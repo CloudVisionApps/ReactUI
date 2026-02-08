@@ -755,19 +755,66 @@ function App() {
   const sections = ['navigation', 'hero', 'buttons', 'badges', 'avatars', 'alerts', 'modals', 'tabs', 'accordions', 'tooltips', 'breadcrumbs', 'spinners', 'progress', 'switches', 'dividers', 'skeletons', 'pagination', 'table', 'link', 'emptyState', 'appDesigns', 'inputs', 'selects', 'checkboxes', 'radios', 'textareas', 'cards', 'footer', 'examples'];
 
   return (
-    <div className="flex min-h-screen bg-surface-muted transition-colors">
+    <div className="relative min-h-screen">
       <style>{`[data-preview-content] .border { border-width: var(--ui-border-width) !important; }`}</style>
+      {/* Mathematical / design-oriented background: perspective grid + dot grid */}
+      <div className="fixed inset-0 z-0 overflow-hidden" aria-hidden>
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 from-0% via-indigo-950/30 via-40% to-zinc-950 to-100% dark:from-black dark:via-indigo-950/20 dark:to-zinc-950" />
+        {/* Perspective grid (vanishing point at top center) */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.07] dark:opacity-[0.05]" preserveAspectRatio="none">
+          {/* Horizontal lines (perspective floor grid) */}
+          {Array.from({ length: 14 }, (_, i) => {
+            const y = 98 - i * 7;
+            const halfSpan = (100 - y) * 0.42;
+            return (
+              <line key={`h-${i}`} x1={`${50 - halfSpan}%`} y1={`${y}%`} x2={`${50 + halfSpan}%`} y2={`${y}%`} stroke="white" strokeWidth="0.4" fill="none" />
+            );
+          })}
+          {/* Left converging lines (from bottom-left to vanishing point ~50% 0) */}
+          {Array.from({ length: 11 }, (_, i) => {
+            const x2 = 5 + (i / 10) * 45;
+            return (
+              <line key={`l-${i}`} x1="0" y1="100%" x2={`${x2}%`} y2="0" stroke="white" strokeWidth="0.4" fill="none" />
+            );
+          })}
+          {/* Right converging lines (from bottom-right to vanishing point) */}
+          {Array.from({ length: 11 }, (_, i) => {
+            const x2 = 50 + (i / 10) * 45;
+            return (
+              <line key={`r-${i}`} x1="100%" y1="100%" x2={`${x2}%`} y2="0" stroke="white" strokeWidth="0.4" fill="none" />
+            );
+          })}
+        </svg>
+        {/* Dot grid overlay (very subtle) */}
+        <div
+          className="absolute inset-0 opacity-[0.06] dark:opacity-[0.04]"
+          style={{
+            backgroundImage: 'radial-gradient(circle at center, rgba(255,255,255,0.06) 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+        {/* Dark vignette at top center to soften bright convergence of grid lines */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,0,0,0.4) 0%, transparent 60%)',
+          }}
+        />
+      </div>
       <Sidebar
         activeSection={activeSection}
         onSectionChange={scrollToSection}
       />
-      <main className="flex-1 ml-64 mr-64 min-h-screen border-l border-r border-border bg-gradient-to-br from-zinc-800 via-zinc-700 to-zinc-800 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950" data-preview-content>
-        <div className="max-w-4xl mx-auto py-14 px-8">
+      <main className="relative z-10 flex-1 min-h-screen pl-64 pr-64" data-preview-content>
+        <div className="min-h-screen border-l border-r border-border">
+          <div className="max-w-4xl mx-auto py-14 px-8">
           {sections.map((sectionId) => (
             <div key={sectionId} className="mb-20 last:mb-14">
               {renderSection(sectionId)}
             </div>
           ))}
+          </div>
         </div>
       </main>
       <RightSidebar

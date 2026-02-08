@@ -128,12 +128,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
   }, [search]);
 
   return (
-    <aside className="w-64 bg-surface/80 backdrop-blur-xl border-r border-border h-screen fixed left-0 top-0 flex flex-col z-50 transition-colors overflow-y-auto">
-      <div className="p-6 border-b border-border bg-surface">
+    <aside className="w-64 border-r border-white/20 dark:border-white/10 h-screen fixed left-0 top-0 flex flex-col z-50 transition-colors overflow-y-auto bg-black/35 backdrop-blur-2xl">
+      <div className="p-6 border-b border-white/15 dark:border-white/10 bg-transparent">
         <h1 className="text-xl font-bold text-fg m-0">React UI</h1>
         <p className="text-sm text-fg-muted mt-1 m-0">Component Library</p>
       </div>
-      <div className="p-3 border-b border-border bg-surface">
+      <div className="p-3 border-b border-white/15 dark:border-white/10 bg-transparent">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-fg-muted pointer-events-none" />
           <input
@@ -141,12 +141,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search components..."
-            className="w-full pl-9 pr-3 py-2 text-[13px] rounded-ui border border-border bg-surface-muted text-fg placeholder:text-fg-subtle focus:outline-none focus:ring-2 focus:ring-primary-ring focus:border-transparent"
+            className="w-full pl-9 pr-3 py-2 text-[13px] rounded-ui border border-white/20 dark:border-white/15 bg-black/10 dark:bg-white/10 text-fg placeholder:text-fg-subtle focus:outline-none focus:ring-2 focus:ring-primary-ring focus:border-white/30 dark:focus:border-white/20"
             aria-label="Search components"
           />
         </div>
       </div>
-      <nav className="p-4 flex-1 overflow-y-auto bg-surface">
+      <nav className="p-4 flex-1 overflow-y-auto bg-transparent">
         {filteredGroups.length === 0 ? (
           <p className="py-4 text-center text-[13px] text-fg-muted">No results</p>
         ) : (
@@ -168,8 +168,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                             'w-full text-left px-4 py-2.5 rounded-ui text-sm font-medium transition-all duration-200 flex items-center gap-3 border-0 cursor-pointer',
                             'focus:outline-none focus:ring-2 focus:ring-primary-ring',
                             activeSection === item.id
-                              ? 'bg-primary-muted text-primary'
-                              : 'text-fg hover:bg-surface-muted bg-transparent'
+                              ? 'bg-primary/20 text-primary'
+                              : 'text-fg hover:bg-black/10 dark:hover:bg-white/10 bg-transparent'
                           )}
                         >
                           <Icon className="w-4 h-4 shrink-0" strokeWidth={2} />
