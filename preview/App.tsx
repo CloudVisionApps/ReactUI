@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button, Input, Card, Select, Checkbox, Radio, Textarea, Navigation, Hero, Footer, Modal, Badge, Avatar, Tabs, TabPanel, Accordion, Alert, Tooltip } from '../src';
 import { Sidebar } from './components/Sidebar';
-import './App.css';
 
 function App() {
   const [activeSection, setActiveSection] = useState('navigation');

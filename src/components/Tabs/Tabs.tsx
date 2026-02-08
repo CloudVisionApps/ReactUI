@@ -1,6 +1,23 @@
 import React, { useState } from 'react';
 import { cn } from '../../utils/cn';
 
+// All Tailwind class combinations defined as literals so the content scanner includes them
+const TAB_CONTAINER_CLASSES: Record<'default' | 'pills', string> = {
+  default: 'border-b border-[#E8E8ED]',
+  pills: 'gap-2',
+};
+
+const TAB_BUTTON_CLASSES: Record<'default' | 'pills', Record<'active' | 'inactive', string>> = {
+  default: {
+    active: 'border-b-2 -mb-px border-[#007AFF] text-[#007AFF]',
+    inactive: 'border-b-2 -mb-px border-transparent text-[#86868B] hover:text-[#1D1D1F] hover:border-[#D2D2D7]',
+  },
+  pills: {
+    active: 'rounded-md bg-[#007AFF] text-white',
+    inactive: 'rounded-md text-[#86868B] hover:bg-[#F5F5F7] hover:text-[#1D1D1F]',
+  },
+};
+
 export interface TabItem {
   label: string;
   value: string;
@@ -38,13 +55,10 @@ export const Tabs: React.FC<TabsProps> = ({
 
   return (
     <div className={cn('w-full', className)} {...props}>
-      <div className={cn(
-        'flex',
-        variant === 'default' && 'border-b border-[#E8E8ED]',
-        variant === 'pills' && 'gap-2'
-      )}>
+      <div className={cn('flex', TAB_CONTAINER_CLASSES[variant])}>
         {items.map((item) => {
           const isActive = activeValue === item.value;
+          const state = isActive ? 'active' : 'inactive';
           return (
             <button
               key={item.value}
@@ -56,12 +70,7 @@ export const Tabs: React.FC<TabsProps> = ({
                 'focus:outline-none focus:ring-2 focus:ring-[#007AFF]/20 focus:ring-offset-2',
                 item.disabled && 'opacity-40 cursor-not-allowed',
                 item.icon ? 'flex items-center gap-2' : '',
-                // Default variant classes - all written out for Tailwind scanner
-                variant === 'default' && isActive && 'border-b-2 -mb-px border-[#007AFF] text-[#007AFF]',
-                variant === 'default' && !isActive && 'border-b-2 -mb-px border-transparent text-[#86868B] hover:text-[#1D1D1F] hover:border-[#D2D2D7]',
-                // Pills variant classes - all written out for Tailwind scanner
-                variant === 'pills' && isActive && 'rounded-md bg-[#007AFF] text-white',
-                variant === 'pills' && !isActive && 'rounded-md text-[#86868B] hover:bg-[#F5F5F7] hover:text-[#1D1D1F]'
+                TAB_BUTTON_CLASSES[variant][state]
               )}
             >
               {item.icon && <span>{item.icon}</span>}
