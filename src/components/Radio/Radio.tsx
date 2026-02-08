@@ -37,25 +37,25 @@ export const Radio: React.FC<RadioProps> = ({
   );
 
   const labelClasses = cn(
-    'text-sm font-medium text-gray-700 cursor-pointer flex items-center gap-2',
+    'text-sm font-medium text-gray-700 cursor-pointer',
     error && 'text-red-600',
     props.disabled && 'opacity-60 cursor-not-allowed'
   );
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-start">
+      <div className="flex items-center gap-2.5">
         <input
           id={radioId}
           type="radio"
-          className={baseRadioClasses}
+          className={cn(baseRadioClasses, 'mt-0.5 flex-shrink-0')}
           aria-invalid={error ? 'true' : 'false'}
           aria-describedby={error || helperText ? `${radioId}-help` : undefined}
           {...props}
         />
         {label && (
           <label htmlFor={radioId} className={labelClasses}>
-            <span>{label}</span>
+            {label}
           </label>
         )}
       </div>
@@ -63,7 +63,7 @@ export const Radio: React.FC<RadioProps> = ({
         <span
           id={`${radioId}-help`}
           className={cn(
-            'text-xs mt-1.5 ml-7 flex items-center gap-1',
+            'text-xs mt-1.5 ml-7.5 flex items-center gap-1',
             error ? 'text-red-600 font-medium' : 'text-gray-500'
           )}
         >

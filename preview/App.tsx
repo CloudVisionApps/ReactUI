@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button, Input, Card, Select, Checkbox, Radio, Textarea } from '../src';
 import { Sidebar } from './components/Sidebar';
 import './App.css';
@@ -7,17 +7,57 @@ function App() {
   const [activeSection, setActiveSection] = useState('buttons');
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const handleButtonClick = () => {
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 2000);
   };
 
-  const renderSection = () => {
-    switch (activeSection) {
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('data-section-id');
+          if (sectionId) {
+            setActiveSection(sectionId);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    Object.values(sectionRefs.current).forEach((ref) => {
+      if (ref) {
+        observer.observe(ref);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const section = sectionRefs.current[sectionId];
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActiveSection(sectionId);
+    }
+  };
+
+  const renderSection = (sectionId: string) => {
+    switch (sectionId) {
       case 'buttons':
         return (
-          <div className="space-y-8">
+          <div className="space-y-8" data-section-id="buttons" ref={(el) => (sectionRefs.current['buttons'] = el)}>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-2">Buttons</h1>
               <p className="text-gray-600">Interactive button components with multiple variants and states.</p>
@@ -64,7 +104,7 @@ function App() {
 
       case 'inputs':
         return (
-          <div className="space-y-8">
+          <div className="space-y-8" data-section-id="inputs" ref={(el) => (sectionRefs.current['inputs'] = el)}>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-2">Inputs</h1>
               <p className="text-gray-600">Text input fields with validation, helper text, and icon support.</p>
@@ -143,7 +183,7 @@ function App() {
 
       case 'selects':
         return (
-          <div className="space-y-8">
+          <div className="space-y-8" data-section-id="selects" ref={(el) => (sectionRefs.current['selects'] = el)}>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-2">Selects</h1>
               <p className="text-gray-600">Dropdown select components with custom styling.</p>
@@ -207,7 +247,7 @@ function App() {
 
       case 'checkboxes':
         return (
-          <div className="space-y-8">
+          <div className="space-y-8" data-section-id="checkboxes" ref={(el) => (sectionRefs.current['checkboxes'] = el)}>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-2">Checkboxes</h1>
               <p className="text-gray-600">Checkbox components with multiple sizes and states.</p>
@@ -251,7 +291,7 @@ function App() {
 
       case 'radios':
         return (
-          <div className="space-y-8">
+          <div className="space-y-8" data-section-id="radios" ref={(el) => (sectionRefs.current['radios'] = el)}>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-2">Radio Buttons</h1>
               <p className="text-gray-600">Radio button components for single selection.</p>
@@ -297,7 +337,7 @@ function App() {
 
       case 'textareas':
         return (
-          <div className="space-y-8">
+          <div className="space-y-8" data-section-id="textareas" ref={(el) => (sectionRefs.current['textareas'] = el)}>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-2">Textareas</h1>
               <p className="text-gray-600">Multi-line text input components.</p>
@@ -352,7 +392,7 @@ function App() {
 
       case 'cards':
         return (
-          <div className="space-y-8">
+          <div className="space-y-8" data-section-id="cards" ref={(el) => (sectionRefs.current['cards'] = el)}>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-2">Cards</h1>
               <p className="text-gray-600">Container components with header, body, and footer sections.</p>
@@ -388,7 +428,7 @@ function App() {
 
       case 'examples':
         return (
-          <div className="space-y-8">
+          <div className="space-y-8" data-section-id="examples" ref={(el) => (sectionRefs.current['examples'] = el)}>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-2">Examples</h1>
               <p className="text-gray-600">Real-world examples combining multiple components.</p>
@@ -478,12 +518,18 @@ function App() {
     }
   };
 
+  const sections = ['buttons', 'inputs', 'selects', 'checkboxes', 'radios', 'textareas', 'cards', 'examples'];
+
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
+      <Sidebar activeSection={activeSection} onSectionChange={scrollToSection} />
       <main className="flex-1 ml-64 p-8">
-        <div className="max-w-6xl mx-auto">
-          {renderSection()}
+        <div className="max-w-6xl mx-auto space-y-16">
+          {sections.map((sectionId) => (
+            <div key={sectionId}>
+              {renderSection(sectionId)}
+            </div>
+          ))}
         </div>
       </main>
     </div>
