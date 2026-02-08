@@ -1,0 +1,8 @@
+src
+node_modules
+*.config.js
+tsconfig.json
+.gitignore
+.npmignore
+.DS_Store
+*.log
