@@ -5,7 +5,7 @@ export default function NavigationSolid() {
   return (
     <div className="space-y-4">
       <Navigation
-        logo={<span className="text-lg font-semibold text-[#1D1D1F]">React UI</span>}
+        logo={<span className="text-lg font-semibold text-fg">React UI</span>}
         items={[
           { label: 'Dashboard', href: '#' },
           { label: 'Settings', href: '#' },

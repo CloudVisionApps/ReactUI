@@ -41,7 +41,7 @@ export const Hero: React.FC<HeroProps> = ({
     <section
       className={cn(
         'relative w-full overflow-hidden',
-        'bg-gradient-to-b from-white to-[#F5F5F7]',
+        'bg-gradient-to-b from-surface to-surface-muted',
         className
       )}
       style={backgroundImage ? { backgroundImage: `url(${backgroundImage})` } : undefined}
@@ -61,17 +61,17 @@ export const Hero: React.FC<HeroProps> = ({
           variantClasses[variant]
         )}>
           {subtitle && (
-            <p className="text-[13px] font-medium text-[#007AFF] uppercase tracking-wide mb-3">
+            <p className="text-[13px] font-medium text-primary uppercase tracking-wide mb-3">
               {subtitle}
             </p>
           )}
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1D1D1F] mb-4 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-fg mb-4 leading-tight">
             {title}
           </h1>
           
           {description && (
-            <p className="text-[17px] md:text-[19px] text-[#86868B] mb-8 max-w-2xl leading-relaxed">
+            <p className="text-[17px] md:text-[19px] text-fg-muted mb-8 max-w-2xl leading-relaxed">
               {description}
             </p>
           )}
@@ -82,7 +82,7 @@ export const Hero: React.FC<HeroProps> = ({
                 primaryAction.href ? (
                   <a
                     href={primaryAction.href}
-                    className="inline-flex items-center justify-center gap-2 rounded-md cursor-pointer transition-all duration-150 ease-out outline-none relative px-6 py-2.5 text-[15px] font-medium min-h-[36px] bg-[#007AFF] text-white border-0 shadow-sm hover:bg-[#0051D5] active:bg-[#0040AA] active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30 focus:ring-offset-2"
+                    className="inline-flex items-center justify-center gap-2 rounded-md cursor-pointer transition-all duration-150 ease-out outline-none relative px-6 py-2.5 text-[15px] font-medium min-h-[36px] bg-primary text-white border-0 shadow-sm hover:bg-primary-hover active:bg-primary-active active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-primary-ring focus:ring-offset-2"
                   >
                     {primaryAction.label}
                   </a>
@@ -100,7 +100,7 @@ export const Hero: React.FC<HeroProps> = ({
                 secondaryAction.href ? (
                   <a
                     href={secondaryAction.href}
-                    className="inline-flex items-center justify-center gap-2 rounded-md cursor-pointer transition-all duration-150 ease-out outline-none relative px-6 py-2.5 text-[15px] font-medium min-h-[36px] bg-transparent text-[#007AFF] border border-[#007AFF] hover:bg-[#007AFF]/10 active:bg-[#007AFF]/20 active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30 focus:ring-offset-2"
+                    className="inline-flex items-center justify-center gap-2 rounded-md cursor-pointer transition-all duration-150 ease-out outline-none relative px-6 py-2.5 text-[15px] font-medium min-h-[36px] bg-transparent text-primary border-2 border-primary hover:bg-primary-muted active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-primary-ring focus:ring-offset-2"
                   >
                     {secondaryAction.label}
                   </a>
@@ -121,8 +121,8 @@ export const Hero: React.FC<HeroProps> = ({
         {variant === 'split' && (
           <div className="hidden md:block">
             {/* Placeholder for image or content */}
-            <div className="w-full h-96 bg-[#E8E8ED] rounded-lg flex items-center justify-center">
-              <span className="text-[#86868B] text-[13px]">Image or Content</span>
+            <div className="w-full h-96 bg-surface-muted border border-border rounded-lg flex items-center justify-center">
+              <span className="text-fg-muted text-[13px]">Image or Content</span>
             </div>
           </div>
         )}

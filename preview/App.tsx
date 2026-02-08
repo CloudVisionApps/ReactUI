@@ -68,6 +68,21 @@ function App() {
             <ExampleWithCode title="Solid Navigation" code={examples.navigation.solid.code}>
               <examples.navigation.solid.Component />
             </ExampleWithCode>
+            <ExampleWithCode title="With Icons" code={examples.navigation.withIcons.code}>
+              <examples.navigation.withIcons.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="With CTA" code={examples.navigation.withCta.code}>
+              <examples.navigation.withCta.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Sticky" code={examples.navigation.sticky.code}>
+              <examples.navigation.sticky.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="With User Menu" code={examples.navigation.withUserMenu.code}>
+              <examples.navigation.withUserMenu.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Fixed" code={examples.navigation.fixed.code}>
+              <examples.navigation.fixed.Component />
+            </ExampleWithCode>
           </div>
         );
 

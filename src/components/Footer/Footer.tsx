@@ -32,8 +32,8 @@ export const Footer: React.FC<FooterProps> = ({
   ...props
 }) => {
   const variantClasses = {
-    default: 'bg-[#F5F5F7] border-t border-[#E8E8ED]',
-    minimal: 'bg-white border-t border-[#E8E8ED]',
+    default: 'bg-surface-muted border-t border-border',
+    minimal: 'bg-surface border-t border-border',
   };
 
   return (
@@ -51,7 +51,7 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             {columns.map((column, index) => (
               <div key={index}>
-                <h3 className="text-[13px] font-semibold text-[#1D1D1F] mb-4">
+                <h3 className="text-[13px] font-semibold text-fg mb-4">
                   {column.title}
                 </h3>
                 <ul className="space-y-2">
@@ -65,7 +65,7 @@ export const Footer: React.FC<FooterProps> = ({
                             link.onClick();
                           }
                         }}
-                        className="text-[12px] text-[#86868B] hover:text-[#007AFF] transition-colors duration-150"
+                        className="text-[12px] text-fg-muted hover:text-primary transition-colors duration-150"
                       >
                         {link.label}
                       </a>
@@ -86,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#86868B] hover:text-[#007AFF] transition-colors duration-150"
+                className="text-fg-muted hover:text-primary transition-colors duration-150"
                 aria-label={social.label}
               >
                 {social.icon || social.label}
@@ -97,8 +97,8 @@ export const Footer: React.FC<FooterProps> = ({
 
         {/* Copyright */}
         {copyright && (
-          <div className="pt-8 border-t border-[#E8E8ED]">
-            <p className="text-[12px] text-[#86868B]">
+          <div className="pt-8 border-t border-border">
+            <p className="text-[12px] text-fg-muted">
               {copyright}
             </p>
           </div>
