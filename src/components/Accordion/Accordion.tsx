@@ -38,26 +38,27 @@ export const Accordion: React.FC<AccordionProps> = ({
       {items.map((item) => {
         const isOpen = openItems.includes(item.value);
         return (
-          <div key={item.value} className="border border-[#E8E8ED] rounded-md overflow-hidden">
+          <div
+            key={item.value}
+            className="border-2 border-border rounded-ui overflow-hidden bg-surface"
+          >
             <button
               type="button"
               onClick={() => !item.disabled && toggleItem(item.value)}
               disabled={item.disabled}
               className={cn(
-                'w-full px-4 py-3 text-left flex items-center justify-between',
-                'text-[13px] font-medium text-[#1D1D1F]',
+                'w-full px-4 py-3 text-left flex items-center justify-between font-semibold text-fg text-[13px] tracking-tight',
                 'transition-colors duration-150 ease-out',
-                'focus:outline-none focus:ring-2 focus:ring-[#007AFF]/20 focus:ring-offset-2',
+                'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-ring focus-visible:ring-offset-2',
                 item.disabled && 'opacity-40 cursor-not-allowed',
-                !item.disabled && 'hover:bg-[#F5F5F7]'
+                !item.disabled && 'hover:bg-surface-muted'
               )}
             >
               <span>{item.title}</span>
               <svg
                 className={cn(
-                  'w-5 h-5 text-[#86868B] transition-transform duration-150',
-                  isOpen && 'transform rotate-180',
-                  !isOpen && 'transform rotate-0'
+                  'w-5 h-5 text-fg-muted transition-transform duration-200 shrink-0',
+                  isOpen && 'rotate-180'
                 )}
                 fill="none"
                 viewBox="0 0 24 24"
@@ -67,7 +68,7 @@ export const Accordion: React.FC<AccordionProps> = ({
               </svg>
             </button>
             {isOpen && (
-              <div className="px-4 py-3 border-t border-[#E8E8ED] bg-white text-[#86868B] text-[13px]">
+              <div className="px-4 py-3 border-t-2 border-border bg-surface-subtle/50 text-fg-muted text-[13px] leading-relaxed">
                 {item.content}
               </div>
             )}

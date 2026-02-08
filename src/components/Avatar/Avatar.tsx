@@ -26,10 +26,10 @@ export const Avatar: React.FC<AvatarProps> = ({
   };
 
   const statusClasses = {
-    online: 'bg-[#34C759]',
-    offline: 'bg-[#86868B]',
-    away: 'bg-[#FF9500]',
-    busy: 'bg-[#FF3B30]',
+    online: 'bg-success',
+    offline: 'bg-fg-muted',
+    away: 'bg-warning',
+    busy: 'bg-destructive',
   };
 
   const getInitials = (name: string) => {
@@ -45,23 +45,20 @@ export const Avatar: React.FC<AvatarProps> = ({
     <div className={cn('relative inline-block', className)} {...props}>
       <div
         className={cn(
-          'rounded-full bg-[#E8E8ED] flex items-center justify-center overflow-hidden',
-          'border-2 border-white',
+          'rounded-full bg-surface-muted flex items-center justify-center overflow-hidden border-2 border-surface font-semibold text-fg-muted',
           sizeClasses[size]
         )}
       >
         {src ? (
           <img src={src} alt={alt || name} className="w-full h-full object-cover" />
         ) : (
-          <span className="text-[#86868B] font-medium">
-            {name ? getInitials(name) : '?'}
-          </span>
+          <span>{name ? getInitials(name) : '?'}</span>
         )}
       </div>
       {status && (
         <span
           className={cn(
-            'absolute bottom-0 right-0 rounded-full border-2 border-white',
+            'absolute bottom-0 right-0 rounded-full border-2 border-surface',
             statusClasses[status],
             size === 'small' && 'w-2.5 h-2.5',
             size === 'medium' && 'w-3 h-3',
