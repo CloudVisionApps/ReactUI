@@ -760,8 +760,6 @@ function App() {
       <Sidebar
         activeSection={activeSection}
         onSectionChange={scrollToSection}
-        theme={theme}
-        onThemeChange={setTheme}
       />
       <main className="flex-1 ml-64 mr-64 min-h-screen border-l border-r border-border" data-preview-content>
         <div className="max-w-4xl mx-auto py-14 px-8">
@@ -773,6 +771,8 @@ function App() {
         </div>
       </main>
       <RightSidebar
+        theme={theme}
+        onThemeChange={setTheme}
         themeConfig={themeConfig}
         onThemeConfigChange={setThemeConfig}
         onThemeConfigReset={resetThemeConfig}

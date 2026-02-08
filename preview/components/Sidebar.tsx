@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { cn } from '../../src/utils/cn';
 
 interface SidebarProps {
   activeSection: string;
   onSectionChange: (section: string) => void;
-  theme: 'light' | 'dark';
-  onThemeChange: (theme: 'light' | 'dark') => void;
 }
 
 const navigationItems = [
@@ -43,38 +41,45 @@ const navigationItems = [
 export const Sidebar: React.FC<SidebarProps> = ({
   activeSection,
   onSectionChange,
-  theme,
-  onThemeChange,
 }) => {
+  const [search, setSearch] = useState('');
+  const filteredItems = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return navigationItems;
+    return navigationItems.filter(
+      (item) => item.label.toLowerCase().includes(q) || item.id.toLowerCase().includes(q)
+    );
+  }, [search]);
+
   return (
     <aside className="w-64 bg-surface border-r border border-border h-screen fixed left-0 top-0 flex flex-col z-50 transition-colors overflow-y-auto">
       <div className="p-6 border-b border-border bg-surface">
-        <div className="flex items-center justify-between gap-2">
-          <div>
-            <h1 className="text-xl font-bold text-fg m-0">React UI</h1>
-            <p className="text-sm text-fg-muted mt-1 m-0">Component Library</p>
-          </div>
-          <button
-            type="button"
-            onClick={() => onThemeChange(theme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-ui border border-border bg-surface-muted text-fg hover:bg-border/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-ring"
-            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {theme === 'dark' ? (
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
-            )}
-          </button>
+        <h1 className="text-xl font-bold text-fg m-0">React UI</h1>
+        <p className="text-sm text-fg-muted mt-1 m-0">Component Library</p>
+      </div>
+      <div className="p-3 border-b border-border bg-surface">
+        <div className="relative">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-fg-muted pointer-events-none">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </span>
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search components..."
+            className="w-full pl-9 pr-3 py-2 text-[13px] rounded-ui border border-border bg-surface-muted text-fg placeholder:text-fg-subtle focus:outline-none focus:ring-2 focus:ring-primary-ring focus:border-transparent"
+            aria-label="Search components"
+          />
         </div>
       </div>
-      <nav className="p-4 flex-1 bg-surface">
+      <nav className="p-4 flex-1 overflow-y-auto bg-surface">
         <ul className="space-y-1 m-0 p-0 list-none">
-          {navigationItems.map((item) => (
+          {filteredItems.length === 0 ? (
+            <li className="py-4 text-center text-[13px] text-fg-muted">No results</li>
+          ) : (
+          filteredItems.map((item) => (
             <li key={item.id} className="m-0 p-0">
               <button
                 type="button"
@@ -91,7 +96,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <span className="flex-1">{item.label}</span>
               </button>
             </li>
-          ))}
+          )))}
         </ul>
       </nav>
     </aside>
