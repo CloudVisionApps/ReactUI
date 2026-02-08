@@ -1,1 +1,31 @@
-/* Preview styles using Tailwind - can add custom styles here if needed */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Documentation styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar scrollbar styling */
+aside::-webkit-scrollbar {
+  width: 6px;
+}
+
+aside::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+aside::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+aside::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
