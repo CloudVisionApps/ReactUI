@@ -56,7 +56,8 @@ export const Accordion: React.FC<AccordionProps> = ({
               <svg
                 className={cn(
                   'w-5 h-5 text-[#86868B] transition-transform duration-150',
-                  isOpen && 'transform rotate-180'
+                  isOpen && 'transform rotate-180',
+                  !isOpen && 'transform rotate-0'
                 )}
                 fill="none"
                 viewBox="0 0 24 24"

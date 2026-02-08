@@ -8,7 +8,7 @@ export interface TabItem {
   disabled?: boolean;
 }
 
-export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   items: TabItem[];
   defaultValue?: string;
   value?: string;
@@ -36,14 +36,13 @@ export const Tabs: React.FC<TabsProps> = ({
     onChange?.(newValue);
   };
 
-  const variantClasses = {
-    default: 'border-b border-[#E8E8ED]',
-    pills: 'gap-2',
-  };
-
   return (
     <div className={cn('w-full', className)} {...props}>
-      <div className={cn('flex', variantClasses[variant])}>
+      <div className={cn(
+        'flex',
+        variant === 'default' && 'border-b border-[#E8E8ED]',
+        variant === 'pills' && 'gap-2'
+      )}>
         {items.map((item) => {
           const isActive = activeValue === item.value;
           return (
@@ -56,19 +55,13 @@ export const Tabs: React.FC<TabsProps> = ({
                 'px-4 py-2 text-[13px] font-medium transition-all duration-150 ease-out',
                 'focus:outline-none focus:ring-2 focus:ring-[#007AFF]/20 focus:ring-offset-2',
                 item.disabled && 'opacity-40 cursor-not-allowed',
-                variant === 'default' && cn(
-                  'border-b-2 -mb-px',
-                  isActive
-                    ? 'border-[#007AFF] text-[#007AFF]'
-                    : 'border-transparent text-[#86868B] hover:text-[#1D1D1F] hover:border-[#D2D2D7]'
-                ),
-                variant === 'pills' && cn(
-                  'rounded-md',
-                  isActive
-                    ? 'bg-[#007AFF] text-white'
-                    : 'text-[#86868B] hover:bg-[#F5F5F7] hover:text-[#1D1D1F]'
-                ),
-                item.icon && 'flex items-center gap-2'
+                item.icon ? 'flex items-center gap-2' : '',
+                // Default variant classes - all written out for Tailwind scanner
+                variant === 'default' && isActive && 'border-b-2 -mb-px border-[#007AFF] text-[#007AFF]',
+                variant === 'default' && !isActive && 'border-b-2 -mb-px border-transparent text-[#86868B] hover:text-[#1D1D1F] hover:border-[#D2D2D7]',
+                // Pills variant classes - all written out for Tailwind scanner
+                variant === 'pills' && isActive && 'rounded-md bg-[#007AFF] text-white',
+                variant === 'pills' && !isActive && 'rounded-md text-[#86868B] hover:bg-[#F5F5F7] hover:text-[#1D1D1F]'
               )}
             >
               {item.icon && <span>{item.icon}</span>}
