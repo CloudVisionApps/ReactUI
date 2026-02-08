@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Button, Input, Card, Select, Checkbox, Radio, Textarea } from '../src';
+import { Button, Input, Card, Select, Checkbox, Radio, Textarea, Navigation, Hero, Footer } from '../src';
 import { Sidebar } from './components/Sidebar';
 import './App.css';
 
 function App() {
-  const [activeSection, setActiveSection] = useState('buttons');
+  const [activeSection, setActiveSection] = useState('navigation');
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -55,6 +55,199 @@ function App() {
 
   const renderSection = (sectionId: string) => {
     switch (sectionId) {
+      case 'navigation':
+        return (
+          <div className="space-y-8" data-section-id="navigation" ref={(el) => (sectionRefs.current['navigation'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Navigation</h1>
+              <p className="text-gray-600">Navigation bar component with macOS-inspired styling.</p>
+            </div>
+
+            <Card title="Default Navigation" variant="elevated">
+              <div className="space-y-4">
+                <Navigation
+                  logo={<span className="text-lg font-semibold text-[#1D1D1F]">React UI</span>}
+                  items={[
+                    { label: 'Home', href: '#', active: true },
+                    { label: 'Components', href: '#' },
+                    { label: 'Documentation', href: '#' },
+                    { label: 'About', href: '#' },
+                  ]}
+                  variant="default"
+                />
+              </div>
+            </Card>
+
+            <Card title="Transparent Navigation" variant="elevated">
+              <div className="space-y-4">
+                <Navigation
+                  logo={<span className="text-lg font-semibold text-[#1D1D1F]">React UI</span>}
+                  items={[
+                    { label: 'Home', href: '#' },
+                    { label: 'Products', href: '#' },
+                    { label: 'Services', href: '#' },
+                    { label: 'Contact', href: '#', active: true },
+                  ]}
+                  variant="transparent"
+                />
+              </div>
+            </Card>
+
+            <Card title="Solid Navigation" variant="elevated">
+              <div className="space-y-4">
+                <Navigation
+                  logo={<span className="text-lg font-semibold text-[#1D1D1F]">React UI</span>}
+                  items={[
+                    { label: 'Dashboard', href: '#' },
+                    { label: 'Settings', href: '#' },
+                    { label: 'Profile', href: '#', active: true },
+                  ]}
+                  variant="solid"
+                />
+              </div>
+            </Card>
+          </div>
+        );
+
+      case 'hero':
+        return (
+          <div className="space-y-8" data-section-id="hero" ref={(el) => (sectionRefs.current['hero'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Hero Sections</h1>
+              <p className="text-gray-600">Hero section components for landing pages and marketing.</p>
+            </div>
+
+            <Card title="Default Hero" variant="elevated">
+              <div className="overflow-hidden rounded-lg">
+                <Hero
+                  title="Build Beautiful UIs"
+                  subtitle="React Component Library"
+                  description="Create stunning user interfaces with our macOS-inspired component library. Clean, modern, and accessible."
+                  primaryAction={{
+                    label: 'Get Started',
+                    onClick: () => console.log('Get Started clicked'),
+                  }}
+                  secondaryAction={{
+                    label: 'Learn More',
+                    onClick: () => console.log('Learn More clicked'),
+                  }}
+                />
+              </div>
+            </Card>
+
+            <Card title="Centered Hero" variant="elevated">
+              <div className="overflow-hidden rounded-lg">
+                <Hero
+                  variant="centered"
+                  title="Welcome to React UI"
+                  description="A comprehensive component library designed with macOS aesthetics in mind. Build faster, design better."
+                  primaryAction={{
+                    label: 'Start Building',
+                    onClick: () => console.log('Start Building clicked'),
+                  }}
+                />
+              </div>
+            </Card>
+
+            <Card title="Split Hero" variant="elevated">
+              <div className="overflow-hidden rounded-lg">
+                <Hero
+                  variant="split"
+                  title="Modern Design System"
+                  subtitle="macOS Inspired"
+                  description="Every component is carefully crafted to match the macOS design language. Clean, minimal, and beautiful."
+                  primaryAction={{
+                    label: 'Explore Components',
+                    onClick: () => console.log('Explore clicked'),
+                  }}
+                  secondaryAction={{
+                    label: 'View Docs',
+                    onClick: () => console.log('Docs clicked'),
+                  }}
+                />
+              </div>
+            </Card>
+          </div>
+        );
+
+      case 'footer':
+        return (
+          <div className="space-y-8" data-section-id="footer" ref={(el) => (sectionRefs.current['footer'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Footer</h1>
+              <p className="text-gray-600">Footer component with links and social media integration.</p>
+            </div>
+
+            <Card title="Default Footer" variant="elevated">
+              <div className="overflow-hidden rounded-lg">
+                <Footer
+                  columns={[
+                    {
+                      title: 'Product',
+                      links: [
+                        { label: 'Features', href: '#' },
+                        { label: 'Pricing', href: '#' },
+                        { label: 'Documentation', href: '#' },
+                        { label: 'Changelog', href: '#' },
+                      ],
+                    },
+                    {
+                      title: 'Company',
+                      links: [
+                        { label: 'About', href: '#' },
+                        { label: 'Blog', href: '#' },
+                        { label: 'Careers', href: '#' },
+                        { label: 'Contact', href: '#' },
+                      ],
+                    },
+                    {
+                      title: 'Legal',
+                      links: [
+                        { label: 'Privacy', href: '#' },
+                        { label: 'Terms', href: '#' },
+                        { label: 'Security', href: '#' },
+                      ],
+                    },
+                    {
+                      title: 'Resources',
+                      links: [
+                        { label: 'Support', href: '#' },
+                        { label: 'Community', href: '#' },
+                        { label: 'API', href: '#' },
+                      ],
+                    },
+                  ]}
+                  socialLinks={[
+                    { label: 'Twitter', href: 'https://twitter.com' },
+                    { label: 'GitHub', href: 'https://github.com' },
+                    { label: 'LinkedIn', href: 'https://linkedin.com' },
+                  ]}
+                  copyright="© 2024 React UI. All rights reserved."
+                />
+              </div>
+            </Card>
+
+            <Card title="Minimal Footer" variant="elevated">
+              <div className="overflow-hidden rounded-lg">
+                <Footer
+                  variant="minimal"
+                  columns={[
+                    {
+                      title: 'Quick Links',
+                      links: [
+                        { label: 'Home', href: '#' },
+                        { label: 'About', href: '#' },
+                        { label: 'Contact', href: '#' },
+                      ],
+                    },
+                  ]}
+                  copyright="© 2024 React UI"
+                />
+              </div>
+            </Card>
+          </div>
+        );
+
       case 'buttons':
         return (
           <div className="space-y-8" data-section-id="buttons" ref={(el) => (sectionRefs.current['buttons'] = el)}>
@@ -518,7 +711,7 @@ function App() {
     }
   };
 
-  const sections = ['buttons', 'inputs', 'selects', 'checkboxes', 'radios', 'textareas', 'cards', 'examples'];
+  const sections = ['navigation', 'hero', 'buttons', 'inputs', 'selects', 'checkboxes', 'radios', 'textareas', 'cards', 'footer', 'examples'];
 
   return (
     <div className="flex min-h-screen bg-gray-50">

@@ -7,6 +7,8 @@ interface SidebarProps {
 }
 
 const navigationItems = [
+  { id: 'navigation', label: 'Navigation', icon: '🧭' },
+  { id: 'hero', label: 'Hero Sections', icon: '🎯' },
   { id: 'buttons', label: 'Buttons', icon: '🔘' },
   { id: 'inputs', label: 'Inputs', icon: '📝' },
   { id: 'selects', label: 'Selects', icon: '📋' },
@@ -14,6 +16,7 @@ const navigationItems = [
   { id: 'radios', label: 'Radio Buttons', icon: '🔘' },
   { id: 'textareas', label: 'Textareas', icon: '📄' },
   { id: 'cards', label: 'Cards', icon: '🃏' },
+  { id: 'footer', label: 'Footer', icon: '📄' },
   { id: 'examples', label: 'Examples', icon: '💡' },
 ];
 
