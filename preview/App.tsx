@@ -621,6 +621,264 @@ function App() {
           </div>
         );
 
+      case 'badges':
+        return (
+          <div className="space-y-8" data-section-id="badges" ref={(el) => (sectionRefs.current['badges'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Badges</h1>
+              <p className="text-gray-600">Badge components for labels, status indicators, and notifications.</p>
+            </div>
+
+            <Card title="Variants" variant="elevated">
+              <div className="flex flex-wrap gap-4 items-center">
+                <Badge variant="default">Default</Badge>
+                <Badge variant="primary">Primary</Badge>
+                <Badge variant="success">Success</Badge>
+                <Badge variant="warning">Warning</Badge>
+                <Badge variant="danger">Danger</Badge> 
+                <Badge variant="info">Info</Badge>
+              </div>
+            </Card>
+
+            <Card title="Sizes" variant="elevated">
+              <div className="flex flex-wrap gap-4 items-center">
+                <Badge size="small">Small</Badge>
+                <Badge size="medium">Medium</Badge>
+                <Badge size="large">Large</Badge>
+              </div>
+            </Card>
+          </div>
+        );
+
+      case 'avatars':
+        return (
+          <div className="space-y-8" data-section-id="avatars" ref={(el) => (sectionRefs.current['avatars'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Avatars</h1>
+              <p className="text-gray-600">Avatar components for user profiles and images.</p>
+            </div>
+
+            <Card title="Sizes" variant="elevated">
+              <div className="flex flex-wrap gap-4 items-center">
+                <Avatar name="John Doe" size="small" />
+                <Avatar name="Jane Smith" size="medium" />
+                <Avatar name="Bob Johnson" size="large" />
+                <Avatar name="Alice Brown" size="xlarge" />
+              </div>
+            </Card>
+
+            <Card title="With Status" variant="elevated">
+              <div className="flex flex-wrap gap-4 items-center">
+                <Avatar name="Online User" status="online" />
+                <Avatar name="Offline User" status="offline" />
+                <Avatar name="Away User" status="away" />
+                <Avatar name="Busy User" status="busy" />
+              </div>
+            </Card>
+          </div>
+        );
+
+      case 'alerts':
+        return (
+          <div className="space-y-8" data-section-id="alerts" ref={(el) => (sectionRefs.current['alerts'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Alerts</h1>
+              <p className="text-gray-600">Alert components for notifications and messages.</p>
+            </div>
+
+            <Card title="Variants" variant="elevated">
+              <div className="space-y-4">
+                <Alert variant="info" title="Information">
+                  This is an informational alert message.
+                </Alert>
+                <Alert variant="success" title="Success">
+                  Your action was completed successfully!
+                </Alert>
+                <Alert variant="warning" title="Warning">
+                  Please review this important information.
+                </Alert>
+                <Alert variant="danger" title="Error">
+                  Something went wrong. Please try again.
+                </Alert>
+              </div>
+            </Card>
+
+            <Card title="Dismissible" variant="elevated">
+              {alertVisible && (
+                <Alert variant="info" onClose={() => setAlertVisible(false)}>
+                  This alert can be dismissed by clicking the close button.
+                </Alert>
+              )}
+            </Card>
+          </div>
+        );
+
+      case 'modals':
+        return (
+          <div className="space-y-8" data-section-id="modals" ref={(el) => (sectionRefs.current['modals'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Modals</h1>
+              <p className="text-gray-600">Modal dialog components for overlays and confirmations.</p>
+            </div>
+
+            <Card title="Modal Examples" variant="elevated">
+              <div className="space-y-4">
+                <Button onClick={() => setModalOpen(true)}>Open Modal</Button>
+                <Modal
+                  isOpen={modalOpen}
+                  onClose={() => setModalOpen(false)}
+                  title="Example Modal"
+                  footer={
+                    <>
+                      <Button variant="outline" onClick={() => setModalOpen(false)}>Cancel</Button>
+                      <Button variant="primary" onClick={() => setModalOpen(false)}>Confirm</Button>
+                    </>
+                  }
+                >
+                  <p className="text-[#86868B] text-[13px]">
+                    This is an example modal dialog. You can add any content here.
+                  </p>
+                </Modal>
+              </div>
+            </Card>
+          </div>
+        );
+
+      case 'tabs':
+        return (
+          <div className="space-y-8" data-section-id="tabs" ref={(el) => (sectionRefs.current['tabs'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Tabs</h1>
+              <p className="text-gray-600">Tab components for organizing content into sections.</p>
+            </div>
+
+            <Card title="Default Tabs" variant="elevated">
+              <Tabs
+                items={[
+                  { label: 'Overview', value: 'overview' },
+                  { label: 'Settings', value: 'settings' },
+                  { label: 'Profile', value: 'profile' },
+                ]}
+                defaultValue="overview"
+              >
+                <TabPanel value="overview">
+                  <p className="text-[#86868B] text-[13px]">This is the overview tab content.</p>
+                </TabPanel>
+                <TabPanel value="settings">
+                  <p className="text-[#86868B] text-[13px]">This is the settings tab content.</p>
+                </TabPanel>
+                <TabPanel value="profile">
+                  <p className="text-[#86868B] text-[13px]">This is the profile tab content.</p>
+                </TabPanel>
+              </Tabs>
+            </Card>
+
+            <Card title="Pills Variant" variant="elevated">
+              <Tabs
+                variant="pills"
+                items={[
+                  { label: 'Home', value: 'home' },
+                  { label: 'About', value: 'about' },
+                  { label: 'Contact', value: 'contact' },
+                ]}
+                defaultValue="home"
+              >
+                <TabPanel value="home">
+                  <p className="text-[#86868B] text-[13px]">Home content here.</p>
+                </TabPanel>
+                <TabPanel value="about">
+                  <p className="text-[#86868B] text-[13px]">About content here.</p>
+                </TabPanel>
+                <TabPanel value="contact">
+                  <p className="text-[#86868B] text-[13px]">Contact content here.</p>
+                </TabPanel>
+              </Tabs>
+            </Card>
+          </div>
+        );
+
+      case 'accordions':
+        return (
+          <div className="space-y-8" data-section-id="accordions" ref={(el) => (sectionRefs.current['accordions'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Accordions</h1>
+              <p className="text-gray-600">Accordion components for collapsible content sections.</p>
+            </div>
+
+            <Card title="Single Open" variant="elevated">
+              <Accordion
+                items={[
+                  {
+                    title: 'What is React UI?',
+                    value: '1',
+                    content: 'React UI is a comprehensive component library designed with macOS aesthetics in mind.',
+                  },
+                  {
+                    title: 'How do I install it?',
+                    value: '2',
+                    content: 'You can install React UI using npm or yarn package managers.',
+                  },
+                  {
+                    title: 'Is it free to use?',
+                    value: '3',
+                    content: 'Yes, React UI is completely free and open source.',
+                  },
+                ]}
+              />
+            </Card>
+
+            <Card title="Multiple Open" variant="elevated">
+              <Accordion
+                allowMultiple
+                items={[
+                  {
+                    title: 'Feature 1',
+                    value: '1',
+                    content: 'This is the first feature description.',
+                  },
+                  {
+                    title: 'Feature 2',
+                    value: '2',
+                    content: 'This is the second feature description.',
+                  },
+                  {
+                    title: 'Feature 3',
+                    value: '3',
+                    content: 'This is the third feature description.',
+                  },
+                ]}
+              />
+            </Card>
+          </div>
+        );
+
+      case 'tooltips':
+        return (
+          <div className="space-y-8" data-section-id="tooltips" ref={(el) => (sectionRefs.current['tooltips'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Tooltips</h1>
+              <p className="text-gray-600">Tooltip components for additional information on hover.</p>
+            </div>
+
+            <Card title="Tooltip Examples" variant="elevated">
+              <div className="flex flex-wrap gap-4 items-center">
+                <Tooltip content="This is a tooltip on top" position="top">
+                  <Button>Hover me (Top)</Button>
+                </Tooltip>
+                <Tooltip content="This is a tooltip on bottom" position="bottom">
+                  <Button>Hover me (Bottom)</Button>
+                </Tooltip>
+                <Tooltip content="This is a tooltip on left" position="left">
+                  <Button>Hover me (Left)</Button>
+                </Tooltip>
+                <Tooltip content="This is a tooltip on right" position="right">
+                  <Button>Hover me (Right)</Button>
+                </Tooltip>
+              </div>
+            </Card>
+          </div>
+        );
+
       case 'examples':
         return (
           <div className="space-y-8" data-section-id="examples" ref={(el) => (sectionRefs.current['examples'] = el)}>
@@ -713,7 +971,7 @@ function App() {
     }
   };
 
-  const sections = ['navigation', 'hero', 'buttons', 'inputs', 'selects', 'checkboxes', 'radios', 'textareas', 'cards', 'footer', 'examples'];
+  const sections = ['navigation', 'hero', 'buttons', 'badges', 'avatars', 'alerts', 'modals', 'tabs', 'accordions', 'tooltips', 'inputs', 'selects', 'checkboxes', 'radios', 'textareas', 'cards', 'footer', 'examples'];
 
   return (
     <div className="flex min-h-screen bg-gray-50">
