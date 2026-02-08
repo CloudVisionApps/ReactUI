@@ -12,8 +12,6 @@ import NavigationSticky from './Sticky';
 import navigationStickyCode from './Sticky.tsx?raw';
 import NavigationWithUserMenu from './WithUserMenu';
 import navigationWithUserMenuCode from './WithUserMenu.tsx?raw';
-import NavigationFixed from './Fixed';
-import navigationFixedCode from './Fixed.tsx?raw';
 
 export const navigationExamples = {
   default: { Component: NavigationDefault, code: navigationDefaultCode },
@@ -22,6 +20,5 @@ export const navigationExamples = {
   withIcons: { Component: NavigationWithIcons, code: navigationWithIconsCode },
   withCta: { Component: NavigationWithCta, code: navigationWithCtaCode },
   sticky: { Component: NavigationSticky, code: navigationStickyCode },
-  withUserMenu: { Component: NavigationWithUserMenu, code: navigationWithUserMenuCode },
-  fixed: { Component: NavigationFixed, code: navigationFixedCode },
+  withUserMenu: { Component: NavigationWithUserMenu, code: navigationWithUserMenuCode }
 };

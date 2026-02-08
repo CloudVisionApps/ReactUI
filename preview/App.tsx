@@ -80,9 +80,7 @@ function App() {
             <ExampleWithCode title="With User Menu" code={examples.navigation.withUserMenu.code}>
               <examples.navigation.withUserMenu.Component />
             </ExampleWithCode>
-            <ExampleWithCode title="Fixed" code={examples.navigation.fixed.code}>
-              <examples.navigation.fixed.Component />
-            </ExampleWithCode>
+
           </div>
         );
 
@@ -585,6 +583,123 @@ function App() {
             <ExampleWithCode title="Tooltip Examples" code={examples.tooltips.positions.code}>
               <examples.tooltips.positions.Component />
             </ExampleWithCode>
+          </div>
+        );
+
+      case 'breadcrumbs':
+        return (
+          <div className="space-y-8" data-section-id="breadcrumbs" ref={(el) => (sectionRefs.current['breadcrumbs'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Breadcrumbs</h1>
+              <p className="text-gray-600 dark:text-zinc-400">Navigation trail showing current location in hierarchy.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ExampleWithCode title="Default" code={examples.breadcrumbs.default.code}>
+                <examples.breadcrumbs.default.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Custom Separator" code={examples.breadcrumbs.withSeparator.code}>
+                <examples.breadcrumbs.withSeparator.Component />
+              </ExampleWithCode>
+            </div>
+          </div>
+        );
+
+      case 'spinners':
+        return (
+          <div className="space-y-8" data-section-id="spinners" ref={(el) => (sectionRefs.current['spinners'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Spinners</h1>
+              <p className="text-gray-600 dark:text-zinc-400">Loading indicators for async operations.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ExampleWithCode title="Default" code={examples.spinners.default.code}>
+                <examples.spinners.default.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Sizes" code={examples.spinners.sizes.code}>
+                <examples.spinners.sizes.Component />
+              </ExampleWithCode>
+            </div>
+          </div>
+        );
+
+      case 'progress':
+        return (
+          <div className="space-y-8" data-section-id="progress" ref={(el) => (sectionRefs.current['progress'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Progress</h1>
+              <p className="text-gray-600 dark:text-zinc-400">Linear progress bars for completion or loading.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ExampleWithCode title="Default" code={examples.progress.default.code}>
+                <examples.progress.default.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Variants" code={examples.progress.variants.code}>
+                <examples.progress.variants.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="With Label" code={examples.progress.withLabel.code}>
+                <examples.progress.withLabel.Component />
+              </ExampleWithCode>
+            </div>
+          </div>
+        );
+
+      case 'switches':
+        return (
+          <div className="space-y-8" data-section-id="switches" ref={(el) => (sectionRefs.current['switches'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Switches</h1>
+              <p className="text-gray-600 dark:text-zinc-400">Toggle controls for boolean settings.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ExampleWithCode title="Default" code={examples.switches.default.code}>
+                <examples.switches.default.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="With Label" code={examples.switches.withLabel.code}>
+                <examples.switches.withLabel.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Sizes" code={examples.switches.sizes.code}>
+                <examples.switches.sizes.Component />
+              </ExampleWithCode>
+            </div>
+          </div>
+        );
+
+      case 'dividers':
+        return (
+          <div className="space-y-8" data-section-id="dividers" ref={(el) => (sectionRefs.current['dividers'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Dividers</h1>
+              <p className="text-gray-600 dark:text-zinc-400">Horizontal or vertical separators between content.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ExampleWithCode title="Horizontal" code={examples.dividers.default.code}>
+                <examples.dividers.default.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="With Label" code={examples.dividers.withLabel.code}>
+                <examples.dividers.withLabel.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Vertical" code={examples.dividers.vertical.code}>
+                <examples.dividers.vertical.Component />
+              </ExampleWithCode>
+            </div>
+          </div>
+        );
+
+      case 'skeletons':
+        return (
+          <div className="space-y-8" data-section-id="skeletons" ref={(el) => (sectionRefs.current['skeletons'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Skeletons</h1>
+              <p className="text-gray-600 dark:text-zinc-400">Placeholder shapes for loading states.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ExampleWithCode title="Default" code={examples.skeletons.default.code}>
+                <examples.skeletons.default.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Card Skeleton" code={examples.skeletons.card.code}>
+                <examples.skeletons.card.Component />
+              </ExampleWithCode>
+            </div>
           </div>
         );
 

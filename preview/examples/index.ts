@@ -26,6 +26,12 @@ import { modalExamples } from './modals';
 import { tabExamples } from './tabs';
 import { accordionExamples } from './accordions';
 import { tooltipExamples } from './tooltips';
+import { breadcrumbExamples } from './breadcrumbs';
+import { spinnerExamples } from './spinners';
+import { progressExamples } from './progress';
+import { switchExamples } from './switches';
+import { dividerExamples } from './dividers';
+import { skeletonExamples } from './skeletons';
 
 export const examples = {
   buttons: buttonExamples,
@@ -45,4 +51,10 @@ export const examples = {
   tabs: tabExamples,
   accordions: accordionExamples,
   tooltips: tooltipExamples,
+  breadcrumbs: breadcrumbExamples,
+  spinners: spinnerExamples,
+  progress: progressExamples,
+  switches: switchExamples,
+  dividers: dividerExamples,
+  skeletons: skeletonExamples,
 };

@@ -16,6 +16,12 @@ export { Tabs, TabPanel } from './components/Tabs';
 export { Accordion } from './components/Accordion';
 export { Alert } from './components/Alert';
 export { Tooltip } from './components/Tooltip';
+export { Breadcrumb } from './components/Breadcrumb';
+export { Spinner } from './components/Spinner';
+export { Progress } from './components/Progress';
+export { Switch } from './components/Switch';
+export { Divider } from './components/Divider';
+export { Skeleton } from './components/Skeleton';
 
 // Export types
 export type { ButtonProps } from './components/Button';
@@ -35,6 +41,12 @@ export type { TabsProps, TabItem, TabPanelProps } from './components/Tabs';
 export type { AccordionProps, AccordionItem } from './components/Accordion';
 export type { AlertProps } from './components/Alert';
 export type { TooltipProps } from './components/Tooltip';
+export type { BreadcrumbProps, BreadcrumbItem } from './components/Breadcrumb';
+export type { SpinnerProps } from './components/Spinner';
+export type { ProgressProps } from './components/Progress';
+export type { SwitchProps } from './components/Switch';
+export type { DividerProps } from './components/Divider';
+export type { SkeletonProps } from './components/Skeleton';
 
 // Export utilities
 export { cn } from './utils/cn';
