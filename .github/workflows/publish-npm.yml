@@ -8,6 +8,10 @@ on:
   #   tags:
   #     - 'v*'
 
+permissions:
+  contents: read
+  id-token: write   # Required for npm Trusted Publishing (OIDC)
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -17,8 +21,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: '22'
+
+      # npm Trusted Publishing requires npm CLI 11.5.1+
+      - name: Install npm
+        run: npm install -g npm@latest
 
       - name: Install dependencies
         run: npm ci
@@ -27,6 +34,4 @@ jobs:
         run: npm run build
 
       - name: Publish to npm
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public
