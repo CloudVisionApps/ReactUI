@@ -761,7 +761,7 @@ function App() {
         activeSection={activeSection}
         onSectionChange={scrollToSection}
       />
-      <main className="flex-1 ml-64 mr-64 min-h-screen border-l border-r border-border" data-preview-content>
+      <main className="flex-1 ml-64 mr-64 min-h-screen border-l border-r border-border bg-gradient-to-br from-zinc-800 via-zinc-700 to-zinc-800 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950" data-preview-content>
         <div className="max-w-4xl mx-auto py-14 px-8">
           {sections.map((sectionId) => (
             <div key={sectionId} className="mb-20 last:mb-14">
