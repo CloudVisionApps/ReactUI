@@ -1,0 +1,68 @@
+import React, { useState } from 'react';
+
+export interface ExampleWithCodeProps {
+  title?: string;
+  code: string;
+  children: React.ReactNode;
+  /** If true, code block is expanded by default */
+  defaultShowCode?: boolean;
+}
+
+export function ExampleWithCode({
+  title,
+  code,
+  children,
+  defaultShowCode = false,
+}: ExampleWithCodeProps) {
+  const [showCode, setShowCode] = useState(defaultShowCode);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  return (
+    <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
+      {title && (
+        <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
+          <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
+        </div>
+      )}
+      <div className="p-4">
+        {children}
+      </div>
+      <div className="border-t border-gray-200 bg-gray-100 px-4 py-2.5 flex items-center justify-between gap-3">
+        <span className="text-[12px] font-medium text-gray-500 uppercase tracking-wide">Code</span>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setShowCode((v) => !v)}
+            className="text-[13px] font-medium text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            {showCode ? 'Hide' : 'Show'}
+          </button>
+          <button
+            type="button"
+            onClick={handleCopy}
+            className="text-[13px] font-medium px-3 py-1.5 rounded-lg bg-gray-800 text-white hover:bg-gray-900 transition-colors"
+          >
+            {copied ? 'Copied!' : 'Copy'}
+          </button>
+        </div>
+      </div>
+      {showCode && (
+        <div className="border-t border-gray-200 bg-gray-900 overflow-x-auto">
+          <pre className="p-4 text-[13px] text-gray-100 font-mono leading-relaxed m-0">
+            <code>{code}</code>
+          </pre>
+        </div>
+      )}
+    </div>
+  );
+}
