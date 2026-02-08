@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Button, Input, Card, Select, Checkbox, Radio, Textarea, Navigation, Hero, Footer } from '../src';
+import { Button, Input, Card, Select, Checkbox, Radio, Textarea, Navigation, Hero, Footer, Modal, Badge, Avatar, Tabs, TabPanel, Accordion, Alert, Tooltip } from '../src';
 import { Sidebar } from './components/Sidebar';
 import './App.css';
 
@@ -7,6 +7,8 @@ function App() {
   const [activeSection, setActiveSection] = useState('navigation');
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(true);
   const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const handleButtonClick = () => {
