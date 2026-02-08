@@ -2,18 +2,18 @@ import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '../../utils/cn';
 
 const TAB_CONTAINER_CLASSES: Record<'default' | 'pills', string> = {
-  default: 'relative border-b border-[#D2D2D7]/60',
-  pills: 'inline-flex p-1 rounded-xl bg-[#F5F5F7]',
+  default: 'relative border-b-2 border-border',
+  pills: 'inline-flex p-1 rounded-ui-lg bg-surface-muted',
 };
 
 const TAB_BUTTON_CLASSES: Record<'default' | 'pills', Record<'active' | 'inactive', string>> = {
   default: {
-    active: 'text-[#007AFF]',
-    inactive: 'text-[#86868B] hover:text-[#1D1D1F]',
+    active: 'text-primary font-semibold',
+    inactive: 'text-fg-muted hover:text-fg font-medium',
   },
   pills: {
-    active: 'rounded-lg bg-white text-[#1D1D1F] shadow-sm',
-    inactive: 'rounded-lg text-[#86868B] hover:text-[#1D1D1F]',
+    active: 'rounded-ui bg-surface text-fg font-semibold shadow-ui',
+    inactive: 'rounded-ui text-fg-muted font-medium hover:text-fg',
   },
 };
 
@@ -81,7 +81,7 @@ export const Tabs: React.FC<TabsProps> = ({
       >
         {variant === 'default' && (
           <span
-            className="absolute bottom-0 h-0.5 bg-[#007AFF] transition-all duration-200 ease-out"
+            className="absolute bottom-0 h-0.5 bg-primary rounded-full transition-all duration-200 ease-out"
             style={{ left: indicatorStyle.left, width: indicatorStyle.width }}
           />
         )}
@@ -98,8 +98,8 @@ export const Tabs: React.FC<TabsProps> = ({
               onClick={() => !item.disabled && handleChange(item.value)}
               disabled={item.disabled}
               className={cn(
-                'relative px-4 py-2.5 text-[13px] font-medium transition-all duration-150 ease-out',
-                'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#007AFF]/30 focus-visible:ring-offset-2',
+                'relative px-4 py-2.5 text-[13px] transition-all duration-150 ease-out',
+                'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-ring focus-visible:ring-offset-2 rounded-t-ui',
                 item.disabled && 'opacity-40 cursor-not-allowed',
                 item.icon ? 'flex items-center gap-2' : '',
                 variant === 'default' && 'pb-3',

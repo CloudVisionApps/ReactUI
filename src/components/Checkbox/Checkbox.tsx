@@ -70,30 +70,23 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   };
 
   const customCheckboxClasses = cn(
-    'relative flex items-center justify-center',
-    'rounded-md border-2',
-    'transition-all duration-300 ease-in-out',
-    'cursor-pointer',
-    'shadow-sm',
-    'hover:shadow-md hover:scale-105',
-    'focus-within:ring-4 focus-within:ring-offset-0',
-    disabled && 'opacity-50 cursor-not-allowed hover:scale-100 hover:shadow-sm',
+    'relative flex items-center justify-center rounded-ui border-2 transition-all duration-200 cursor-pointer',
+    'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-ring',
+    disabled && 'opacity-50 cursor-not-allowed',
     error
-      ? 'border-[#FF3B30] focus-within:ring-[#FF3B30]/20 hover:border-[#FF3B30]'
+      ? 'border-destructive focus-within:ring-destructive/20'
       : currentChecked
-      ? 'border-[#007AFF] focus-within:ring-[#007AFF]/20'
-      : 'border-[#D2D2D7] focus-within:ring-[#007AFF]/20 hover:border-[#AEAEB2]',
-    currentChecked && 'bg-[#007AFF] border-[#007AFF] hover:bg-[#0051D5] hover:border-[#0051D5]',
-    !currentChecked && 'bg-white border-[#D2D2D7] hover:bg-[#F5F5F7] hover:border-[#AEAEB2]',
+      ? 'border-primary bg-primary'
+      : 'border-border bg-surface hover:border-border-strong',
+    currentChecked && 'hover:bg-primary-hover',
     sizeClasses[size],
     className
   );
 
   const labelClasses = cn(
-    'text-[13px] font-medium text-[#1D1D1F] cursor-pointer transition-colors',
-    'hover:text-[#1D1D1F]',
-    error && 'text-[#FF3B30]',
-    disabled && 'opacity-40 cursor-not-allowed hover:text-[#1D1D1F]'
+    'text-[13px] font-semibold text-fg cursor-pointer transition-colors tracking-tight',
+    error && 'text-destructive',
+    disabled && 'opacity-50 cursor-not-allowed'
   );
 
   return (
@@ -121,10 +114,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           />
           {currentChecked && (
             <svg
-              className={cn(
-                'text-white pointer-events-none',
-                checkmarkSizes[size]
-              )}
+              className={cn('text-white pointer-events-none', checkmarkSizes[size])}
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -158,8 +148,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         <span
           id={`${checkboxId}-help`}
           className={cn(
-            'text-[12px] mt-1.5 ml-8 flex items-center gap-1',
-            error ? 'text-[#FF3B30] font-medium' : 'text-[#86868B]'
+            'text-[12px] mt-1.5 ml-8 font-medium',
+            error ? 'text-destructive' : 'text-fg-muted'
           )}
         >
           {error || helperText}

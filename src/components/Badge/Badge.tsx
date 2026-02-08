@@ -15,24 +15,24 @@ export const Badge: React.FC<BadgeProps> = ({
   ...props
 }) => {
   const variantClasses = {
-    default: 'bg-[#F5F5F7] text-[#1D1D1F]',
-    primary: 'bg-[#007AFF]/10 text-[#007AFF]',
-    success: 'bg-[#34C759]/10 text-[#34C759]',
-    warning: 'bg-[#FF9500]/10 text-[#FF9500]',
-    danger: 'bg-[#FF3B30]/10 text-[#FF3B30]',
-    info: 'bg-[#5856D6]/10 text-[#5856D6]',
+    default: 'bg-surface-muted text-fg font-semibold',
+    primary: 'bg-primary-muted text-primary font-semibold',
+    success: 'bg-success-muted text-success font-semibold',
+    warning: 'bg-warning-muted text-warning font-semibold',
+    danger: 'bg-destructive-muted text-destructive font-semibold',
+    info: 'bg-info-muted text-primary font-semibold',
   };
 
   const sizeClasses = {
-    small: 'px-2 py-0.5 text-[11px]',
-    medium: 'px-2.5 py-1 text-[12px]',
-    large: 'px-3 py-1.5 text-[13px]',
+    small: 'px-2 py-0.5 text-[11px] rounded-md',
+    medium: 'px-2.5 py-1 text-[12px] rounded-ui',
+    large: 'px-3 py-1.5 text-[13px] rounded-ui',
   };
 
   return (
     <span
       className={cn(
-        'inline-flex items-center justify-center rounded-full font-medium',
+        'inline-flex items-center justify-center tracking-tight',
         variantClasses[variant],
         sizeClasses[size],
         className

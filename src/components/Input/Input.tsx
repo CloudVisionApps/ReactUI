@@ -26,9 +26,9 @@ export const Input: React.FC<InputProps> = ({
   const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
 
   const sizeClasses = {
-    small: 'px-3 py-2 text-sm',
-    medium: 'px-4 py-2.5 text-base',
-    large: 'px-5 py-3 text-lg',
+    small: 'px-3 py-2 text-[13px]',
+    medium: 'px-4 py-2.5 text-[14px]',
+    large: 'px-5 py-3 text-[15px]',
   };
 
   const iconPadding = {
@@ -38,32 +38,25 @@ export const Input: React.FC<InputProps> = ({
   };
 
   const baseInputClasses = cn(
-    'block w-full font-normal bg-white text-[#1D1D1F]',
-    'border border-[#D2D2D7] rounded-md',
-    'box-border',
+    'block w-full font-medium bg-surface text-fg',
+    'border-2 border-border rounded-ui',
     'transition-all duration-150 ease-out',
     'outline-none appearance-none',
-    'leading-normal',
-    'placeholder:text-[#86868B]',
-    'disabled:bg-[#F5F5F7] disabled:text-[#86868B] disabled:cursor-not-allowed disabled:border-[#E8E8ED]',
+    'placeholder:text-fg-muted',
+    'disabled:bg-surface-muted disabled:text-fg-muted disabled:cursor-not-allowed disabled:border-border',
     sizeClasses[size],
     iconPadding[size]
   );
 
   const stateClasses = error
-    ? 'border-[#FF3B30] focus:border-[#FF3B30] focus:ring-2 focus:ring-[#FF3B30]/20 hover:border-[#FF3B30]'
-    : 'border-[#D2D2D7] focus:border-[#007AFF] focus:ring-2 focus:ring-[#007AFF]/20 hover:border-[#AEAEB2]';
+    ? 'border-destructive focus:border-destructive focus:ring-2 focus:ring-destructive/20'
+    : 'hover:border-border-strong focus:border-primary focus:ring-2 focus:ring-primary-ring';
 
-  const inputClasses = cn(
-    baseInputClasses,
-    stateClasses,
-    fullWidth && 'w-full',
-    className
-  );
+  const inputClasses = cn(baseInputClasses, stateClasses, fullWidth && 'w-full', className);
 
   const labelClasses = cn(
-    'text-[13px] font-medium text-[#1D1D1F] mb-1.5 block transition-colors',
-    error && 'text-[#FF3B30]'
+    'text-[13px] font-semibold text-fg mb-1.5 block tracking-tight',
+    error && 'text-destructive'
   );
 
   const iconSizeClasses = {
@@ -81,10 +74,12 @@ export const Input: React.FC<InputProps> = ({
       )}
       <div className="relative w-full">
         {leftIcon && (
-          <div           className={cn(
-            'absolute left-3 top-1/2 -translate-y-1/2 text-[#86868B] pointer-events-none z-10',
-            iconSizeClasses[size]
-          )}>
+          <div
+            className={cn(
+              'absolute left-3 top-1/2 -translate-y-1/2 text-fg-muted pointer-events-none z-10',
+              iconSizeClasses[size]
+            )}
+          >
             {leftIcon}
           </div>
         )}
@@ -97,10 +92,12 @@ export const Input: React.FC<InputProps> = ({
           {...props}
         />
         {rightIcon && (
-          <div           className={cn(
-            'absolute right-3 top-1/2 -translate-y-1/2 text-[#86868B] pointer-events-none z-10',
-            iconSizeClasses[size]
-          )}>
+          <div
+            className={cn(
+              'absolute right-3 top-1/2 -translate-y-1/2 text-fg-muted pointer-events-none z-10',
+              iconSizeClasses[size]
+            )}
+          >
             {rightIcon}
           </div>
         )}
@@ -109,8 +106,8 @@ export const Input: React.FC<InputProps> = ({
         <span
           id={`${inputId}-help`}
           className={cn(
-            'text-[12px] mt-1.5 flex items-center gap-1',
-            error ? 'text-[#FF3B30] font-medium' : 'text-[#86868B]'
+            'text-[12px] mt-1.5 flex items-center gap-1 font-medium',
+            error ? 'text-destructive' : 'text-fg-muted'
           )}
         >
           {error || helperText}

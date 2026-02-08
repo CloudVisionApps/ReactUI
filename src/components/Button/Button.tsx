@@ -9,18 +9,24 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const variantClasses = {
-  primary: 'bg-[#007AFF] text-white border-0 shadow-sm hover:bg-[#0051D5] active:bg-[#0040AA] active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30 focus:ring-offset-2',
-  secondary: 'bg-[#F5F5F7] text-[#1D1D1F] border-0 shadow-sm hover:bg-[#E8E8ED] active:bg-[#D2D2D7] active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-gray-400/30 focus:ring-offset-2',
-  danger: 'bg-[#FF3B30] text-white border-0 shadow-sm hover:bg-[#D70015] active:bg-[#C70014] active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-[#FF3B30]/30 focus:ring-offset-2',
-  outline: 'bg-transparent text-[#007AFF] border border-[#007AFF] hover:bg-[#007AFF]/10 active:bg-[#007AFF]/20 active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30 focus:ring-offset-2',
-  ghost: 'bg-transparent text-[#1D1D1F] border-0 hover:bg-[#F5F5F7] active:bg-[#E8E8ED] active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-gray-400/30 focus:ring-offset-2',
-  gradient: 'bg-gradient-to-r from-[#007AFF] to-[#5856D6] text-white border-0 shadow-sm hover:from-[#0051D5] hover:to-[#4A48C4] active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30 focus:ring-offset-2',
+  primary:
+    'bg-primary text-white shadow-ui hover:bg-primary-hover active:bg-primary-active active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-ring focus-visible:ring-offset-2',
+  secondary:
+    'bg-surface-muted text-fg border border-border hover:bg-border/50 hover:border-border-strong active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-fg-subtle/25 focus-visible:ring-offset-2',
+  danger:
+    'bg-destructive text-white shadow-ui hover:bg-destructive-hover active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive/35 focus-visible:ring-offset-2',
+  outline:
+    'bg-transparent text-primary border-2 border-primary hover:bg-primary-muted active:bg-primary/20 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-ring focus-visible:ring-offset-2',
+  ghost:
+    'bg-transparent text-fg hover:bg-surface-muted active:bg-border/50 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-fg-subtle/25 focus-visible:ring-offset-2',
+  gradient:
+    'bg-gradient-to-r from-primary to-indigo-600 text-white shadow-ui-glow hover:from-primary-hover hover:to-indigo-700 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-ring focus-visible:ring-offset-2',
 };
 
 const sizeClasses = {
-  small: 'px-4 py-1.5 text-sm font-medium min-h-[28px]',
-  medium: 'px-5 py-2 text-[13px] font-medium min-h-[32px]',
-  large: 'px-6 py-2.5 text-[15px] font-medium min-h-[36px]',
+  small: 'px-4 py-2 text-[13px] font-semibold min-h-[32px] rounded-ui',
+  medium: 'px-5 py-2.5 text-[13px] font-semibold min-h-[36px] rounded-ui',
+  large: 'px-6 py-3 text-[14px] font-semibold min-h-[42px] rounded-ui-lg',
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -32,8 +38,10 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-md cursor-pointer transition-all duration-150 ease-out outline-none relative';
-  const disabledClasses = 'disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:scale-100 disabled:active:scale-100';
+  const baseClasses =
+    'inline-flex items-center justify-center gap-2 cursor-pointer transition-all duration-150 ease-out outline-none relative';
+  const disabledClasses =
+    'disabled:opacity-45 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:scale-100 disabled:active:scale-100';
 
   const classes = cn(
     baseClasses,
@@ -46,23 +54,13 @@ export const Button: React.FC<ButtonProps> = ({
   );
 
   return (
-    <button
-      className={classes}
-      disabled={disabled || isLoading}
-      {...props}
-    >
-      {/* Loading spinner */}
+    <button className={classes} disabled={disabled || isLoading} {...props}>
       {isLoading && (
         <span className="absolute inset-0 flex items-center justify-center">
           <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
         </span>
       )}
-      
-      {/* Button content */}
-      <span className={cn(
-        'relative flex items-center gap-2',
-        isLoading && 'opacity-0'
-      )}>
+      <span className={cn('relative flex items-center gap-2', isLoading && 'opacity-0')}>
         {children}
       </span>
     </button>

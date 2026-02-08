@@ -18,41 +18,35 @@ export const Card: React.FC<CardProps> = ({
   variant = 'default',
   ...props
 }) => {
-  const baseClasses = 'bg-white flex flex-col overflow-hidden transition-all duration-150 ease-out';
-  
+  const baseClasses =
+    'bg-surface flex flex-col overflow-hidden transition-all duration-200 ease-out rounded-ui-lg';
+
   const variantClasses = {
-    default: 'rounded-lg border border-[#E8E8ED] shadow-sm',
-    elevated: 'rounded-lg shadow-sm border border-[#E8E8ED]',
-    outlined: 'rounded-lg border border-[#D2D2D7] shadow-none',
+    default: 'border border-border shadow-ui',
+    elevated: 'border border-border shadow-ui-md hover:shadow-ui-lg',
+    outlined: 'border-2 border-border shadow-none',
   };
 
-  const hoverClasses = hoverable 
-    ? 'hover:shadow-md hover:border-[#D2D2D7] cursor-pointer' 
+  const hoverClasses = hoverable
+    ? 'hover:shadow-ui-md hover:border-border-strong cursor-pointer'
     : '';
 
-  const classes = cn(
-    baseClasses,
-    variantClasses[variant],
-    hoverClasses,
-    className
-  );
+  const classes = cn(baseClasses, variantClasses[variant], hoverClasses, className);
 
   return (
     <div className={classes} {...props}>
       {title && (
-        <div className="px-5 py-3.5 bg-[#F5F5F7] border-b border-[#E8E8ED]">
-          <h3 className="text-[15px] font-semibold text-[#1D1D1F] leading-tight">
+        <div className="px-5 py-4 bg-surface-subtle/80 border-b border-border">
+          <h3 className="text-[14px] font-semibold text-fg leading-tight tracking-tight">
             {title}
           </h3>
         </div>
       )}
-      <div className="px-5 py-4 flex-1 text-[#1D1D1F] text-[13px] leading-relaxed">
+      <div className="px-5 py-4 flex-1 text-fg text-[13px] leading-relaxed">
         {children}
       </div>
       {footer && (
-        <div className="px-5 py-3.5 bg-[#F5F5F7] border-t border-[#E8E8ED]">
-          {footer}
-        </div>
+        <div className="px-5 py-4 bg-surface-subtle/80 border-t border-border">{footer}</div>
       )}
     </div>
   );

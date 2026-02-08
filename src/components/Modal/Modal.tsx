@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { cn } from '../../utils/cn';
-import { Button } from '../Button';
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean;
@@ -60,12 +59,12 @@ export const Modal: React.FC<ModalProps> = ({
     >
       <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
         <div
-          className="fixed inset-0 transition-opacity bg-black/20 backdrop-blur-sm"
+          className="fixed inset-0 transition-opacity bg-fg/40 backdrop-blur-[2px]"
           aria-hidden="true"
         />
         <div
           className={cn(
-            'inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full',
+            'inline-block align-bottom bg-surface rounded-ui-lg text-left overflow-hidden shadow-ui-lg transform transition-all sm:my-8 sm:align-middle w-full border border-border',
             sizeClasses[size],
             className
           )}
@@ -73,11 +72,11 @@ export const Modal: React.FC<ModalProps> = ({
           {...props}
         >
           {title && (
-            <div className="px-6 py-4 border-b border-[#E8E8ED] flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-[#1D1D1F]">{title}</h3>
+            <div className="px-6 py-4 border-b border-border flex items-center justify-between bg-surface-subtle/50">
+              <h3 className="text-[15px] font-semibold text-fg tracking-tight">{title}</h3>
               <button
                 onClick={onClose}
-                className="text-[#86868B] hover:text-[#1D1D1F] transition-colors p-1 rounded-md hover:bg-[#F5F5F7]"
+                className="text-fg-muted hover:text-fg transition-colors p-1.5 rounded-ui hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-ring"
                 aria-label="Close"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -86,9 +85,9 @@ export const Modal: React.FC<ModalProps> = ({
               </button>
             </div>
           )}
-          <div className="px-6 py-4">{children}</div>
+          <div className="px-6 py-5 text-fg text-[13px] leading-relaxed">{children}</div>
           {footer && (
-            <div className="px-6 py-4 border-t border-[#E8E8ED] flex items-center justify-end gap-3">
+            <div className="px-6 py-4 border-t border-border flex items-center justify-end gap-3 bg-surface-subtle/50">
               {footer}
             </div>
           )}

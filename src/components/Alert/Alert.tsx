@@ -17,17 +17,17 @@ export const Alert: React.FC<AlertProps> = ({
   ...props
 }) => {
   const variantClasses = {
-    info: 'bg-[#007AFF]/10 border-[#007AFF]/20 text-[#007AFF]',
-    success: 'bg-[#34C759]/10 border-[#34C759]/20 text-[#34C759]',
-    warning: 'bg-[#FF9500]/10 border-[#FF9500]/20 text-[#FF9500]',
-    danger: 'bg-[#FF3B30]/10 border-[#FF3B30]/20 text-[#FF3B30]',
+    info: 'bg-info-muted border border-primary/20 text-primary',
+    success: 'bg-success-muted border border-success/25 text-success',
+    warning: 'bg-warning-muted border border-warning/25 text-warning',
+    danger: 'bg-destructive-muted border border-destructive/25 text-destructive',
   };
 
   const iconColors = {
-    info: 'text-[#007AFF]',
-    success: 'text-[#34C759]',
-    warning: 'text-[#FF9500]',
-    danger: 'text-[#FF3B30]',
+    info: 'text-primary',
+    success: 'text-success',
+    warning: 'text-warning',
+    danger: 'text-destructive',
   };
 
   const icons = {
@@ -56,26 +56,24 @@ export const Alert: React.FC<AlertProps> = ({
   return (
     <div
       className={cn(
-        'rounded-md border p-4',
+        'rounded-ui-lg border p-4 font-medium',
         variantClasses[variant],
         className
       )}
       {...props}
     >
-      <div className="flex items-start">
-        <div className={cn('flex-shrink-0', iconColors[variant])}>
-          {icons[variant]}
-        </div>
-        <div className="ml-3 flex-1">
+      <div className="flex items-start gap-3">
+        <div className={cn('flex-shrink-0', iconColors[variant])}>{icons[variant]}</div>
+        <div className="flex-1 min-w-0">
           {title && (
-            <h3 className="text-[13px] font-semibold mb-1">{title}</h3>
+            <h3 className="text-[13px] font-semibold mb-1 tracking-tight">{title}</h3>
           )}
-          <div className="text-[13px]">{children}</div>
+          <div className="text-[13px] leading-relaxed">{children}</div>
         </div>
         {onClose && (
           <button
             onClick={onClose}
-            className="ml-4 flex-shrink-0 text-current opacity-60 hover:opacity-100 transition-opacity"
+            className="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity rounded-ui p-1 -m-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-current"
             aria-label="Close"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
