@@ -1,6 +1,8 @@
 import React from 'react';
+import { Sun, Moon, Palette } from 'lucide-react';
 import { Configurator } from './Configurator';
 import type { ThemeConfig } from '../useThemeConfig';
+import { cn } from '../../src/utils/cn';
 
 interface RightSidebarProps {
   theme: 'light' | 'dark';
@@ -18,25 +20,44 @@ export function RightSidebar({
   onThemeConfigReset,
 }: RightSidebarProps) {
   return (
-    <aside className="w-64 bg-surface border-l border-border h-screen fixed right-0 top-0 flex flex-col z-50 transition-colors overflow-y-auto">
-      <div className="p-4 border-b border-border bg-surface flex items-center justify-between gap-2">
-        <span className="text-sm font-medium text-fg">Theme</span>
-        <button
-          type="button"
-          onClick={() => onThemeChange(theme === 'dark' ? 'light' : 'dark')}
-          className="p-2 rounded-ui border border-border bg-surface-muted text-fg hover:bg-border/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-ring"
-          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {theme === 'dark' ? (
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-          ) : (
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-          )}
-        </button>
+    <aside className="w-64 h-screen fixed right-0 top-0 flex flex-col z-50 transition-colors overflow-y-auto bg-black/35 backdrop-blur-2xl border-l border-white/20 dark:border-white/10">
+      <div className="p-5 border-b border-white/15 dark:border-white/10 bg-transparent">
+        <div className="flex items-center gap-2 mb-4">
+          <Palette className="w-4 h-4 text-fg-muted shrink-0" strokeWidth={2} />
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-fg-muted">
+            Theme
+          </span>
+        </div>
+        <div className="flex rounded-ui overflow-hidden border border-white/20 dark:border-white/15 bg-black/20 dark:bg-white/5 p-0.5">
+          <button
+            type="button"
+            onClick={() => onThemeChange('light')}
+            className={cn(
+              'flex-1 flex items-center justify-center gap-2 py-2.5 text-[13px] font-medium rounded-[calc(var(--ui-radius)-2px)] transition-colors',
+              theme === 'light'
+                ? 'bg-white/20 dark:bg-white/10 text-fg shadow-sm'
+                : 'text-fg-muted hover:text-fg hover:bg-white/5'
+            )}
+            aria-label="Light mode"
+          >
+            <Sun className="w-4 h-4" strokeWidth={2} />
+            Light
+          </button>
+          <button
+            type="button"
+            onClick={() => onThemeChange('dark')}
+            className={cn(
+              'flex-1 flex items-center justify-center gap-2 py-2.5 text-[13px] font-medium rounded-[calc(var(--ui-radius)-2px)] transition-colors',
+              theme === 'dark'
+                ? 'bg-white/20 dark:bg-white/10 text-fg shadow-sm'
+                : 'text-fg-muted hover:text-fg hover:bg-white/5'
+            )}
+            aria-label="Dark mode"
+          >
+            <Moon className="w-4 h-4" strokeWidth={2} />
+            Dark
+          </button>
+        </div>
       </div>
       <Configurator
         config={themeConfig}

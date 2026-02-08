@@ -31,11 +31,11 @@ const BORDER_WIDTH_OPTIONS: { value: BorderWidthPreset; label: string }[] = [
 
 export function Configurator({ config, onConfigChange, onReset }: ConfiguratorProps) {
   return (
-    <div className="p-4 border-t border-border">
-      <div className="flex items-center justify-between mb-3">
-        <h2 className="text-xs font-semibold text-fg-muted uppercase tracking-wider">
-          Theme
-        </h2>
+    <div className="p-5 border-b border-white/15 dark:border-white/10 bg-transparent flex-1 overflow-y-auto">
+      <div className="flex items-center justify-between mb-4">
+        <span className="text-[11px] font-semibold uppercase tracking-wider text-fg-muted">
+          Tokens
+        </span>
         <button
           type="button"
           onClick={onReset}
@@ -44,32 +44,32 @@ export function Configurator({ config, onConfigChange, onReset }: ConfiguratorPr
           Reset
         </button>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-5">
         <div>
           <label className="block text-[12px] font-medium text-fg mb-2">
             Primary color
           </label>
-          <div className="flex flex-wrap gap-1.5 mb-2">
+          <div className="flex flex-wrap gap-2 mb-2">
             {PRIMARY_PRESETS.map((preset) => (
               <button
                 key={preset.value}
                 type="button"
                 title={preset.name}
                 onClick={() => onConfigChange({ primary: preset.value })}
-                className="w-7 h-7 rounded-ui border-2 border-transparent hover:border-border-strong transition-colors"
+                className="w-8 h-8 rounded-ui border-2 border-transparent hover:border-white/30 transition-colors ring-2 ring-transparent focus:ring-2 focus:ring-primary-ring focus:outline-none"
                 style={{
                   backgroundColor: preset.value,
-                  borderColor: config.primary === preset.value ? 'var(--ui-fg)' : undefined,
+                  borderColor: config.primary === preset.value ? 'rgba(255,255,255,0.5)' : undefined,
                 }}
               />
             ))}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 mt-2">
             <input
               type="color"
               value={config.primary}
               onChange={(e) => onConfigChange({ primary: e.target.value })}
-              className="w-9 h-9 rounded-ui border border-border cursor-pointer bg-surface p-0"
+              className="w-9 h-9 rounded-ui border border-white/20 dark:border-white/15 cursor-pointer bg-black/20 dark:bg-white/10 p-0.5"
             />
             <span className="text-[12px] text-fg-muted font-mono">
               {config.primary}
@@ -77,13 +77,13 @@ export function Configurator({ config, onConfigChange, onReset }: ConfiguratorPr
           </div>
         </div>
         <div>
-          <label className="block text-[12px] font-medium text-fg mb-1.5">
+          <label className="block text-[12px] font-medium text-fg mb-2">
             Border radius
           </label>
           <select
             value={config.radius}
             onChange={(e) => onConfigChange({ radius: e.target.value as RadiusPreset })}
-            className="w-full text-[13px] rounded-ui border border-border bg-surface text-fg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-ring"
+            className="w-full text-[13px] rounded-ui border border-white/20 dark:border-white/15 bg-black/20 dark:bg-white/10 text-fg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary-ring"
           >
             {RADIUS_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>
@@ -93,13 +93,13 @@ export function Configurator({ config, onConfigChange, onReset }: ConfiguratorPr
           </select>
         </div>
         <div>
-          <label className="block text-[12px] font-medium text-fg mb-1.5">
+          <label className="block text-[12px] font-medium text-fg mb-2">
             Border width
           </label>
           <select
             value={config.borderWidth}
             onChange={(e) => onConfigChange({ borderWidth: e.target.value as BorderWidthPreset })}
-            className="w-full text-[13px] rounded-ui border border-border bg-surface text-fg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-ring"
+            className="w-full text-[13px] rounded-ui border border-white/20 dark:border-white/15 bg-black/20 dark:bg-white/10 text-fg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary-ring"
           >
             {BORDER_WIDTH_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>
