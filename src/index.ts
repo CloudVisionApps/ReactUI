@@ -22,6 +22,10 @@ export { Progress } from './components/Progress';
 export { Switch } from './components/Switch';
 export { Divider } from './components/Divider';
 export { Skeleton } from './components/Skeleton';
+export { Pagination } from './components/Pagination';
+export { Table, TableHead, TableBody, TableRow, TableHeader, TableCell } from './components/Table';
+export { Link } from './components/Link';
+export { EmptyState } from './components/EmptyState';
 
 // Export types
 export type { ButtonProps } from './components/Button';
@@ -47,6 +51,10 @@ export type { ProgressProps } from './components/Progress';
 export type { SwitchProps } from './components/Switch';
 export type { DividerProps } from './components/Divider';
 export type { SkeletonProps } from './components/Skeleton';
+export type { PaginationProps } from './components/Pagination';
+export type { TableProps } from './components/Table';
+export type { LinkProps } from './components/Link';
+export type { EmptyStateProps } from './components/EmptyState';
 
 // Export utilities
 export { cn } from './utils/cn';

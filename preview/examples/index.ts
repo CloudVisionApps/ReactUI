@@ -32,6 +32,11 @@ import { progressExamples } from './progress';
 import { switchExamples } from './switches';
 import { dividerExamples } from './dividers';
 import { skeletonExamples } from './skeletons';
+import { paginationExamples } from './pagination';
+import { tableExamples } from './table';
+import { linkExamples } from './link';
+import { emptyStateExamples } from './emptyState';
+import { appDesignsExamples } from './appDesigns';
 
 export const examples = {
   buttons: buttonExamples,
@@ -57,4 +62,9 @@ export const examples = {
   switches: switchExamples,
   dividers: dividerExamples,
   skeletons: skeletonExamples,
+  pagination: paginationExamples,
+  table: tableExamples,
+  link: linkExamples,
+  emptyState: emptyStateExamples,
+  appDesigns: appDesignsExamples,
 };

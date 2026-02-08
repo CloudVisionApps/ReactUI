@@ -702,6 +702,95 @@ function App() {
           </div>
         );
 
+      case 'pagination':
+        return (
+          <div className="space-y-8" data-section-id="pagination" ref={(el) => (sectionRefs.current['pagination'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Pagination</h1>
+              <p className="text-gray-600 dark:text-zinc-400">Page navigation for lists and tables.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ExampleWithCode title="Default" code={examples.pagination.default.code}>
+                <examples.pagination.default.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Compact" code={examples.pagination.compact.code}>
+                <examples.pagination.compact.Component />
+              </ExampleWithCode>
+            </div>
+          </div>
+        );
+
+      case 'table':
+        return (
+          <div className="space-y-8" data-section-id="table" ref={(el) => (sectionRefs.current['table'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Table</h1>
+              <p className="text-gray-600 dark:text-zinc-400">Data tables with header, body, and optional striped or bordered styling.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ExampleWithCode title="Default" code={examples.table.default.code}>
+                <examples.table.default.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Striped" code={examples.table.striped.code}>
+                <examples.table.striped.Component />
+              </ExampleWithCode>
+            </div>
+          </div>
+        );
+
+      case 'link':
+        return (
+          <div className="space-y-8" data-section-id="link" ref={(el) => (sectionRefs.current['link'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Link</h1>
+              <p className="text-gray-600 dark:text-zinc-400">Styled anchor links using design tokens.</p>
+            </div>
+            <ExampleWithCode title="Variants" code={examples.link.default.code}>
+              <examples.link.default.Component />
+            </ExampleWithCode>
+          </div>
+        );
+
+      case 'emptyState':
+        return (
+          <div className="space-y-8" data-section-id="emptyState" ref={(el) => (sectionRefs.current['emptyState'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Empty State</h1>
+              <p className="text-gray-600 dark:text-zinc-400">Placeholder for empty lists or no results.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ExampleWithCode title="Default" code={examples.emptyState.default.code}>
+                <examples.emptyState.default.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="With Icon" code={examples.emptyState.withIcon.code}>
+                <examples.emptyState.withIcon.Component />
+              </ExampleWithCode>
+            </div>
+          </div>
+        );
+
+      case 'appDesigns':
+        return (
+          <div className="space-y-8" data-section-id="appDesigns" ref={(el) => (sectionRefs.current['appDesigns'] = el)}>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">App Designs</h1>
+              <p className="text-gray-600 dark:text-zinc-400">Full app-style layouts: music player, user card, user profile, and pricing.</p>
+            </div>
+            <ExampleWithCode title="Music Player" code={examples.appDesigns.musicPlayer.code}>
+              <examples.appDesigns.musicPlayer.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="User Card" code={examples.appDesigns.userCard.code}>
+              <examples.appDesigns.userCard.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="User Profile" code={examples.appDesigns.userProfile.code}>
+              <examples.appDesigns.userProfile.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Pricing Cards" code={examples.appDesigns.pricingCards.code}>
+              <examples.appDesigns.pricingCards.Component />
+            </ExampleWithCode>
+          </div>
+        );
+
       case 'examples':
         return (
           <div className="space-y-8" data-section-id="examples" ref={(el) => (sectionRefs.current['examples'] = el)}>
@@ -794,7 +883,7 @@ function App() {
     }
   };
 
-  const sections = ['navigation', 'hero', 'buttons', 'badges', 'avatars', 'alerts', 'modals', 'tabs', 'accordions', 'tooltips', 'breadcrumbs', 'spinners', 'progress', 'switches', 'dividers', 'skeletons', 'inputs', 'selects', 'checkboxes', 'radios', 'textareas', 'cards', 'footer', 'examples'];
+  const sections = ['navigation', 'hero', 'buttons', 'badges', 'avatars', 'alerts', 'modals', 'tabs', 'accordions', 'tooltips', 'breadcrumbs', 'spinners', 'progress', 'switches', 'dividers', 'skeletons', 'pagination', 'table', 'link', 'emptyState', 'appDesigns', 'inputs', 'selects', 'checkboxes', 'radios', 'textareas', 'cards', 'footer', 'examples'];
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-zinc-950 transition-colors">
