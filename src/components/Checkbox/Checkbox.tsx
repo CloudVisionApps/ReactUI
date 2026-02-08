@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { cn } from '../../utils/cn';
 
 export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
@@ -15,9 +15,15 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   size = 'medium',
   className = '',
   id,
+  checked,
+  defaultChecked,
+  onChange,
+  disabled,
   ...props
 }) => {
   const checkboxId = id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
+  const [isChecked, setIsChecked] = useState(defaultChecked || false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const sizeClasses = {
     small: 'w-4 h-4',
@@ -26,32 +32,57 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   };
 
   const checkmarkSizes = {
-    small: 'checked:bg-[length:10px_10px]',
-    medium: 'checked:bg-[length:12px_12px]',
-    large: 'checked:bg-[length:14px_14px]',
+    small: 'w-2.5 h-2.5',
+    medium: 'w-3 h-3',
+    large: 'w-3.5 h-3.5',
   };
 
-  // Using Tailwind arbitrary value for background-image
-  const checkmarkBg = "checked:bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 16 16\\' fill=\\'white\\'%3E%3Cpath d=\\'M12.207 4.793a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-3.5-3.5a1 1 0 011.414-1.414L4.5 10.586l6.293-6.293a1 1 0 011.414 0z\\'/%3E%3C/svg%3E')]";
+  const currentChecked = checked !== undefined ? checked : isChecked;
 
-  const baseCheckboxClasses = cn(
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (checked === undefined) {
+      setIsChecked(e.target.checked);
+    }
+    onChange?.(e);
+  };
+
+  const toggleCheckbox = () => {
+    if (!disabled && inputRef.current) {
+      inputRef.current.checked = !currentChecked;
+      const syntheticEvent = {
+        target: inputRef.current,
+        currentTarget: inputRef.current,
+      } as React.ChangeEvent<HTMLInputElement>;
+      handleChange(syntheticEvent);
+    }
+  };
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toggleCheckbox();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if ((e.key === 'Enter' || e.key === ' ') && !disabled) {
+      e.preventDefault();
+      toggleCheckbox();
+    }
+  };
+
+  const customCheckboxClasses = cn(
+    'relative flex items-center justify-center',
     'rounded-md border-2',
-    'appearance-none relative',
-    'box-border m-0 p-0',
     'transition-all duration-300 ease-in-out',
     'cursor-pointer',
     'shadow-sm',
     'hover:shadow-md hover:scale-105',
-    'focus:outline-none focus:ring-4 focus:ring-offset-0',
-    'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-sm',
+    'focus-within:ring-4 focus-within:ring-offset-0',
+    disabled && 'opacity-50 cursor-not-allowed hover:scale-100 hover:shadow-sm',
     error
-      ? 'border-red-400 focus:ring-red-200 hover:border-red-500'
-      : 'border-gray-300 focus:ring-blue-200 hover:border-blue-400',
-    'checked:bg-blue-600 checked:border-blue-600 checked:hover:border-blue-700',
-    'checked:shadow-md checked:shadow-blue-500/30',
-    checkmarkBg,
-    'checked:bg-center checked:bg-no-repeat',
-    checkmarkSizes[size],
+      ? 'border-red-400 focus-within:ring-red-200 hover:border-red-500'
+      : 'border-gray-300 focus-within:ring-blue-200 hover:border-blue-400',
+    currentChecked && 'bg-blue-600 border-blue-600 hover:border-blue-700 shadow-md shadow-blue-500/30',
+    !currentChecked && 'bg-white',
     sizeClasses[size],
     className
   );
@@ -60,23 +91,63 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     'text-sm font-semibold text-gray-800 cursor-pointer transition-colors',
     'hover:text-gray-900',
     error && 'text-red-600',
-    props.disabled && 'opacity-60 cursor-not-allowed hover:text-gray-800'
+    disabled && 'opacity-60 cursor-not-allowed hover:text-gray-800'
   );
 
   return (
     <div className="flex flex-col">
       <div className="flex items-center gap-3 group">
-        <input
-          id={checkboxId}
-          type="checkbox"
-          className={baseCheckboxClasses}
-          style={{ flexShrink: 0 }}
+        <div
+          className={customCheckboxClasses}
+          onClick={handleClick}
+          role="checkbox"
+          aria-checked={currentChecked}
           aria-invalid={error ? 'true' : 'false'}
-          aria-describedby={error || helperText ? `${checkboxId}-help` : undefined}
-          {...props}
-        />
+          tabIndex={disabled ? -1 : 0}
+          onKeyDown={handleKeyDown}
+        >
+          <input
+            ref={inputRef}
+            id={checkboxId}
+            type="checkbox"
+            checked={currentChecked}
+            onChange={handleChange}
+            disabled={disabled}
+            className="sr-only"
+            aria-hidden="true"
+            {...props}
+          />
+          {currentChecked && (
+            <svg
+              className={cn(
+                'text-white pointer-events-none',
+                checkmarkSizes[size]
+              )}
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4 12.6111L8.92308 17.5L20 6.5"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </div>
         {label && (
-          <label htmlFor={checkboxId} className={labelClasses}>
+          <label
+            htmlFor={checkboxId}
+            className={cn(labelClasses, 'cursor-pointer')}
+            onClick={(e) => {
+              e.preventDefault();
+              toggleCheckbox();
+            }}
+          >
             {label}
           </label>
         )}
