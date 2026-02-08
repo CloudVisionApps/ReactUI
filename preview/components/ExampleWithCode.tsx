@@ -28,36 +28,36 @@ export function ExampleWithCode({
   };
 
   return (
-    <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
+    <div className="border border-gray-200 dark:border-zinc-700 rounded-xl overflow-hidden bg-white dark:bg-zinc-900 shadow-sm transition-colors">
       {title && (
-        <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
-          <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
+        <div className="px-4 py-3 border-b border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800/50">
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{title}</h3>
         </div>
       )}
       <div className="p-4">
         {children}
       </div>
-      <div className="border-t border-gray-200 bg-gray-100 px-4 py-2.5 flex items-center justify-between gap-3">
-        <span className="text-[12px] font-medium text-gray-500 uppercase tracking-wide">Code</span>
+      <div className="border-t border-gray-200 dark:border-zinc-700 bg-gray-100 dark:bg-zinc-800 px-4 py-2.5 flex items-center justify-between gap-3">
+        <span className="text-[12px] font-medium text-gray-500 dark:text-zinc-400 uppercase tracking-wide">Code</span>
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => setShowCode((v) => !v)}
-            className="text-[13px] font-medium text-gray-600 hover:text-gray-900 transition-colors"
+            className="text-[13px] font-medium text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white transition-colors"
           >
             {showCode ? 'Hide' : 'Show'}
           </button>
           <button
             type="button"
             onClick={handleCopy}
-            className="text-[13px] font-medium px-3 py-1.5 rounded-lg bg-gray-800 text-white hover:bg-gray-900 transition-colors"
+            className="text-[13px] font-medium px-3 py-1.5 rounded-lg bg-gray-800 dark:bg-zinc-700 text-white hover:bg-gray-900 dark:hover:bg-zinc-600 transition-colors"
           >
             {copied ? 'Copied!' : 'Copy'}
           </button>
         </div>
       </div>
       {showCode && (
-        <div className="border-t border-gray-200 bg-gray-900 overflow-x-auto">
+        <div className="border-t border-gray-200 dark:border-zinc-700 bg-gray-900 dark:bg-zinc-950 overflow-x-auto">
           <pre className="p-4 text-[13px] text-gray-100 font-mono leading-relaxed m-0">
             <code>{code}</code>
           </pre>

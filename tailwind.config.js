@@ -2,6 +2,7 @@ const path = require('path');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     path.join(__dirname, './src/**/*.{js,jsx,ts,tsx}'),
     path.join(__dirname, './preview/**/*.{js,jsx,ts,tsx}'),
@@ -17,18 +18,18 @@ module.exports = {
           ring: 'rgba(99, 102, 241, 0.35)',
         },
         surface: {
-          DEFAULT: '#FFFFFF',
-          subtle: '#F8FAFC',
-          muted: '#F1F5F9',
+          DEFAULT: 'var(--ui-surface)',
+          subtle: 'var(--ui-surface-subtle)',
+          muted: 'var(--ui-surface-muted)',
         },
         fg: {
-          DEFAULT: '#0F172A',
-          muted: '#64748B',
-          subtle: '#94A3B8',
+          DEFAULT: 'var(--ui-fg)',
+          muted: 'var(--ui-fg-muted)',
+          subtle: 'var(--ui-fg-subtle)',
         },
         border: {
-          DEFAULT: '#E2E8F0',
-          strong: '#CBD5E1',
+          DEFAULT: 'var(--ui-border)',
+          strong: 'var(--ui-border-strong)',
         },
         destructive: {
           DEFAULT: '#EF4444',

@@ -7,4 +7,26 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  :root {
+    --ui-surface: #ffffff;
+    --ui-surface-subtle: #f8fafc;
+    --ui-surface-muted: #f1f5f9;
+    --ui-fg: #0f172a;
+    --ui-fg-muted: #64748b;
+    --ui-fg-subtle: #94a3b8;
+    --ui-border: #e2e8f0;
+    --ui-border-strong: #cbd5e1;
+  }
+
+  .dark {
+    --ui-surface: #18181b;
+    --ui-surface-subtle: #27272a;
+    --ui-surface-muted: #3f3f46;
+    --ui-fg: #fafafa;
+    --ui-fg-muted: #a1a1aa;
+    --ui-fg-subtle: #71717a;
+    --ui-border: #3f3f46;
+    --ui-border-strong: #52525b;
+  }
 }
