@@ -10,7 +10,8 @@
     "README.md"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && npm run build:css",
+    "build:css": "mkdir -p dist && npx tailwindcss -i src/styles/index.css -o dist/styles.css --minify",
     "dev": "rollup -c -w",
     "preview": "vite preview --port 3000",
     "preview:dev": "vite --port 3000",

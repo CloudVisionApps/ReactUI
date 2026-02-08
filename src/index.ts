@@ -38,6 +38,3 @@ export type { TooltipProps } from './components/Tooltip';
 
 // Export utilities
 export { cn } from './utils/cn';
-
-// Export styles - Tailwind CSS
-import './styles/index.css';

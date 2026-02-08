@@ -1,7 +1,6 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
-import postcss from 'rollup-plugin-postcss';
 import dts from 'rollup-plugin-dts';
 import { readFileSync } from 'fs';
 
@@ -32,10 +31,6 @@ export default [
       typescript({
         tsconfig: './tsconfig.json',
         exclude: ['**/*.test.*', '**/*.stories.*'],
-      }),
-      postcss({
-        extract: 'styles.css',
-        minimize: true,
       }),
     ],
     external: ['react', 'react-dom'],
