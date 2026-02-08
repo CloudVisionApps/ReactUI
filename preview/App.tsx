@@ -2,13 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button, Input, Card, Select, Checkbox, Radio, Textarea, Navigation, Hero, Footer, Modal, Badge, Avatar, Tabs, TabPanel, Accordion, Alert, Tooltip } from '../src';
 import { Sidebar } from './components/Sidebar';
 import { ExampleWithCode } from './components/ExampleWithCode';
+import { Section } from './components/Section';
 import { examples } from './examples';
 import { useTheme } from './useTheme';
+import { useThemeConfig } from './useThemeConfig';
 
 function App() {
   const [activeSection, setActiveSection] = useState('navigation');
   const [theme, setTheme] = useTheme();
-  const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const [themeConfig, setThemeConfig, resetThemeConfig] = useThemeConfig();
+  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
 
   useEffect(() => {
     const observerOptions = {
@@ -53,12 +56,7 @@ function App() {
     switch (sectionId) {
       case 'navigation':
         return (
-          <div className="space-y-8" data-section-id="navigation" ref={(el) => (sectionRefs.current['navigation'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Navigation</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Navigation bar component with macOS-inspired styling.</p>
-            </div>
-
+          <Section sectionId="navigation" ref={(el) => (sectionRefs.current['navigation'] = el)}>
             <ExampleWithCode title="Default Navigation" code={examples.navigation.default.code}>
               <examples.navigation.default.Component />
             </ExampleWithCode>
@@ -80,17 +78,12 @@ function App() {
             <ExampleWithCode title="With User Menu" code={examples.navigation.withUserMenu.code}>
               <examples.navigation.withUserMenu.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'hero':
         return (
-          <div className="space-y-8" data-section-id="hero" ref={(el) => (sectionRefs.current['hero'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Hero Sections</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Hero section components for landing pages and marketing.</p>
-            </div>
-
+          <Section sectionId="hero" ref={(el) => (sectionRefs.current['hero'] = el)}>
             <ExampleWithCode title="Default Hero" code={examples.hero.default.code}>
               <examples.hero.default.Component />
             </ExampleWithCode>
@@ -100,94 +93,69 @@ function App() {
             <ExampleWithCode title="Split Hero" code={examples.hero.split.code}>
               <examples.hero.split.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'footer':
         return (
-          <div className="space-y-8" data-section-id="footer" ref={(el) => (sectionRefs.current['footer'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Footer</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Footer component with links and social media integration.</p>
-            </div>
-
+          <Section sectionId="footer" ref={(el) => (sectionRefs.current['footer'] = el)}>
             <ExampleWithCode title="Default Footer" code={examples.footer.default.code}>
               <examples.footer.default.Component />
             </ExampleWithCode>
             <ExampleWithCode title="Minimal Footer" code={examples.footer.minimal.code}>
               <examples.footer.minimal.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'buttons':
         return (
-          <div className="space-y-8" data-section-id="buttons" ref={(el) => (sectionRefs.current['buttons'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Buttons</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Interactive button components with multiple variants and states.</p>
-            </div>
-
-            <div className="space-y-6">
-              <ExampleWithCode title="Variants" code={examples.buttons.variants.code} defaultShowCode>
-                <examples.buttons.variants.Component />
-              </ExampleWithCode>
-              <ExampleWithCode title="Sizes" code={examples.buttons.sizes.code}>
-                <examples.buttons.sizes.Component />
-              </ExampleWithCode>
-              <ExampleWithCode title="States" code={examples.buttons.states.code}>
-                <examples.buttons.states.Component />
-              </ExampleWithCode>
-              <ExampleWithCode title="Interactive Examples" code={examples.buttons.interactive.code}>
-                <examples.buttons.interactive.Component />
-              </ExampleWithCode>
-            </div>
-          </div>
+          <Section sectionId="buttons" ref={(el) => (sectionRefs.current['buttons'] = el)}>
+            <ExampleWithCode title="Variants" code={examples.buttons.variants.code} defaultShowCode>
+              <examples.buttons.variants.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Sizes" code={examples.buttons.sizes.code}>
+              <examples.buttons.sizes.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="States" code={examples.buttons.states.code}>
+              <examples.buttons.states.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Interactive Examples" code={examples.buttons.interactive.code}>
+              <examples.buttons.interactive.Component />
+            </ExampleWithCode>
+          </Section>
         );
 
       case 'inputs':
         return (
-          <div className="space-y-8" data-section-id="inputs" ref={(el) => (sectionRefs.current['inputs'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Inputs</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Text input fields with validation, helper text, and icon support.</p>
+          <Section sectionId="inputs" ref={(el) => (sectionRefs.current['inputs'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <ExampleWithCode title="Basic Input" code={examples.inputs.basic.code}>
+                <examples.inputs.basic.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Input with Helper Text" code={examples.inputs.withHelperText.code}>
+                <examples.inputs.withHelperText.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Input with Error" code={examples.inputs.withError.code}>
+                <examples.inputs.withError.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Disabled Input" code={examples.inputs.disabled.code}>
+                <examples.inputs.disabled.Component />
+              </ExampleWithCode>
             </div>
-
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <ExampleWithCode title="Basic Input" code={examples.inputs.basic.code}>
-                  <examples.inputs.basic.Component />
-                </ExampleWithCode>
-                <ExampleWithCode title="Input with Helper Text" code={examples.inputs.withHelperText.code}>
-                  <examples.inputs.withHelperText.Component />
-                </ExampleWithCode>
-                <ExampleWithCode title="Input with Error" code={examples.inputs.withError.code}>
-                  <examples.inputs.withError.Component />
-                </ExampleWithCode>
-                <ExampleWithCode title="Disabled Input" code={examples.inputs.disabled.code}>
-                  <examples.inputs.disabled.Component />
-                </ExampleWithCode>
-              </div>
-
             <ExampleWithCode title="Sizes" code={examples.inputs.sizes.code}>
               <examples.inputs.sizes.Component />
             </ExampleWithCode>
             <ExampleWithCode title="With Icons" code={examples.inputs.withIcons.code}>
               <examples.inputs.withIcons.Component />
             </ExampleWithCode>
-            </div>
-          </div>
+          </Section>
         );
 
       case 'selects':
         return (
-          <div className="space-y-8" data-section-id="selects" ref={(el) => (sectionRefs.current['selects'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Selects</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Dropdown select components with custom styling.</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="selects" ref={(el) => (sectionRefs.current['selects'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Basic Select" code={examples.selects.basic.code}>
                 <examples.selects.basic.Component />
               </ExampleWithCode>
@@ -201,18 +169,13 @@ function App() {
                 <examples.selects.disabled.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'checkboxes':
         return (
-          <div className="space-y-8" data-section-id="checkboxes" ref={(el) => (sectionRefs.current['checkboxes'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Checkboxes</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Checkbox components with multiple sizes and states.</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="checkboxes" ref={(el) => (sectionRefs.current['checkboxes'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Basic Checkboxes" code={examples.checkboxes.basic.code}>
                 <examples.checkboxes.basic.Component />
               </ExampleWithCode>
@@ -226,18 +189,13 @@ function App() {
                 <examples.checkboxes.withError.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'radios':
         return (
-          <div className="space-y-8" data-section-id="radios" ref={(el) => (sectionRefs.current['radios'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Radio Buttons</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Radio button components for single selection.</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="radios" ref={(el) => (sectionRefs.current['radios'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Radio Group" code={examples.radios.group.code}>
                 <examples.radios.group.Component />
               </ExampleWithCode>
@@ -251,18 +209,13 @@ function App() {
                 <examples.radios.withError.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'textareas':
         return (
-          <div className="space-y-8" data-section-id="textareas" ref={(el) => (sectionRefs.current['textareas'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Textareas</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Multi-line text input components.</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="textareas" ref={(el) => (sectionRefs.current['textareas'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Basic Textarea" code={examples.textareas.basic.code}>
                 <examples.textareas.basic.Component />
               </ExampleWithCode>
@@ -276,17 +229,12 @@ function App() {
                 <examples.textareas.sizes.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'cards':
         return (
-          <div className="space-y-8" data-section-id="cards" ref={(el) => (sectionRefs.current['cards'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Cards</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Container components with header, body, and footer sections. Use stats, feature, app, and benefit cards to build dashboards and landing pages.</p>
-            </div>
-
+          <Section sectionId="cards" ref={(el) => (sectionRefs.current['cards'] = el)}>
             <div>
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Variants</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -469,130 +417,91 @@ function App() {
                 </Card>
               </div>
             </div>
-          </div>
+          </Section>
         );
 
       case 'badges':
         return (
-          <div className="space-y-8" data-section-id="badges" ref={(el) => (sectionRefs.current['badges'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Badges</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Badge components for labels, status indicators, and notifications.</p>
-            </div>
-
+          <Section sectionId="badges" ref={(el) => (sectionRefs.current['badges'] = el)}>
             <ExampleWithCode title="Variants" code={examples.badges.variants.code}>
               <examples.badges.variants.Component />
             </ExampleWithCode>
             <ExampleWithCode title="Sizes" code={examples.badges.sizes.code}>
               <examples.badges.sizes.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'avatars':
         return (
-          <div className="space-y-8" data-section-id="avatars" ref={(el) => (sectionRefs.current['avatars'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Avatars</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Avatar components for user profiles and images.</p>
-            </div>
-
+          <Section sectionId="avatars" ref={(el) => (sectionRefs.current['avatars'] = el)}>
             <ExampleWithCode title="Sizes" code={examples.avatars.sizes.code}>
               <examples.avatars.sizes.Component />
             </ExampleWithCode>
             <ExampleWithCode title="With Status" code={examples.avatars.withStatus.code}>
               <examples.avatars.withStatus.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'alerts':
         return (
-          <div className="space-y-8" data-section-id="alerts" ref={(el) => (sectionRefs.current['alerts'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Alerts</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Alert components for notifications and messages.</p>
-            </div>
-
+          <Section sectionId="alerts" ref={(el) => (sectionRefs.current['alerts'] = el)}>
             <ExampleWithCode title="Variants" code={examples.alerts.variants.code}>
               <examples.alerts.variants.Component />
             </ExampleWithCode>
             <ExampleWithCode title="Dismissible" code={examples.alerts.dismissible.code}>
               <examples.alerts.dismissible.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'modals':
         return (
-          <div className="space-y-8" data-section-id="modals" ref={(el) => (sectionRefs.current['modals'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Modals</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Modal dialog components for overlays and confirmations.</p>
-            </div>
-
+          <Section sectionId="modals" ref={(el) => (sectionRefs.current['modals'] = el)}>
             <ExampleWithCode title="Modal Examples" code={examples.modals.basic.code}>
               <examples.modals.basic.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'tabs':
         return (
-          <div className="space-y-8" data-section-id="tabs" ref={(el) => (sectionRefs.current['tabs'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Tabs</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Tab components for organizing content into sections.</p>
-            </div>
-
+          <Section sectionId="tabs" ref={(el) => (sectionRefs.current['tabs'] = el)}>
             <ExampleWithCode title="Default Tabs" code={examples.tabs.default.code}>
               <examples.tabs.default.Component />
             </ExampleWithCode>
             <ExampleWithCode title="Pills Variant" code={examples.tabs.pills.code}>
               <examples.tabs.pills.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'accordions':
         return (
-          <div className="space-y-8" data-section-id="accordions" ref={(el) => (sectionRefs.current['accordions'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Accordions</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Accordion components for collapsible content sections.</p>
-            </div>
-
+          <Section sectionId="accordions" ref={(el) => (sectionRefs.current['accordions'] = el)}>
             <ExampleWithCode title="Single Open" code={examples.accordions.singleOpen.code}>
               <examples.accordions.singleOpen.Component />
             </ExampleWithCode>
             <ExampleWithCode title="Multiple Open" code={examples.accordions.multipleOpen.code}>
               <examples.accordions.multipleOpen.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'tooltips':
         return (
-          <div className="space-y-8" data-section-id="tooltips" ref={(el) => (sectionRefs.current['tooltips'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Tooltips</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Tooltip components for additional information on hover.</p>
-            </div>
-
+          <Section sectionId="tooltips" ref={(el) => (sectionRefs.current['tooltips'] = el)}>
             <ExampleWithCode title="Tooltip Examples" code={examples.tooltips.positions.code}>
               <examples.tooltips.positions.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'breadcrumbs':
         return (
-          <div className="space-y-8" data-section-id="breadcrumbs" ref={(el) => (sectionRefs.current['breadcrumbs'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Breadcrumbs</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Navigation trail showing current location in hierarchy.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="breadcrumbs" ref={(el) => (sectionRefs.current['breadcrumbs'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Default" code={examples.breadcrumbs.default.code}>
                 <examples.breadcrumbs.default.Component />
               </ExampleWithCode>
@@ -600,17 +509,13 @@ function App() {
                 <examples.breadcrumbs.withSeparator.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'spinners':
         return (
-          <div className="space-y-8" data-section-id="spinners" ref={(el) => (sectionRefs.current['spinners'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Spinners</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Loading indicators for async operations.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="spinners" ref={(el) => (sectionRefs.current['spinners'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Default" code={examples.spinners.default.code}>
                 <examples.spinners.default.Component />
               </ExampleWithCode>
@@ -618,17 +523,13 @@ function App() {
                 <examples.spinners.sizes.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'progress':
         return (
-          <div className="space-y-8" data-section-id="progress" ref={(el) => (sectionRefs.current['progress'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Progress</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Linear progress bars for completion or loading.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="progress" ref={(el) => (sectionRefs.current['progress'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Default" code={examples.progress.default.code}>
                 <examples.progress.default.Component />
               </ExampleWithCode>
@@ -639,17 +540,13 @@ function App() {
                 <examples.progress.withLabel.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'switches':
         return (
-          <div className="space-y-8" data-section-id="switches" ref={(el) => (sectionRefs.current['switches'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Switches</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Toggle controls for boolean settings.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="switches" ref={(el) => (sectionRefs.current['switches'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Default" code={examples.switches.default.code}>
                 <examples.switches.default.Component />
               </ExampleWithCode>
@@ -660,17 +557,13 @@ function App() {
                 <examples.switches.sizes.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'dividers':
         return (
-          <div className="space-y-8" data-section-id="dividers" ref={(el) => (sectionRefs.current['dividers'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Dividers</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Horizontal or vertical separators between content.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="dividers" ref={(el) => (sectionRefs.current['dividers'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Horizontal" code={examples.dividers.default.code}>
                 <examples.dividers.default.Component />
               </ExampleWithCode>
@@ -681,17 +574,13 @@ function App() {
                 <examples.dividers.vertical.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'skeletons':
         return (
-          <div className="space-y-8" data-section-id="skeletons" ref={(el) => (sectionRefs.current['skeletons'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Skeletons</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Placeholder shapes for loading states.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="skeletons" ref={(el) => (sectionRefs.current['skeletons'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Default" code={examples.skeletons.default.code}>
                 <examples.skeletons.default.Component />
               </ExampleWithCode>
@@ -699,17 +588,13 @@ function App() {
                 <examples.skeletons.card.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'pagination':
         return (
-          <div className="space-y-8" data-section-id="pagination" ref={(el) => (sectionRefs.current['pagination'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Pagination</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Page navigation for lists and tables.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="pagination" ref={(el) => (sectionRefs.current['pagination'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Default" code={examples.pagination.default.code}>
                 <examples.pagination.default.Component />
               </ExampleWithCode>
@@ -717,7 +602,7 @@ function App() {
                 <examples.pagination.compact.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'table':
@@ -740,25 +625,17 @@ function App() {
 
       case 'link':
         return (
-          <div className="space-y-8" data-section-id="link" ref={(el) => (sectionRefs.current['link'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Link</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Styled anchor links using design tokens.</p>
-            </div>
+          <Section sectionId="link" ref={(el) => (sectionRefs.current['link'] = el)}>
             <ExampleWithCode title="Variants" code={examples.link.default.code}>
               <examples.link.default.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'emptyState':
         return (
-          <div className="space-y-8" data-section-id="emptyState" ref={(el) => (sectionRefs.current['emptyState'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Empty State</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Placeholder for empty lists or no results.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Section sectionId="emptyState" ref={(el) => (sectionRefs.current['emptyState'] = el)}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExampleWithCode title="Default" code={examples.emptyState.default.code}>
                 <examples.emptyState.default.Component />
               </ExampleWithCode>
@@ -766,16 +643,12 @@ function App() {
                 <examples.emptyState.withIcon.Component />
               </ExampleWithCode>
             </div>
-          </div>
+          </Section>
         );
 
       case 'appDesigns':
         return (
-          <div className="space-y-8" data-section-id="appDesigns" ref={(el) => (sectionRefs.current['appDesigns'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">App Designs</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Full app-style layouts: music player, user card, user profile, and pricing.</p>
-            </div>
+          <Section sectionId="appDesigns" ref={(el) => (sectionRefs.current['appDesigns'] = el)}>
             <ExampleWithCode title="Music Player" code={examples.appDesigns.musicPlayer.code}>
               <examples.appDesigns.musicPlayer.Component />
             </ExampleWithCode>
@@ -788,17 +661,12 @@ function App() {
             <ExampleWithCode title="Pricing Cards" code={examples.appDesigns.pricingCards.code}>
               <examples.appDesigns.pricingCards.Component />
             </ExampleWithCode>
-          </div>
+          </Section>
         );
 
       case 'examples':
         return (
-          <div className="space-y-8" data-section-id="examples" ref={(el) => (sectionRefs.current['examples'] = el)}>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Examples</h1>
-              <p className="text-gray-600 dark:text-zinc-400">Real-world examples combining multiple components.</p>
-            </div>
-
+          <Section sectionId="examples" ref={(el) => (sectionRefs.current['examples'] = el)}>
             <Card
               title="Contact Form"
               variant="elevated"
@@ -875,7 +743,7 @@ function App() {
                 />
               </div>
             </Card>
-          </div>
+          </Section>
         );
 
       default:
@@ -887,11 +755,20 @@ function App() {
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-zinc-950 transition-colors">
-      <Sidebar activeSection={activeSection} onSectionChange={scrollToSection} theme={theme} onThemeChange={setTheme} />
-      <main className="flex-1 ml-64 p-8">
-        <div className="max-w-6xl mx-auto space-y-16">
+      <style>{`[data-preview-content] .border { border-width: var(--ui-border-width) !important; }`}</style>
+      <Sidebar
+        activeSection={activeSection}
+        onSectionChange={scrollToSection}
+        theme={theme}
+        onThemeChange={setTheme}
+        themeConfig={themeConfig}
+        onThemeConfigChange={setThemeConfig}
+        onThemeConfigReset={resetThemeConfig}
+      />
+      <main className="flex-1 ml-64 min-h-screen border-l border-gray-200/80 dark:border-zinc-800" data-preview-content>
+        <div className="max-w-4xl mx-auto py-14 px-8">
           {sections.map((sectionId) => (
-            <div key={sectionId}>
+            <div key={sectionId} className="mb-20 last:mb-14">
               {renderSection(sectionId)}
             </div>
           ))}

@@ -1,11 +1,16 @@
 import React from 'react';
 import { cn } from '../../src/utils/cn';
+import { Configurator } from './Configurator';
+import type { ThemeConfig } from '../useThemeConfig';
 
 interface SidebarProps {
   activeSection: string;
   onSectionChange: (section: string) => void;
   theme: 'light' | 'dark';
   onThemeChange: (theme: 'light' | 'dark') => void;
+  themeConfig: ThemeConfig;
+  onThemeConfigChange: (patch: Partial<ThemeConfig>) => void;
+  onThemeConfigReset: () => void;
 }
 
 const navigationItems = [
@@ -40,9 +45,17 @@ const navigationItems = [
   { id: 'examples', label: 'Examples', icon: '💡' },
 ];
 
-export const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange, theme, onThemeChange }) => {
+export const Sidebar: React.FC<SidebarProps> = ({
+  activeSection,
+  onSectionChange,
+  theme,
+  onThemeChange,
+  themeConfig,
+  onThemeConfigChange,
+  onThemeConfigReset,
+}) => {
   return (
-    <aside className="w-64 bg-white dark:bg-zinc-900 border-r border-gray-200 dark:border-zinc-700 h-screen fixed left-0 top-0 overflow-y-auto z-50 transition-colors">
+    <aside className="w-64 bg-white dark:bg-zinc-900 border-r border-gray-200 dark:border-zinc-700 h-screen fixed left-0 top-0 flex flex-col z-50 transition-colors">
       <div className="p-6 border-b border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
         <div className="flex items-center justify-between gap-2">
           <div>
@@ -67,7 +80,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange
           </button>
         </div>
       </div>
-      <nav className="p-4 bg-white dark:bg-zinc-900">
+      <nav className="p-4 flex-1 overflow-y-auto bg-white dark:bg-zinc-900">
         <ul className="space-y-1 m-0 p-0 list-none">
           {navigationItems.map((item) => (
             <li key={item.id} className="m-0 p-0">
@@ -89,6 +102,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange
           ))}
         </ul>
       </nav>
+      <Configurator
+        config={themeConfig}
+        onConfigChange={onThemeConfigChange}
+        onReset={onThemeConfigReset}
+      />
     </aside>
   );
 };

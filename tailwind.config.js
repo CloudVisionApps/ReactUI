@@ -11,11 +11,11 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#6366F1',
-          hover: '#4F46E5',
-          active: '#4338CA',
-          muted: 'rgba(99, 102, 241, 0.12)',
-          ring: 'rgba(99, 102, 241, 0.35)',
+          DEFAULT: 'var(--ui-primary)',
+          hover: 'var(--ui-primary-hover)',
+          active: 'var(--ui-primary-active)',
+          muted: 'var(--ui-primary-muted)',
+          ring: 'var(--ui-primary-ring)',
         },
         surface: {
           DEFAULT: 'var(--ui-surface)',
@@ -50,9 +50,12 @@ module.exports = {
         },
       },
       borderRadius: {
-        'ui': '10px',
-        'ui-lg': '12px',
-        'ui-xl': '16px',
+        'ui': 'var(--ui-radius)',
+        'ui-lg': 'var(--ui-radius-lg)',
+        'ui-xl': 'var(--ui-radius-xl)',
+      },
+      borderWidth: {
+        'ui': 'var(--ui-border-width)',
       },
       boxShadow: {
         'ui': '0 1px 2px rgba(15, 23, 42, 0.04)',
