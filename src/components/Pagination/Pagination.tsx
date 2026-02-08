@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
 
-export interface PaginationProps extends React.HTMLAttributes<nav> {
+export interface PaginationProps extends React.ComponentPropsWithoutRef<'nav'> {
   page: number;
   totalPages: number;
   onPageChange: (page: number) => void;
