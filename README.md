@@ -8,9 +8,6 @@ A React component library built with TypeScript and Tailwind CSS. Use it to buil
 ## Screenshots
 
 ![Screenshot 1](screenshots/screenshot1.png)
-
-![Screenshot 2](screenshots/screenshot2.png)
-
 ## Requirements
 
 - React 18+
