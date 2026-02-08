@@ -1,5 +1,5 @@
 {
-  "name": "@cloudvisionapps/react-ui",
+  "name": "cloudvisionapps/react-ui",
   "version": "1.0.0",
   "description": "A comprehensive React UI component library",
   "main": "dist/index.js",
