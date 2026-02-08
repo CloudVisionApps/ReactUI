@@ -20,5 +20,5 @@ export const navigationExamples = {
   withIcons: { Component: NavigationWithIcons, code: navigationWithIconsCode },
   withCta: { Component: NavigationWithCta, code: navigationWithCtaCode },
   sticky: { Component: NavigationSticky, code: navigationStickyCode },
-  withUserMenu: { Component: NavigationWithUserMenu, code: navigationWithUserMenuCode }
+  withUserMenu: { Component: NavigationWithUserMenu, code: navigationWithUserMenuCode },
 };

@@ -80,7 +80,6 @@ function App() {
             <ExampleWithCode title="With User Menu" code={examples.navigation.withUserMenu.code}>
               <examples.navigation.withUserMenu.Component />
             </ExampleWithCode>
-
           </div>
         );
 
@@ -795,7 +794,7 @@ function App() {
     }
   };
 
-  const sections = ['navigation', 'hero', 'buttons', 'badges', 'avatars', 'alerts', 'modals', 'tabs', 'accordions', 'tooltips', 'inputs', 'selects', 'checkboxes', 'radios', 'textareas', 'cards', 'footer', 'examples'];
+  const sections = ['navigation', 'hero', 'buttons', 'badges', 'avatars', 'alerts', 'modals', 'tabs', 'accordions', 'tooltips', 'breadcrumbs', 'spinners', 'progress', 'switches', 'dividers', 'skeletons', 'inputs', 'selects', 'checkboxes', 'radios', 'textareas', 'cards', 'footer', 'examples'];
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-zinc-950 transition-colors">
