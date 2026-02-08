@@ -30,21 +30,21 @@ export const Textarea: React.FC<TextareaProps> = ({
   };
 
   const baseTextareaClasses = cn(
-    'block w-full font-normal bg-white text-gray-900',
-    'border border-solid rounded-lg',
+    'block w-full font-normal bg-white text-[#1D1D1F]',
+    'border border-[#D2D2D7] rounded-md',
     'box-border',
-    'transition-all duration-200 ease-in-out',
+    'transition-all duration-150 ease-out',
     'outline-none appearance-none',
     'leading-relaxed',
     'resize-y',
-    'placeholder:text-gray-400',
-    'disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed disabled:border-gray-200',
+    'placeholder:text-[#86868B]',
+    'disabled:bg-[#F5F5F7] disabled:text-[#86868B] disabled:cursor-not-allowed disabled:border-[#E8E8ED]',
     sizeClasses[size]
   );
 
   const stateClasses = error
-    ? 'border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 hover:border-red-400'
-    : 'border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 hover:border-gray-400';
+    ? 'border-[#FF3B30] focus:border-[#FF3B30] focus:ring-2 focus:ring-[#FF3B30]/20 hover:border-[#FF3B30]'
+    : 'border-[#D2D2D7] focus:border-[#007AFF] focus:ring-2 focus:ring-[#007AFF]/20 hover:border-[#AEAEB2]';
 
   const textareaClasses = cn(
     baseTextareaClasses,
@@ -54,8 +54,8 @@ export const Textarea: React.FC<TextareaProps> = ({
   );
 
   const labelClasses = cn(
-    'text-sm font-semibold text-gray-700 mb-2 block transition-colors',
-    error && 'text-red-600'
+    'text-[13px] font-medium text-[#1D1D1F] mb-1.5 block transition-colors',
+    error && 'text-[#FF3B30]'
   );
 
   return (
@@ -80,8 +80,8 @@ export const Textarea: React.FC<TextareaProps> = ({
         <span
           id={`${textareaId}-help`}
           className={cn(
-            'text-xs mt-1.5 flex items-center gap-1',
-            error ? 'text-red-600 font-medium' : 'text-gray-500'
+            'text-[12px] mt-1.5 flex items-center gap-1',
+            error ? 'text-[#FF3B30] font-medium' : 'text-[#86868B]'
           )}
         >
           {error || helperText}

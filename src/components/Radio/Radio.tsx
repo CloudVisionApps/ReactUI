@@ -79,21 +79,21 @@ export const Radio: React.FC<RadioProps> = ({
     'focus-within:ring-4 focus-within:ring-offset-0',
     disabled && 'opacity-50 cursor-not-allowed hover:scale-100 hover:shadow-sm',
     error
-      ? 'border-red-400 focus-within:ring-red-200 hover:border-red-500'
+      ? 'border-[#FF3B30] focus-within:ring-[#FF3B30]/20 hover:border-[#FF3B30]'
       : currentChecked
-      ? 'border-blue-600 focus-within:ring-blue-200'
-      : 'border-gray-400 focus-within:ring-blue-200 hover:border-gray-500',
-    currentChecked && 'bg-white border-blue-600 hover:border-blue-700 shadow-md shadow-blue-500/30',
-    !currentChecked && 'bg-gray-100 border-gray-400 hover:bg-gray-200 hover:border-gray-500',
+      ? 'border-[#007AFF] focus-within:ring-[#007AFF]/20'
+      : 'border-[#D2D2D7] focus-within:ring-[#007AFF]/20 hover:border-[#AEAEB2]',
+    currentChecked && 'bg-white border-[#007AFF] hover:border-[#0051D5]',
+    !currentChecked && 'bg-white border-[#D2D2D7] hover:bg-[#F5F5F7] hover:border-[#AEAEB2]',
     sizeClasses[size],
     className
   );
 
   const labelClasses = cn(
-    'text-sm font-semibold text-gray-800 cursor-pointer transition-colors',
-    'hover:text-gray-900',
-    error && 'text-red-600',
-    disabled && 'opacity-60 cursor-not-allowed hover:text-gray-800'
+    'text-[13px] font-medium text-[#1D1D1F] cursor-pointer transition-colors',
+    'hover:text-[#1D1D1F]',
+    error && 'text-[#FF3B30]',
+    disabled && 'opacity-40 cursor-not-allowed hover:text-[#1D1D1F]'
   );
 
   return (
@@ -122,7 +122,7 @@ export const Radio: React.FC<RadioProps> = ({
           {currentChecked && (
             <div
               className={cn(
-                'rounded-full bg-blue-600 pointer-events-none',
+                'rounded-full bg-[#007AFF] pointer-events-none',
                 dotSizes[size]
               )}
             />
@@ -145,8 +145,8 @@ export const Radio: React.FC<RadioProps> = ({
         <span
           id={`${radioId}-help`}
           className={cn(
-            'text-xs mt-1.5 ml-8 flex items-center gap-1',
-            error ? 'text-red-600 font-medium' : 'text-gray-500'
+            'text-[12px] mt-1.5 ml-8 flex items-center gap-1',
+            error ? 'text-[#FF3B30] font-medium' : 'text-[#86868B]'
           )}
         >
           {error || helperText}

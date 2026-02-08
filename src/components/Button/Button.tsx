@@ -9,18 +9,18 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const variantClasses = {
-  primary: 'bg-gradient-to-r from-blue-600 to-blue-700 text-white border-0 shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 hover:from-blue-700 hover:to-blue-800 active:scale-[0.98] focus:ring-4 focus:ring-blue-500/30',
-  secondary: 'bg-gradient-to-r from-gray-700 to-gray-800 text-white border-0 shadow-lg shadow-gray-500/30 hover:shadow-xl hover:shadow-gray-500/40 hover:from-gray-800 hover:to-gray-900 active:scale-[0.98] focus:ring-4 focus:ring-gray-500/30',
-  danger: 'bg-gradient-to-r from-red-500 to-red-600 text-white border-0 shadow-lg shadow-red-500/50 hover:shadow-xl hover:shadow-red-500/60 hover:from-red-600 hover:to-red-700 active:scale-[0.98] focus:ring-4 focus:ring-red-500/30',
-  outline: 'bg-transparent text-blue-600 border-2 border-blue-600 shadow-sm hover:bg-blue-50 hover:border-blue-700 hover:text-blue-700 active:scale-[0.98] focus:ring-4 focus:ring-blue-500/20',
-  ghost: 'bg-transparent text-gray-700 border-0 hover:bg-gray-100 active:bg-gray-200 active:scale-[0.98] focus:ring-4 focus:ring-gray-500/20',
-  gradient: 'bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white border-0 shadow-lg shadow-pink-500/50 hover:shadow-xl hover:shadow-pink-500/60 active:scale-[0.98] focus:ring-4 focus:ring-pink-500/30',
+  primary: 'bg-[#007AFF] text-white border-0 shadow-sm hover:bg-[#0051D5] active:bg-[#0040AA] active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30 focus:ring-offset-2',
+  secondary: 'bg-[#F5F5F7] text-[#1D1D1F] border-0 shadow-sm hover:bg-[#E8E8ED] active:bg-[#D2D2D7] active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-gray-400/30 focus:ring-offset-2',
+  danger: 'bg-[#FF3B30] text-white border-0 shadow-sm hover:bg-[#D70015] active:bg-[#C70014] active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-[#FF3B30]/30 focus:ring-offset-2',
+  outline: 'bg-transparent text-[#007AFF] border border-[#007AFF] hover:bg-[#007AFF]/10 active:bg-[#007AFF]/20 active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30 focus:ring-offset-2',
+  ghost: 'bg-transparent text-[#1D1D1F] border-0 hover:bg-[#F5F5F7] active:bg-[#E8E8ED] active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-gray-400/30 focus:ring-offset-2',
+  gradient: 'bg-gradient-to-r from-[#007AFF] to-[#5856D6] text-white border-0 shadow-sm hover:from-[#0051D5] hover:to-[#4A48C4] active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30 focus:ring-offset-2',
 };
 
 const sizeClasses = {
-  small: 'px-4 py-2 text-sm font-semibold min-h-[2.25rem]',
-  medium: 'px-6 py-2.5 text-base font-semibold min-h-[2.75rem]',
-  large: 'px-8 py-3.5 text-lg font-semibold min-h-[3.5rem]',
+  small: 'px-4 py-1.5 text-sm font-medium min-h-[28px]',
+  medium: 'px-5 py-2 text-[13px] font-medium min-h-[32px]',
+  large: 'px-6 py-2.5 text-[15px] font-medium min-h-[36px]',
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -32,8 +32,8 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-xl cursor-pointer transition-all duration-300 ease-out outline-none font-medium relative overflow-hidden group';
-  const disabledClasses = 'disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:scale-100 disabled:active:scale-100';
+  const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-md cursor-pointer transition-all duration-150 ease-out outline-none relative';
+  const disabledClasses = 'disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:scale-100 disabled:active:scale-100';
 
   const classes = cn(
     baseClasses,
@@ -51,21 +51,16 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled || isLoading}
       {...props}
     >
-      {/* Shine effect on hover */}
-      {!disabled && !isLoading && (
-        <span className="absolute inset-0 w-full h-full -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
-      )}
-      
       {/* Loading spinner */}
       {isLoading && (
         <span className="absolute inset-0 flex items-center justify-center">
-          <span className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+          <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
         </span>
       )}
       
       {/* Button content */}
       <span className={cn(
-        'relative z-10 flex items-center gap-2',
+        'relative flex items-center gap-2',
         isLoading && 'opacity-0'
       )}>
         {children}

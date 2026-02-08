@@ -30,20 +30,20 @@ export const Select: React.FC<SelectProps> = ({
   };
 
   const baseSelectClasses = cn(
-    'block w-full font-normal bg-white text-gray-900',
-    'border border-solid rounded-lg',
+    'block w-full font-normal bg-white text-[#1D1D1F]',
+    'border border-[#D2D2D7] rounded-md',
     'box-border',
-    'transition-all duration-200 ease-in-out',
+    'transition-all duration-150 ease-out',
     'outline-none appearance-none',
     'leading-normal',
     'cursor-pointer',
-    'disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed disabled:border-gray-200',
+    'disabled:bg-[#F5F5F7] disabled:text-[#86868B] disabled:cursor-not-allowed disabled:border-[#E8E8ED]',
     sizeClasses[size]
   );
 
   const stateClasses = error
-    ? 'border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 hover:border-red-400'
-    : 'border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 hover:border-gray-400';
+    ? 'border-[#FF3B30] focus:border-[#FF3B30] focus:ring-2 focus:ring-[#FF3B30]/20 hover:border-[#FF3B30]'
+    : 'border-[#D2D2D7] focus:border-[#007AFF] focus:ring-2 focus:ring-[#007AFF]/20 hover:border-[#AEAEB2]';
 
   const selectClasses = cn(
     baseSelectClasses,
@@ -53,8 +53,8 @@ export const Select: React.FC<SelectProps> = ({
   );
 
   const labelClasses = cn(
-    'text-sm font-semibold text-gray-700 mb-2 block transition-colors',
-    error && 'text-red-600'
+    'text-[13px] font-medium text-[#1D1D1F] mb-1.5 block transition-colors',
+    error && 'text-[#FF3B30]'
   );
 
   return (
@@ -72,7 +72,7 @@ export const Select: React.FC<SelectProps> = ({
           aria-describedby={error || helperText ? `${selectId}-help` : undefined}
           style={{ 
             boxSizing: 'border-box',
-            backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+            backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2386868B' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
             backgroundSize: '1.5em 1.5em',
             backgroundPosition: 'right 0.5rem center',
             backgroundRepeat: 'no-repeat',
@@ -91,8 +91,8 @@ export const Select: React.FC<SelectProps> = ({
         <span
           id={`${selectId}-help`}
           className={cn(
-            'text-xs mt-1.5 flex items-center gap-1',
-            error ? 'text-red-600 font-medium' : 'text-gray-500'
+            'text-[12px] mt-1.5 flex items-center gap-1',
+            error ? 'text-[#FF3B30] font-medium' : 'text-[#86868B]'
           )}
         >
           {error || helperText}

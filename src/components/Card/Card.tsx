@@ -18,16 +18,16 @@ export const Card: React.FC<CardProps> = ({
   variant = 'default',
   ...props
 }) => {
-  const baseClasses = 'bg-white flex flex-col overflow-hidden transition-all duration-300 ease-in-out';
+  const baseClasses = 'bg-white flex flex-col overflow-hidden transition-all duration-150 ease-out';
   
   const variantClasses = {
-    default: 'rounded-lg border border-gray-200 shadow-sm',
-    elevated: 'rounded-lg shadow-md',
-    outlined: 'rounded-lg border-2 border-gray-300 shadow-none',
+    default: 'rounded-lg border border-[#E8E8ED] shadow-sm',
+    elevated: 'rounded-lg shadow-sm border border-[#E8E8ED]',
+    outlined: 'rounded-lg border border-[#D2D2D7] shadow-none',
   };
 
   const hoverClasses = hoverable 
-    ? 'hover:shadow-lg hover:-translate-y-1 hover:scale-[1.01] cursor-pointer' 
+    ? 'hover:shadow-md hover:border-[#D2D2D7] cursor-pointer' 
     : '';
 
   const classes = cn(
@@ -40,17 +40,17 @@ export const Card: React.FC<CardProps> = ({
   return (
     <div className={classes} {...props}>
       {title && (
-        <div className="px-6 py-4 bg-gradient-to-br from-gray-50 to-white border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 leading-tight">
+        <div className="px-5 py-3.5 bg-[#F5F5F7] border-b border-[#E8E8ED]">
+          <h3 className="text-[15px] font-semibold text-[#1D1D1F] leading-tight">
             {title}
           </h3>
         </div>
       )}
-      <div className="px-6 py-5 flex-1 text-gray-700 text-sm leading-relaxed">
+      <div className="px-5 py-4 flex-1 text-[#1D1D1F] text-[13px] leading-relaxed">
         {children}
       </div>
       {footer && (
-        <div className="px-6 py-4 bg-gradient-to-br from-gray-50 to-white border-t border-gray-200">
+        <div className="px-5 py-3.5 bg-[#F5F5F7] border-t border-[#E8E8ED]">
           {footer}
         </div>
       )}
