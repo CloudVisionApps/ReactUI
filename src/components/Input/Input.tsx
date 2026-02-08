@@ -38,20 +38,21 @@ export const Input: React.FC<InputProps> = ({
   };
 
   const baseInputClasses = cn(
-    'w-full font-normal bg-white text-gray-900',
-    'border rounded-lg',
-    'transition-all duration-300 ease-in-out',
-    'outline-none',
-    'placeholder:text-gray-400 placeholder:font-normal',
-    'shadow-sm',
-    'disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed disabled:border-gray-200 disabled:shadow-none',
+    'block w-full font-normal bg-white text-gray-900',
+    'border border-solid rounded-lg',
+    'box-border',
+    'transition-all duration-200 ease-in-out',
+    'outline-none appearance-none',
+    'leading-normal',
+    'placeholder:text-gray-400',
+    'disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed disabled:border-gray-200',
     sizeClasses[size],
     iconPadding[size]
   );
 
   const stateClasses = error
-    ? 'border-red-300 focus:border-red-500 focus:ring-4 focus:ring-red-200/50 hover:border-red-400 shadow-red-100/50'
-    : 'border-gray-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-200/50 hover:border-gray-400 hover:shadow-md';
+    ? 'border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 hover:border-red-400'
+    : 'border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 hover:border-gray-400';
 
   const inputClasses = cn(
     baseInputClasses,
@@ -78,10 +79,10 @@ export const Input: React.FC<InputProps> = ({
           {label}
         </label>
       )}
-      <div className="relative">
+      <div className="relative w-full">
         {leftIcon && (
           <div className={cn(
-            'absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none',
+            'absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none z-10',
             iconSizeClasses[size]
           )}>
             {leftIcon}
@@ -92,11 +93,12 @@ export const Input: React.FC<InputProps> = ({
           className={inputClasses}
           aria-invalid={error ? 'true' : 'false'}
           aria-describedby={error || helperText ? `${inputId}-help` : undefined}
+          style={{ boxSizing: 'border-box' }}
           {...props}
         />
         {rightIcon && (
           <div className={cn(
-            'absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none',
+            'absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none z-10',
             iconSizeClasses[size]
           )}>
             {rightIcon}
