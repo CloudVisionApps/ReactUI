@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Input, Card } from '../src';
+import { Button, Input, Card, Select, Checkbox, Radio, Textarea } from '../src';
 import './App.css';
 
 function App() {
@@ -263,29 +263,236 @@ function App() {
         </section>
 
         <section className="mb-12">
+          <h2 className="text-white text-3xl font-semibold mb-6">Select Component</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <Card title="Basic Select" variant="elevated">
+              <Select
+                label="Choose an option"
+                options={[
+                  { value: '', label: 'Select...' },
+                  { value: '1', label: 'Option 1' },
+                  { value: '2', label: 'Option 2' },
+                  { value: '3', label: 'Option 3' },
+                ]}
+              />
+            </Card>
+
+            <Card title="Select with Error" variant="elevated">
+              <Select
+                label="Required Field"
+                error="This field is required"
+                options={[
+                  { value: '', label: 'Select...' },
+                  { value: '1', label: 'Option 1' },
+                ]}
+              />
+            </Card>
+
+            <Card title="Select Sizes" variant="elevated">
+              <div className="space-y-4">
+                <Select
+                  label="Small"
+                  size="small"
+                  options={[
+                    { value: '1', label: 'Small select' },
+                  ]}
+                />
+                <Select
+                  label="Large"
+                  size="large"
+                  options={[
+                    { value: '1', label: 'Large select' },
+                  ]}
+                />
+              </div>
+            </Card>
+
+            <Card title="Disabled Select" variant="elevated">
+              <Select
+                label="Disabled"
+                disabled
+                options={[
+                  { value: '1', label: 'Cannot select' },
+                ]}
+              />
+            </Card>
+          </div>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-white text-3xl font-semibold mb-6">Checkbox Component</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <Card title="Basic Checkboxes" variant="elevated">
+              <div className="space-y-3">
+                <Checkbox label="Accept terms and conditions" />
+                <Checkbox label="Subscribe to newsletter" defaultChecked />
+                <Checkbox label="Enable notifications" />
+              </div>
+            </Card>
+
+            <Card title="Checkbox States" variant="elevated">
+              <div className="space-y-3">
+                <Checkbox label="Normal checkbox" />
+                <Checkbox label="Checked by default" defaultChecked />
+                <Checkbox label="Disabled checkbox" disabled />
+                <Checkbox label="Disabled checked" disabled defaultChecked />
+              </div>
+            </Card>
+
+            <Card title="Checkbox Sizes" variant="elevated">
+              <div className="space-y-3">
+                <Checkbox label="Small checkbox" size="small" />
+                <Checkbox label="Medium checkbox" size="medium" defaultChecked />
+                <Checkbox label="Large checkbox" size="large" />
+              </div>
+            </Card>
+
+            <Card title="Checkbox with Error" variant="elevated">
+              <Checkbox
+                label="Required checkbox"
+                error="You must accept this"
+              />
+            </Card>
+          </div>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-white text-3xl font-semibold mb-6">Radio Component</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <Card title="Radio Group" variant="elevated">
+              <div className="space-y-3">
+                <Radio name="option" label="Option 1" value="1" defaultChecked />
+                <Radio name="option" label="Option 2" value="2" />
+                <Radio name="option" label="Option 3" value="3" />
+              </div>
+            </Card>
+
+            <Card title="Radio States" variant="elevated">
+              <div className="space-y-3">
+                <Radio name="state" label="Normal radio" value="1" />
+                <Radio name="state" label="Selected radio" value="2" defaultChecked />
+                <Radio name="state" label="Disabled radio" value="3" disabled />
+                <Radio name="state" label="Disabled selected" value="4" disabled defaultChecked />
+              </div>
+            </Card>
+
+            <Card title="Radio Sizes" variant="elevated">
+              <div className="space-y-3">
+                <Radio name="size" label="Small radio" size="small" value="1" />
+                <Radio name="size" label="Medium radio" size="medium" value="2" defaultChecked />
+                <Radio name="size" label="Large radio" size="large" value="3" />
+              </div>
+            </Card>
+
+            <Card title="Radio with Error" variant="elevated">
+              <Radio
+                name="error"
+                label="Required selection"
+                error="Please select an option"
+                value="1"
+              />
+            </Card>
+          </div>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-white text-3xl font-semibold mb-6">Textarea Component</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <Card title="Basic Textarea" variant="elevated">
+              <Textarea
+                label="Message"
+                placeholder="Enter your message here..."
+                rows={4}
+              />
+            </Card>
+
+            <Card title="Textarea with Helper Text" variant="elevated">
+              <Textarea
+                label="Description"
+                placeholder="Describe something..."
+                helperText="Maximum 500 characters"
+                rows={5}
+              />
+            </Card>
+
+            <Card title="Textarea with Error" variant="elevated">
+              <Textarea
+                label="Comments"
+                placeholder="Your comments..."
+                error="This field is required"
+                rows={4}
+              />
+            </Card>
+
+            <Card title="Textarea Sizes" variant="elevated">
+              <div className="space-y-4">
+                <Textarea
+                  label="Small"
+                  size="small"
+                  rows={3}
+                  placeholder="Small textarea"
+                />
+                <Textarea
+                  label="Large"
+                  size="large"
+                  rows={3}
+                  placeholder="Large textarea"
+                />
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        <section className="mb-12">
           <h2 className="text-white text-3xl font-semibold mb-6">Combined Example</h2>
           <div className="max-w-2xl mx-auto">
             <Card
-              title="Login Form"
+              title="Contact Form"
               variant="elevated"
               footer={
                 <div className="flex gap-2 justify-end">
                   <Button variant="outline">Cancel</Button>
-                  <Button variant="primary">Login</Button>
+                  <Button variant="primary">Submit</Button>
                 </div>
               }
             >
               <div className="flex flex-col gap-4">
                 <Input
+                  label="Name"
+                  placeholder="Your name"
+                />
+                <Input
                   label="Email"
                   type="email"
                   placeholder="you@example.com"
                 />
-                <Input
-                  label="Password"
-                  type="password"
-                  placeholder="Enter your password"
+                <Select
+                  label="Subject"
+                  options={[
+                    { value: '', label: 'Select a subject...' },
+                    { value: 'support', label: 'Support' },
+                    { value: 'sales', label: 'Sales' },
+                    { value: 'other', label: 'Other' },
+                  ]}
                 />
+                <Textarea
+                  label="Message"
+                  placeholder="Your message..."
+                  rows={5}
+                />
+                <Checkbox
+                  label="I agree to the terms and conditions"
+                />
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Preferred Contact Method
+                  </label>
+                  <div className="space-y-2">
+                    <Radio name="contact" label="Email" value="email" defaultChecked />
+                    <Radio name="contact" label="Phone" value="phone" />
+                    <Radio name="contact" label="SMS" value="sms" />
+                  </div>
+                </div>
               </div>
             </Card>
           </div>
