@@ -757,50 +757,31 @@ function App() {
   return (
     <div className="relative min-h-screen">
       <style>{`[data-preview-content] .border { border-width: var(--ui-border-width) !important; }`}</style>
-      {/* Mathematical / design-oriented background: perspective grid + dot grid */}
+      {/* Dark background + Cartesian grid (graph-paper style) */}
       <div className="fixed inset-0 z-0 overflow-hidden" aria-hidden>
-        {/* Base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 from-0% via-indigo-950/30 via-40% to-zinc-950 to-100% dark:from-black dark:via-indigo-950/20 dark:to-zinc-950" />
-        {/* Perspective grid (vanishing point at top center) */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.07] dark:opacity-[0.05]" preserveAspectRatio="none">
-          {/* Horizontal lines (perspective floor grid) */}
-          {Array.from({ length: 14 }, (_, i) => {
-            const y = 98 - i * 7;
-            const halfSpan = (100 - y) * 0.42;
-            return (
-              <line key={`h-${i}`} x1={`${50 - halfSpan}%`} y1={`${y}%`} x2={`${50 + halfSpan}%`} y2={`${y}%`} stroke="white" strokeWidth="0.4" fill="none" />
-            );
-          })}
-          {/* Left converging lines (from bottom-left to vanishing point ~50% 0) */}
-          {Array.from({ length: 11 }, (_, i) => {
-            const x2 = 5 + (i / 10) * 45;
-            return (
-              <line key={`l-${i}`} x1="0" y1="100%" x2={`${x2}%`} y2="0" stroke="white" strokeWidth="0.4" fill="none" />
-            );
-          })}
-          {/* Right converging lines (from bottom-right to vanishing point) */}
-          {Array.from({ length: 11 }, (_, i) => {
-            const x2 = 50 + (i / 10) * 45;
-            return (
-              <line key={`r-${i}`} x1="100%" y1="100%" x2={`${x2}%`} y2="0" stroke="white" strokeWidth="0.4" fill="none" />
-            );
-          })}
-        </svg>
-        {/* Dot grid overlay (very subtle) */}
-        <div
-          className="absolute inset-0 opacity-[0.06] dark:opacity-[0.04]"
-          style={{
-            backgroundImage: 'radial-gradient(circle at center, rgba(255,255,255,0.06) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-        {/* Dark vignette at top center to soften bright convergence of grid lines */}
+        <div className="absolute inset-0 bg-zinc-950 dark:bg-black" />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,0,0,0.4) 0%, transparent 60%)',
+            background: 'radial-gradient(ellipse 100% 80% at 50% 50%, rgba(80, 80, 83, 0.2) 0%, transparent 70%)',
           }}
         />
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+          {/* Vertical lines (x = constant) */}
+          {Array.from({ length: 31 }, (_, i) => {
+            const x = i * 5;
+            return (
+              <line key={`v-${i}`} x1={x} y1="0" x2={x} y2="100" stroke="rgba(63, 63, 70, 0.05)" strokeWidth="0.1" fill="none" />
+            );
+          })}
+          {/* Horizontal lines (y = constant) */}
+          {Array.from({ length: 31 }, (_, i) => {
+            const y = i * 5;
+            return (
+              <line key={`h-${i}`} x1="0" y1={y} x2="100" y2={y} stroke="rgba(63, 63, 70, 0.05)" strokeWidth="0.1" fill="none" />
+            );
+          })}
+        </svg>
       </div>
       <Sidebar
         activeSection={activeSection}
