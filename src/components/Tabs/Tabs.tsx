@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '../../utils/cn';
 
-// All Tailwind class combinations defined as literals so the content scanner includes them
 const TAB_CONTAINER_CLASSES: Record<'default' | 'pills', string> = {
-  default: 'border-b border-[#E8E8ED]',
-  pills: 'gap-2',
+  default: 'relative border-b border-[#D2D2D7]/60',
+  pills: 'inline-flex p-1 rounded-xl bg-[#F5F5F7]',
 };
 
 const TAB_BUTTON_CLASSES: Record<'default' | 'pills', Record<'active' | 'inactive', string>> = {
   default: {
-    active: 'border-b-2 -mb-px border-[#007AFF] text-[#007AFF]',
-    inactive: 'border-b-2 -mb-px border-transparent text-[#86868B] hover:text-[#1D1D1F] hover:border-[#D2D2D7]',
+    active: 'text-[#007AFF]',
+    inactive: 'text-[#86868B] hover:text-[#1D1D1F]',
   },
   pills: {
-    active: 'rounded-md bg-[#007AFF] text-white',
-    inactive: 'rounded-md text-[#86868B] hover:bg-[#F5F5F7] hover:text-[#1D1D1F]',
+    active: 'rounded-lg bg-white text-[#1D1D1F] shadow-sm',
+    inactive: 'rounded-lg text-[#86868B] hover:text-[#1D1D1F]',
   },
 };
 
@@ -45,6 +44,23 @@ export const Tabs: React.FC<TabsProps> = ({
 }) => {
   const [internalValue, setInternalValue] = useState(defaultValue || items[0]?.value || '');
   const activeValue = controlledValue !== undefined ? controlledValue : internalValue;
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+  const navRef = useRef<HTMLDivElement>(null);
+  const buttonRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+
+  useEffect(() => {
+    if (variant !== 'default') return;
+    const activeBtn = buttonRefs.current.get(activeValue);
+    const nav = navRef.current;
+    if (activeBtn && nav) {
+      const navRect = nav.getBoundingClientRect();
+      const btnRect = activeBtn.getBoundingClientRect();
+      setIndicatorStyle({
+        left: btnRect.left - navRect.left,
+        width: btnRect.width,
+      });
+    }
+  }, [activeValue, variant, items]);
 
   const handleChange = (newValue: string) => {
     if (controlledValue === undefined) {
@@ -55,32 +71,49 @@ export const Tabs: React.FC<TabsProps> = ({
 
   return (
     <div className={cn('w-full', className)} {...props}>
-      <div className={cn('flex', TAB_CONTAINER_CLASSES[variant])}>
+      <div
+        ref={navRef}
+        className={cn(
+          'flex',
+          variant === 'default' ? 'flex' : 'flex gap-0.5',
+          TAB_CONTAINER_CLASSES[variant]
+        )}
+      >
+        {variant === 'default' && (
+          <span
+            className="absolute bottom-0 h-0.5 bg-[#007AFF] transition-all duration-200 ease-out"
+            style={{ left: indicatorStyle.left, width: indicatorStyle.width }}
+          />
+        )}
         {items.map((item) => {
           const isActive = activeValue === item.value;
           const state = isActive ? 'active' : 'inactive';
           return (
             <button
               key={item.value}
+              ref={(el) => {
+                if (el) buttonRefs.current.set(item.value, el);
+              }}
               type="button"
               onClick={() => !item.disabled && handleChange(item.value)}
               disabled={item.disabled}
               className={cn(
-                'px-4 py-2 text-[13px] font-medium transition-all duration-150 ease-out',
-                'focus:outline-none focus:ring-2 focus:ring-[#007AFF]/20 focus:ring-offset-2',
+                'relative px-4 py-2.5 text-[13px] font-medium transition-all duration-150 ease-out',
+                'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#007AFF]/30 focus-visible:ring-offset-2',
                 item.disabled && 'opacity-40 cursor-not-allowed',
                 item.icon ? 'flex items-center gap-2' : '',
+                variant === 'default' && 'pb-3',
                 TAB_BUTTON_CLASSES[variant][state]
               )}
             >
-              {item.icon && <span>{item.icon}</span>}
+              {item.icon && <span className="shrink-0">{item.icon}</span>}
               {item.label}
             </button>
           );
         })}
       </div>
       {children && (
-        <div className="mt-4">
+        <div className="mt-5">
           {React.Children.map(children, (child) => {
             if (React.isValidElement(child) && child.props.value === activeValue) {
               return child;
