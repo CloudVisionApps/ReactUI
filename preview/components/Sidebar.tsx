@@ -128,7 +128,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   }, [search]);
 
   return (
-    <aside className="w-64 bg-surface border-r border border-border h-screen fixed left-0 top-0 flex flex-col z-50 transition-colors overflow-y-auto">
+    <aside className="w-64 bg-surface/80 backdrop-blur-xl border-r border-border h-screen fixed left-0 top-0 flex flex-col z-50 transition-colors overflow-y-auto">
       <div className="p-6 border-b border-border bg-surface">
         <h1 className="text-xl font-bold text-fg m-0">React UI</h1>
         <p className="text-sm text-fg-muted mt-1 m-0">Component Library</p>
