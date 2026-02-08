@@ -1,0 +1,30 @@
+/* Custom radio button inner dot */
+input[type="radio"] {
+  position: relative;
+}
+
+input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #3b82f6;
+}
+
+/* Size-specific dot sizes */
+input[type="radio"][class*="w-4"]:checked::after {
+  width: 6px;
+  height: 6px;
+}
+
+input[type="radio"][class*="w-5"]:checked::after {
+  width: 8px;
+  height: 8px;
+}
+
+input[type="radio"][class*="w-6"]:checked::after {
+  width: 10px;
+  height: 10px;
+}

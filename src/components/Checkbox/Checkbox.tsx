@@ -25,30 +25,52 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     large: 'w-6 h-6',
   };
 
+  const checkmarkSizes = {
+    small: 'checked:bg-[length:10px_10px]',
+    medium: 'checked:bg-[length:12px_12px]',
+    large: 'checked:bg-[length:14px_14px]',
+  };
+
+  // Using Tailwind arbitrary value for background-image
+  const checkmarkBg = "checked:bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 16 16\\' fill=\\'white\\'%3E%3Cpath d=\\'M12.207 4.793a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-3.5-3.5a1 1 0 011.414-1.414L4.5 10.586l6.293-6.293a1 1 0 011.414 0z\\'/%3E%3C/svg%3E')]";
+
   const baseCheckboxClasses = cn(
-    'rounded border-gray-300',
-    'text-blue-600 focus:ring-2 focus:ring-blue-200',
-    'transition-all duration-200 ease-in-out',
+    'rounded-md border-2',
+    'appearance-none relative',
+    'box-border m-0 p-0',
+    'transition-all duration-300 ease-in-out',
     'cursor-pointer',
-    'disabled:bg-gray-100 disabled:border-gray-300 disabled:cursor-not-allowed',
-    error && 'border-red-300 focus:ring-red-200',
+    'shadow-sm',
+    'hover:shadow-md hover:scale-105',
+    'focus:outline-none focus:ring-4 focus:ring-offset-0',
+    'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-sm',
+    error
+      ? 'border-red-400 focus:ring-red-200 hover:border-red-500'
+      : 'border-gray-300 focus:ring-blue-200 hover:border-blue-400',
+    'checked:bg-blue-600 checked:border-blue-600 checked:hover:border-blue-700',
+    'checked:shadow-md checked:shadow-blue-500/30',
+    checkmarkBg,
+    'checked:bg-center checked:bg-no-repeat',
+    checkmarkSizes[size],
     sizeClasses[size],
     className
   );
 
   const labelClasses = cn(
-    'text-sm font-medium text-gray-700 cursor-pointer',
+    'text-sm font-semibold text-gray-800 cursor-pointer transition-colors',
+    'hover:text-gray-900',
     error && 'text-red-600',
-    props.disabled && 'opacity-60 cursor-not-allowed'
+    props.disabled && 'opacity-60 cursor-not-allowed hover:text-gray-800'
   );
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center gap-2.5">
+      <div className="flex items-center gap-3 group">
         <input
           id={checkboxId}
           type="checkbox"
-          className={cn(baseCheckboxClasses, 'mt-0.5 flex-shrink-0')}
+          className={baseCheckboxClasses}
+          style={{ flexShrink: 0 }}
           aria-invalid={error ? 'true' : 'false'}
           aria-describedby={error || helperText ? `${checkboxId}-help` : undefined}
           {...props}
@@ -63,7 +85,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         <span
           id={`${checkboxId}-help`}
           className={cn(
-            'text-xs mt-1.5 ml-7.5 flex items-center gap-1',
+            'text-xs mt-1.5 ml-8 flex items-center gap-1',
             error ? 'text-red-600 font-medium' : 'text-gray-500'
           )}
         >

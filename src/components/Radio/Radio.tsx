@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
+import './Radio.css';
 
 export interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
   label?: string;
@@ -26,33 +27,43 @@ export const Radio: React.FC<RadioProps> = ({
   };
 
   const baseRadioClasses = cn(
-    'rounded-full border-gray-300',
-    'text-blue-600 focus:ring-2 focus:ring-blue-200',
-    'transition-all duration-200 ease-in-out',
+    'rounded-full border-2',
+    'appearance-none relative',
+    'transition-all duration-300 ease-in-out',
     'cursor-pointer',
-    'disabled:bg-gray-100 disabled:border-gray-300 disabled:cursor-not-allowed',
-    error && 'border-red-300 focus:ring-red-200',
+    'shadow-sm',
+    'hover:shadow-md hover:scale-105',
+    'focus:outline-none focus:ring-4 focus:ring-offset-0',
+    'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-sm',
+    error
+      ? 'border-red-400 focus:ring-red-200 hover:border-red-500'
+      : 'border-gray-300 focus:ring-blue-200 hover:border-blue-400',
+    'checked:border-blue-600 checked:hover:border-blue-700',
+    'checked:shadow-md checked:shadow-blue-500/30',
     sizeClasses[size],
     className
   );
 
   const labelClasses = cn(
-    'text-sm font-medium text-gray-700 cursor-pointer',
+    'text-sm font-semibold text-gray-800 cursor-pointer transition-colors',
+    'hover:text-gray-900',
     error && 'text-red-600',
-    props.disabled && 'opacity-60 cursor-not-allowed'
+    props.disabled && 'opacity-60 cursor-not-allowed hover:text-gray-800'
   );
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center gap-2.5">
-        <input
-          id={radioId}
-          type="radio"
-          className={cn(baseRadioClasses, 'mt-0.5 flex-shrink-0')}
-          aria-invalid={error ? 'true' : 'false'}
-          aria-describedby={error || helperText ? `${radioId}-help` : undefined}
-          {...props}
-        />
+      <div className="flex items-center gap-3 group">
+        <div className="relative flex-shrink-0">
+          <input
+            id={radioId}
+            type="radio"
+            className={baseRadioClasses}
+            aria-invalid={error ? 'true' : 'false'}
+            aria-describedby={error || helperText ? `${radioId}-help` : undefined}
+            {...props}
+          />
+        </div>
         {label && (
           <label htmlFor={radioId} className={labelClasses}>
             {label}
@@ -63,7 +74,7 @@ export const Radio: React.FC<RadioProps> = ({
         <span
           id={`${radioId}-help`}
           className={cn(
-            'text-xs mt-1.5 ml-7.5 flex items-center gap-1',
+            'text-xs mt-1.5 ml-8 flex items-center gap-1',
             error ? 'text-red-600 font-medium' : 'text-gray-500'
           )}
         >
