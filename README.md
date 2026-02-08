@@ -7,7 +7,7 @@ A React component library built with TypeScript and Tailwind CSS. Use it to buil
 
 ## Screenshots
 
-![Screenshot 1](screenshots/screenshot1.png)
+![Screenshot 1](https://raw.githubusercontent.com/CloudVisionApps/ReactUI/main/screenshots/screenshot1.png)
 ## Requirements
 
 - React 18+
