@@ -1,16 +1,11 @@
 import React from 'react';
 import { cn } from '../../src/utils/cn';
-import { Configurator } from './Configurator';
-import type { ThemeConfig } from '../useThemeConfig';
 
 interface SidebarProps {
   activeSection: string;
   onSectionChange: (section: string) => void;
   theme: 'light' | 'dark';
   onThemeChange: (theme: 'light' | 'dark') => void;
-  themeConfig: ThemeConfig;
-  onThemeConfigChange: (patch: Partial<ThemeConfig>) => void;
-  onThemeConfigReset: () => void;
 }
 
 const navigationItems = [
@@ -50,22 +45,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onSectionChange,
   theme,
   onThemeChange,
-  themeConfig,
-  onThemeConfigChange,
-  onThemeConfigReset,
 }) => {
   return (
-    <aside className="w-64 bg-white dark:bg-zinc-900 border-r border-gray-200 dark:border-zinc-700 h-screen fixed left-0 top-0 flex flex-col z-50 transition-colors">
-      <div className="p-6 border-b border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+    <aside className="w-64 bg-surface border-r border border-border h-screen fixed left-0 top-0 flex flex-col z-50 transition-colors overflow-y-auto">
+      <div className="p-6 border-b border-border bg-surface">
         <div className="flex items-center justify-between gap-2">
           <div>
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white m-0">React UI</h1>
-            <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1 m-0">Component Library</p>
+            <h1 className="text-xl font-bold text-fg m-0">React UI</h1>
+            <p className="text-sm text-fg-muted mt-1 m-0">Component Library</p>
           </div>
           <button
             type="button"
             onClick={() => onThemeChange(theme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-lg border border-gray-200 dark:border-zinc-600 bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
+            className="p-2 rounded-ui border border-border bg-surface-muted text-fg hover:bg-border/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-ring"
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {theme === 'dark' ? (
@@ -80,7 +72,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </button>
         </div>
       </div>
-      <nav className="p-4 flex-1 overflow-y-auto bg-white dark:bg-zinc-900">
+      <nav className="p-4 flex-1 bg-surface">
         <ul className="space-y-1 m-0 p-0 list-none">
           {navigationItems.map((item) => (
             <li key={item.id} className="m-0 p-0">
@@ -88,11 +80,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 type="button"
                 onClick={() => onSectionChange(item.id)}
                 className={cn(
-                  'w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-3 border-0 cursor-pointer',
-                  'focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900',
+                  'w-full text-left px-4 py-2.5 rounded-ui text-sm font-medium transition-all duration-200 flex items-center gap-3 border-0 cursor-pointer',
+                  'focus:outline-none focus:ring-2 focus:ring-primary-ring',
                   activeSection === item.id
-                    ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
-                    : 'text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800 bg-transparent'
+                    ? 'bg-primary-muted text-primary'
+                    : 'text-fg hover:bg-surface-muted bg-transparent'
                 )}
               >
                 <span className="text-lg leading-none">{item.icon}</span>
@@ -102,11 +94,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
           ))}
         </ul>
       </nav>
-      <Configurator
-        config={themeConfig}
-        onConfigChange={onThemeConfigChange}
-        onReset={onThemeConfigReset}
-      />
     </aside>
   );
 };
