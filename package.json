@@ -1,5 +1,5 @@
 {
-  "name": "cloudvisionapps/react-ui",
+  "name": "@cloudvisionapps/react-ui",
   "version": "1.0.0",
   "description": "A comprehensive React UI component library",
   "main": "dist/index.js",
@@ -15,6 +15,7 @@
     "dev": "rollup -c -w",
     "preview": "vite preview --port 3000",
     "preview:dev": "vite --port 3000",
+    "build:preview": "npm run build && vite build",
     "type-check": "tsc --noEmit",
     "lint": "eslint src --ext .ts,.tsx",
     "prepublishOnly": "npm run build"
