@@ -1,4 +1,38 @@
 import React, { useState, useMemo } from 'react';
+import {
+  Search,
+  MousePointer,
+  Compass,
+  Target,
+  FileText,
+  Square,
+  User,
+  AlertTriangle,
+  SquareStack,
+  LayoutList,
+  PanelTop,
+  ChevronDown,
+  MessageCircle,
+  Route,
+  Loader2,
+  BarChart3,
+  ToggleLeft,
+  Minus,
+  Box,
+  FileStack,
+  Table2,
+  Link2,
+  Inbox,
+  Palette,
+  Type,
+  ChevronDownCircle,
+  CheckSquare,
+  CircleDot,
+  AlignLeft,
+  CreditCard,
+  Lightbulb,
+  LucideIcon,
+} from 'lucide-react';
 import { cn } from '../../src/utils/cn';
 
 interface SidebarProps {
@@ -6,49 +40,91 @@ interface SidebarProps {
   onSectionChange: (section: string) => void;
 }
 
-const navigationItems = [
-  { id: 'navigation', label: 'Navigation', icon: '🧭' },
-  { id: 'hero', label: 'Hero Sections', icon: '🎯' },
-  { id: 'buttons', label: 'Buttons', icon: '🔘' },
-  { id: 'badges', label: 'Badges', icon: '🏷️' },
-  { id: 'avatars', label: 'Avatars', icon: '👤' },
-  { id: 'alerts', label: 'Alerts', icon: '⚠️' },
-  { id: 'modals', label: 'Modals', icon: '🪟' },
-  { id: 'tabs', label: 'Tabs', icon: '📑' },
-  { id: 'accordions', label: 'Accordions', icon: '📋' },
-  { id: 'tooltips', label: 'Tooltips', icon: '💬' },
-  { id: 'breadcrumbs', label: 'Breadcrumbs', icon: '🍞' },
-  { id: 'spinners', label: 'Spinners', icon: '⏳' },
-  { id: 'progress', label: 'Progress', icon: '📊' },
-  { id: 'switches', label: 'Switches', icon: '🔀' },
-  { id: 'dividers', label: 'Dividers', icon: '➖' },
-  { id: 'skeletons', label: 'Skeletons', icon: '▢' },
-  { id: 'pagination', label: 'Pagination', icon: '📄' },
-  { id: 'table', label: 'Table', icon: '📊' },
-  { id: 'link', label: 'Link', icon: '🔗' },
-  { id: 'emptyState', label: 'Empty State', icon: '📭' },
-  { id: 'appDesigns', label: 'App Designs', icon: '🎨' },
-  { id: 'inputs', label: 'Inputs', icon: '📝' },
-  { id: 'selects', label: 'Selects', icon: '📋' },
-  { id: 'checkboxes', label: 'Checkboxes', icon: '☑️' },
-  { id: 'radios', label: 'Radio Buttons', icon: '🔘' },
-  { id: 'textareas', label: 'Textareas', icon: '📄' },
-  { id: 'cards', label: 'Cards', icon: '🃏' },
-  { id: 'footer', label: 'Footer', icon: '📄' },
-  { id: 'examples', label: 'Examples', icon: '💡' },
+interface NavItem {
+  id: string;
+  label: string;
+  Icon: LucideIcon;
+}
+
+interface NavGroup {
+  label: string;
+  items: NavItem[];
+}
+
+const navigationGroups: NavGroup[] = [
+  {
+    label: 'Layout',
+    items: [
+      { id: 'navigation', label: 'Navigation', Icon: Compass },
+      { id: 'hero', label: 'Hero Sections', Icon: Target },
+      { id: 'footer', label: 'Footer', Icon: FileText },
+    ],
+  },
+  {
+    label: 'Components',
+    items: [
+      { id: 'buttons', label: 'Buttons', Icon: MousePointer },
+      { id: 'badges', label: 'Badges', Icon: Square },
+      { id: 'avatars', label: 'Avatars', Icon: User },
+      { id: 'alerts', label: 'Alerts', Icon: AlertTriangle },
+      { id: 'modals', label: 'Modals', Icon: SquareStack },
+      { id: 'tabs', label: 'Tabs', Icon: LayoutList },
+      { id: 'accordions', label: 'Accordions', Icon: ChevronDown },
+      { id: 'tooltips', label: 'Tooltips', Icon: MessageCircle },
+      { id: 'breadcrumbs', label: 'Breadcrumbs', Icon: Route },
+      { id: 'spinners', label: 'Spinners', Icon: Loader2 },
+      { id: 'progress', label: 'Progress', Icon: BarChart3 },
+      { id: 'switches', label: 'Switches', Icon: ToggleLeft },
+      { id: 'dividers', label: 'Dividers', Icon: Minus },
+      { id: 'skeletons', label: 'Skeletons', Icon: Box },
+      { id: 'pagination', label: 'Pagination', Icon: FileStack },
+      { id: 'table', label: 'Table', Icon: Table2 },
+      { id: 'link', label: 'Link', Icon: Link2 },
+      { id: 'emptyState', label: 'Empty State', Icon: Inbox },
+      { id: 'appDesigns', label: 'App Designs', Icon: Palette },
+    ],
+  },
+  {
+    label: 'Forms',
+    items: [
+      { id: 'inputs', label: 'Inputs', Icon: Type },
+      { id: 'selects', label: 'Selects', Icon: ChevronDownCircle },
+      { id: 'checkboxes', label: 'Checkboxes', Icon: CheckSquare },
+      { id: 'radios', label: 'Radio Buttons', Icon: CircleDot },
+      { id: 'textareas', label: 'Textareas', Icon: AlignLeft },
+    ],
+  },
+  {
+    label: 'Display',
+    items: [
+      { id: 'cards', label: 'Cards', Icon: CreditCard },
+      { id: 'examples', label: 'Examples', Icon: Lightbulb },
+    ],
+  },
 ];
+
+const allItems = navigationGroups.flatMap((g) => g.items);
 
 export const Sidebar: React.FC<SidebarProps> = ({
   activeSection,
   onSectionChange,
 }) => {
   const [search, setSearch] = useState('');
-  const filteredItems = useMemo(() => {
+  const filteredGroups = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return navigationItems;
-    return navigationItems.filter(
-      (item) => item.label.toLowerCase().includes(q) || item.id.toLowerCase().includes(q)
+    if (!q) return navigationGroups;
+    const matched = allItems.filter(
+      (item) =>
+        item.label.toLowerCase().includes(q) || item.id.toLowerCase().includes(q)
     );
+    if (matched.length === 0) return [];
+    const matchedIds = new Set(matched.map((i) => i.id));
+    return navigationGroups
+      .map((group) => ({
+        ...group,
+        items: group.items.filter((i) => matchedIds.has(i.id)),
+      }))
+      .filter((g) => g.items.length > 0);
   }, [search]);
 
   return (
@@ -59,11 +135,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
       <div className="p-3 border-b border-border bg-surface">
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-fg-muted pointer-events-none">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </span>
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-fg-muted pointer-events-none" />
           <input
             type="search"
             value={search}
@@ -75,29 +147,42 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
       <nav className="p-4 flex-1 overflow-y-auto bg-surface">
-        <ul className="space-y-1 m-0 p-0 list-none">
-          {filteredItems.length === 0 ? (
-            <li className="py-4 text-center text-[13px] text-fg-muted">No results</li>
-          ) : (
-          filteredItems.map((item) => (
-            <li key={item.id} className="m-0 p-0">
-              <button
-                type="button"
-                onClick={() => onSectionChange(item.id)}
-                className={cn(
-                  'w-full text-left px-4 py-2.5 rounded-ui text-sm font-medium transition-all duration-200 flex items-center gap-3 border-0 cursor-pointer',
-                  'focus:outline-none focus:ring-2 focus:ring-primary-ring',
-                  activeSection === item.id
-                    ? 'bg-primary-muted text-primary'
-                    : 'text-fg hover:bg-surface-muted bg-transparent'
-                )}
-              >
-                <span className="text-lg leading-none">{item.icon}</span>
-                <span className="flex-1">{item.label}</span>
-              </button>
-            </li>
-          )))}
-        </ul>
+        {filteredGroups.length === 0 ? (
+          <p className="py-4 text-center text-[13px] text-fg-muted">No results</p>
+        ) : (
+          <ul className="space-y-6 m-0 p-0 list-none">
+            {filteredGroups.map((group) => (
+              <li key={group.label} className="m-0 p-0">
+                <h2 className="px-3 mb-2 text-[11px] font-semibold uppercase tracking-wider text-fg-muted">
+                  {group.label}
+                </h2>
+                <ul className="space-y-1 m-0 p-0 list-none">
+                  {group.items.map((item) => {
+                    const Icon = item.Icon;
+                    return (
+                      <li key={item.id} className="m-0 p-0">
+                        <button
+                          type="button"
+                          onClick={() => onSectionChange(item.id)}
+                          className={cn(
+                            'w-full text-left px-4 py-2.5 rounded-ui text-sm font-medium transition-all duration-200 flex items-center gap-3 border-0 cursor-pointer',
+                            'focus:outline-none focus:ring-2 focus:ring-primary-ring',
+                            activeSection === item.id
+                              ? 'bg-primary-muted text-primary'
+                              : 'text-fg hover:bg-surface-muted bg-transparent'
+                          )}
+                        >
+                          <Icon className="w-4 h-4 shrink-0" strokeWidth={2} />
+                          <span className="flex-1 truncate">{item.label}</span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        )}
       </nav>
     </aside>
   );
