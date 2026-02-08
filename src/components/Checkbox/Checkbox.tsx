@@ -80,9 +80,11 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     disabled && 'opacity-50 cursor-not-allowed hover:scale-100 hover:shadow-sm',
     error
       ? 'border-red-400 focus-within:ring-red-200 hover:border-red-500'
-      : 'border-gray-300 focus-within:ring-blue-200 hover:border-blue-400',
+      : currentChecked
+      ? 'border-blue-600 focus-within:ring-blue-200'
+      : 'border-gray-500 focus-within:ring-blue-200 hover:border-gray-600',
     currentChecked && 'bg-blue-600 border-blue-600 hover:border-blue-700 shadow-md shadow-blue-500/30',
-    !currentChecked && 'bg-white',
+    !currentChecked && 'bg-white border-gray-500 hover:border-gray-600',
     sizeClasses[size],
     className
   );
