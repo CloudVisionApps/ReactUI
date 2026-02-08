@@ -1,13 +1,14 @@
 {
   "name": "@cloudvisionapps/react-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A comprehensive React UI component library",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "screenshots"
   ],
   "scripts": {
     "build": "rollup -c && npm run build:css",
