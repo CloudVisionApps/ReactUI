@@ -1,16 +1,13 @@
-name: Publish to npm
+name: Publish Package
 
 on:
-  release:
-    types: [published]
-  # Optional: also publish when pushing a version tag (e.g. v1.0.1)
-  # push:
-  #   tags:
-  #     - 'v*'
+  push:
+    tags:
+      - 'v*'
 
 permissions:
+  id-token: write  # Required for OIDC
   contents: read
-  id-token: write   # Required for npm Trusted Publishing (OIDC)
 
 jobs:
   publish:
@@ -18,20 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '22'
-
-      # npm Trusted Publishing requires npm CLI 11.5.1+
-      - name: Install npm
-        run: npm install -g npm@latest
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: Publish to npm
-        run: npm publish --provenance --access public
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+      - run: npm publish
