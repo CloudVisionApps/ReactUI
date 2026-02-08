@@ -3,12 +3,9 @@ import { Button, Input, Card, Select, Checkbox, Radio, Textarea, Navigation, Her
 import { Sidebar } from './components/Sidebar';
 import { ExampleWithCode } from './components/ExampleWithCode';
 import { examples } from './examples';
-import { codeExamples } from './codeExamples';
 
 function App() {
   const [activeSection, setActiveSection] = useState('navigation');
-  const [modalOpen, setModalOpen] = useState(false);
-  const [alertVisible, setAlertVisible] = useState(true);
   const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   useEffect(() => {
@@ -60,49 +57,15 @@ function App() {
               <p className="text-gray-600">Navigation bar component with macOS-inspired styling.</p>
             </div>
 
-            <Card title="Default Navigation" variant="elevated">
-              <div className="space-y-4">
-                <Navigation
-                  logo={<span className="text-lg font-semibold text-[#1D1D1F]">React UI</span>}
-                  items={[
-                    { label: 'Home', href: '#', active: true },
-                    { label: 'Components', href: '#' },
-                    { label: 'Documentation', href: '#' },
-                    { label: 'About', href: '#' },
-                  ]}
-                  variant="default"
-                />
-              </div>
-            </Card>
-
-            <Card title="Transparent Navigation" variant="elevated">
-              <div className="space-y-4">
-                <Navigation
-                  logo={<span className="text-lg font-semibold text-[#1D1D1F]">React UI</span>}
-                  items={[
-                    { label: 'Home', href: '#' },
-                    { label: 'Products', href: '#' },
-                    { label: 'Services', href: '#' },
-                    { label: 'Contact', href: '#', active: true },
-                  ]}
-                  variant="transparent"
-                />
-              </div>
-            </Card>
-
-            <Card title="Solid Navigation" variant="elevated">
-              <div className="space-y-4">
-                <Navigation
-                  logo={<span className="text-lg font-semibold text-[#1D1D1F]">React UI</span>}
-                  items={[
-                    { label: 'Dashboard', href: '#' },
-                    { label: 'Settings', href: '#' },
-                    { label: 'Profile', href: '#', active: true },
-                  ]}
-                  variant="solid"
-                />
-              </div>
-            </Card>
+            <ExampleWithCode title="Default Navigation" code={examples.navigation.default.code}>
+              <examples.navigation.default.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Transparent Navigation" code={examples.navigation.transparent.code}>
+              <examples.navigation.transparent.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Solid Navigation" code={examples.navigation.solid.code}>
+              <examples.navigation.solid.Component />
+            </ExampleWithCode>
           </div>
         );
 
@@ -114,56 +77,15 @@ function App() {
               <p className="text-gray-600">Hero section components for landing pages and marketing.</p>
             </div>
 
-            <Card title="Default Hero" variant="elevated">
-              <div className="overflow-hidden rounded-lg">
-                <Hero
-                  title="Build Beautiful UIs"
-                  subtitle="React Component Library"
-                  description="Create stunning user interfaces with our macOS-inspired component library. Clean, modern, and accessible."
-                  primaryAction={{
-                    label: 'Get Started',
-                    onClick: () => console.log('Get Started clicked'),
-                  }}
-                  secondaryAction={{
-                    label: 'Learn More',
-                    onClick: () => console.log('Learn More clicked'),
-                  }}
-                />
-              </div>
-            </Card>
-
-            <Card title="Centered Hero" variant="elevated">
-              <div className="overflow-hidden rounded-lg">
-                <Hero
-                  variant="centered"
-                  title="Welcome to React UI"
-                  description="A comprehensive component library designed with macOS aesthetics in mind. Build faster, design better."
-                  primaryAction={{
-                    label: 'Start Building',
-                    onClick: () => console.log('Start Building clicked'),
-                  }}
-                />
-              </div>
-            </Card>
-
-            <Card title="Split Hero" variant="elevated">
-              <div className="overflow-hidden rounded-lg">
-                <Hero
-                  variant="split"
-                  title="Modern Design System"
-                  subtitle="macOS Inspired"
-                  description="Every component is carefully crafted to match the macOS design language. Clean, minimal, and beautiful."
-                  primaryAction={{
-                    label: 'Explore Components',
-                    onClick: () => console.log('Explore clicked'),
-                  }}
-                  secondaryAction={{
-                    label: 'View Docs',
-                    onClick: () => console.log('Docs clicked'),
-                  }}
-                />
-              </div>
-            </Card>
+            <ExampleWithCode title="Default Hero" code={examples.hero.default.code}>
+              <examples.hero.default.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Centered Hero" code={examples.hero.centered.code}>
+              <examples.hero.centered.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Split Hero" code={examples.hero.split.code}>
+              <examples.hero.split.Component />
+            </ExampleWithCode>
           </div>
         );
 
@@ -175,73 +97,12 @@ function App() {
               <p className="text-gray-600">Footer component with links and social media integration.</p>
             </div>
 
-            <Card title="Default Footer" variant="elevated">
-              <div className="overflow-hidden rounded-lg">
-                <Footer
-                  columns={[
-                    {
-                      title: 'Product',
-                      links: [
-                        { label: 'Features', href: '#' },
-                        { label: 'Pricing', href: '#' },
-                        { label: 'Documentation', href: '#' },
-                        { label: 'Changelog', href: '#' },
-                      ],
-                    },
-                    {
-                      title: 'Company',
-                      links: [
-                        { label: 'About', href: '#' },
-                        { label: 'Blog', href: '#' },
-                        { label: 'Careers', href: '#' },
-                        { label: 'Contact', href: '#' },
-                      ],
-                    },
-                    {
-                      title: 'Legal',
-                      links: [
-                        { label: 'Privacy', href: '#' },
-                        { label: 'Terms', href: '#' },
-                        { label: 'Security', href: '#' },
-                      ],
-                    },
-                    {
-                      title: 'Resources',
-                      links: [
-                        { label: 'Support', href: '#' },
-                        { label: 'Community', href: '#' },
-                        { label: 'API', href: '#' },
-                      ],
-                    },
-                  ]}
-                  socialLinks={[
-                    { label: 'Twitter', href: 'https://twitter.com' },
-                    { label: 'GitHub', href: 'https://github.com' },
-                    { label: 'LinkedIn', href: 'https://linkedin.com' },
-                  ]}
-                  copyright="© 2024 React UI. All rights reserved."
-                />
-              </div>
-            </Card>
-
-            <Card title="Minimal Footer" variant="elevated">
-              <div className="overflow-hidden rounded-lg">
-                <Footer
-                  variant="minimal"
-                  columns={[
-                    {
-                      title: 'Quick Links',
-                      links: [
-                        { label: 'Home', href: '#' },
-                        { label: 'About', href: '#' },
-                        { label: 'Contact', href: '#' },
-                      ],
-                    },
-                  ]}
-                  copyright="© 2024 React UI"
-                />
-              </div>
-            </Card>
+            <ExampleWithCode title="Default Footer" code={examples.footer.default.code}>
+              <examples.footer.default.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Minimal Footer" code={examples.footer.minimal.code}>
+              <examples.footer.minimal.Component />
+            </ExampleWithCode>
           </div>
         );
 
@@ -294,37 +155,12 @@ function App() {
                 </ExampleWithCode>
               </div>
 
-            <Card title="Sizes" variant="elevated">
-              <div className="space-y-4">
-                <Input label="Small" size="small" placeholder="Small size input" />
-                <Input label="Medium" size="medium" placeholder="Medium size input" />
-                <Input label="Large" size="large" placeholder="Large size input" />
-              </div>
-            </Card>
-
-            <Card title="With Icons" variant="elevated">
-              <div className="space-y-4">
-                <Input
-                  label="Search"
-                  placeholder="Search..."
-                  leftIcon={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  }
-                />
-                <Input
-                  label="Email"
-                  type="email"
-                  placeholder="your@email.com"
-                  rightIcon={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  }
-                />
-              </div>
-            </Card>
+            <ExampleWithCode title="Sizes" code={examples.inputs.sizes.code}>
+              <examples.inputs.sizes.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="With Icons" code={examples.inputs.withIcons.code}>
+              <examples.inputs.withIcons.Component />
+            </ExampleWithCode>
             </div>
           </div>
         );
@@ -338,57 +174,18 @@ function App() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card title="Basic Select" variant="elevated">
-                <Select
-                  label="Choose an option"
-                  options={[
-                    { value: '', label: 'Select...' },
-                    { value: '1', label: 'Option 1' },
-                    { value: '2', label: 'Option 2' },
-                    { value: '3', label: 'Option 3' },
-                  ]}
-                />
-              </Card>
-
-              <Card title="Select with Error" variant="elevated">
-                <Select
-                  label="Required Field"
-                  error="This field is required"
-                  options={[
-                    { value: '', label: 'Select...' },
-                    { value: '1', label: 'Option 1' },
-                  ]}
-                />
-              </Card>
-
-              <Card title="Select Sizes" variant="elevated">
-                <div className="space-y-4">
-                  <Select
-                    label="Small"
-                    size="small"
-                    options={[
-                      { value: '1', label: 'Small select' },
-                    ]}
-                  />
-                  <Select
-                    label="Large"
-                    size="large"
-                    options={[
-                      { value: '1', label: 'Large select' },
-                    ]}
-                  />
-                </div>
-              </Card>
-
-              <Card title="Disabled Select" variant="elevated">
-                <Select
-                  label="Disabled"
-                  disabled
-                  options={[
-                    { value: '1', label: 'Cannot select' },
-                  ]}
-                />
-              </Card>
+              <ExampleWithCode title="Basic Select" code={examples.selects.basic.code}>
+                <examples.selects.basic.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Select with Error" code={examples.selects.withError.code}>
+                <examples.selects.withError.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Select Sizes" code={examples.selects.sizes.code}>
+                <examples.selects.sizes.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Disabled Select" code={examples.selects.disabled.code}>
+                <examples.selects.disabled.Component />
+              </ExampleWithCode>
             </div>
           </div>
         );
@@ -402,37 +199,18 @@ function App() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card title="Basic Checkboxes" variant="elevated">
-                <div className="space-y-3">
-                  <Checkbox label="Accept terms and conditions" />
-                  <Checkbox label="Subscribe to newsletter" defaultChecked />
-                  <Checkbox label="Enable notifications" />
-                </div>
-              </Card>
-
-              <Card title="Checkbox States" variant="elevated">
-                <div className="space-y-3">
-                  <Checkbox label="Normal checkbox" />
-                  <Checkbox label="Checked by default" defaultChecked />
-                  <Checkbox label="Disabled checkbox" disabled />
-                  <Checkbox label="Disabled checked" disabled defaultChecked />
-                </div>
-              </Card>
-
-              <Card title="Checkbox Sizes" variant="elevated">
-                <div className="space-y-3">
-                  <Checkbox label="Small checkbox" size="small" />
-                  <Checkbox label="Medium checkbox" size="medium" defaultChecked />
-                  <Checkbox label="Large checkbox" size="large" />
-                </div>
-              </Card>
-
-              <Card title="Checkbox with Error" variant="elevated">
-                <Checkbox
-                  label="Required checkbox"
-                  error="You must accept this"
-                />
-              </Card>
+              <ExampleWithCode title="Basic Checkboxes" code={examples.checkboxes.basic.code}>
+                <examples.checkboxes.basic.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Checkbox States" code={examples.checkboxes.states.code}>
+                <examples.checkboxes.states.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Checkbox Sizes" code={examples.checkboxes.sizes.code}>
+                <examples.checkboxes.sizes.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Checkbox with Error" code={examples.checkboxes.withError.code}>
+                <examples.checkboxes.withError.Component />
+              </ExampleWithCode>
             </div>
           </div>
         );
@@ -446,39 +224,18 @@ function App() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card title="Radio Group" variant="elevated">
-                <div className="space-y-3">
-                  <Radio name="option" label="Option 1" value="1" defaultChecked />
-                  <Radio name="option" label="Option 2" value="2" />
-                  <Radio name="option" label="Option 3" value="3" />
-                </div>
-              </Card>
-
-              <Card title="Radio States" variant="elevated">
-                <div className="space-y-3">
-                  <Radio name="state" label="Normal radio" value="1" />
-                  <Radio name="state" label="Selected radio" value="2" defaultChecked />
-                  <Radio name="state" label="Disabled radio" value="3" disabled />
-                  <Radio name="state" label="Disabled selected" value="4" disabled defaultChecked />
-                </div>
-              </Card>
-
-              <Card title="Radio Sizes" variant="elevated">
-                <div className="space-y-3">
-                  <Radio name="size" label="Small radio" size="small" value="1" />
-                  <Radio name="size" label="Medium radio" size="medium" value="2" defaultChecked />
-                  <Radio name="size" label="Large radio" size="large" value="3" />
-                </div>
-              </Card>
-
-              <Card title="Radio with Error" variant="elevated">
-                <Radio
-                  name="error"
-                  label="Required selection"
-                  error="Please select an option"
-                  value="1"
-                />
-              </Card>
+              <ExampleWithCode title="Radio Group" code={examples.radios.group.code}>
+                <examples.radios.group.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Radio States" code={examples.radios.states.code}>
+                <examples.radios.states.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Radio Sizes" code={examples.radios.sizes.code}>
+                <examples.radios.sizes.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Radio with Error" code={examples.radios.withError.code}>
+                <examples.radios.withError.Component />
+              </ExampleWithCode>
             </div>
           </div>
         );
@@ -492,48 +249,18 @@ function App() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card title="Basic Textarea" variant="elevated">
-                <Textarea
-                  label="Message"
-                  placeholder="Enter your message here..."
-                  rows={4}
-                />
-              </Card>
-
-              <Card title="Textarea with Helper Text" variant="elevated">
-                <Textarea
-                  label="Description"
-                  placeholder="Describe something..."
-                  helperText="Maximum 500 characters"
-                  rows={5}
-                />
-              </Card>
-
-              <Card title="Textarea with Error" variant="elevated">
-                <Textarea
-                  label="Comments"
-                  placeholder="Your comments..."
-                  error="This field is required"
-                  rows={4}
-                />
-              </Card>
-
-              <Card title="Textarea Sizes" variant="elevated">
-                <div className="space-y-4">
-                  <Textarea
-                    label="Small"
-                    size="small"
-                    rows={3}
-                    placeholder="Small textarea"
-                  />
-                  <Textarea
-                    label="Large"
-                    size="large"
-                    rows={3}
-                    placeholder="Large textarea"
-                  />
-                </div>
-              </Card>
+              <ExampleWithCode title="Basic Textarea" code={examples.textareas.basic.code}>
+                <examples.textareas.basic.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Textarea with Helper Text" code={examples.textareas.withHelperText.code}>
+                <examples.textareas.withHelperText.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Textarea with Error" code={examples.textareas.withError.code}>
+                <examples.textareas.withError.Component />
+              </ExampleWithCode>
+              <ExampleWithCode title="Textarea Sizes" code={examples.textareas.sizes.code}>
+                <examples.textareas.sizes.Component />
+              </ExampleWithCode>
             </div>
           </div>
         );
@@ -549,21 +276,21 @@ function App() {
             <div>
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Variants</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <Card title="Default Card" variant="default">
-                  Subtle shadow and clean design for general content.
-                </Card>
-                <Card title="Elevated Card" variant="elevated">
-                  Stronger shadow for more depth and prominence.
-                </Card>
-                <Card title="Outlined Card" variant="outlined">
-                  Visible border for a defined, minimal look.
-                </Card>
-                <Card title="Hoverable Card" hoverable>
-                  Hover to see the elevation effect. Great for clickable items.
-                </Card>
-                <Card title="Card with Footer" footer={<Button>Action</Button>}>
-                  Title, body, and footer with an action button.
-                </Card>
+                <ExampleWithCode title="Default Card" code={examples.cards.default.code}>
+                  <examples.cards.default.Component />
+                </ExampleWithCode>
+                <ExampleWithCode title="Elevated Card" code={examples.cards.elevated.code}>
+                  <examples.cards.elevated.Component />
+                </ExampleWithCode>
+                <ExampleWithCode title="Outlined Card" code={examples.cards.outlined.code}>
+                  <examples.cards.outlined.Component />
+                </ExampleWithCode>
+                <ExampleWithCode title="Hoverable Card" code={examples.cards.hoverable.code}>
+                  <examples.cards.hoverable.Component />
+                </ExampleWithCode>
+                <ExampleWithCode title="Card with Footer" code={examples.cards.withFooter.code}>
+                  <examples.cards.withFooter.Component />
+                </ExampleWithCode>
                 <Card hoverable>
                   Simple hoverable card without title or footer.
                 </Card>
@@ -739,23 +466,11 @@ function App() {
               <p className="text-gray-600">Badge components for labels, status indicators, and notifications.</p>
             </div>
 
-            <ExampleWithCode title="Variants" code={codeExamples.badges.variants}>
-              <div className="flex flex-wrap gap-4 items-center">
-                <Badge variant="default">Default</Badge>
-                <Badge variant="primary">Primary</Badge>
-                <Badge variant="success">Success</Badge>
-                <Badge variant="warning">Warning</Badge>
-                <Badge variant="danger">Danger</Badge>
-                <Badge variant="info">Info</Badge>
-              </div>
+            <ExampleWithCode title="Variants" code={examples.badges.variants.code}>
+              <examples.badges.variants.Component />
             </ExampleWithCode>
-
-            <ExampleWithCode title="Sizes" code={codeExamples.badges.sizes}>
-              <div className="flex flex-wrap gap-4 items-center">
-                <Badge size="small">Small</Badge>
-                <Badge size="medium">Medium</Badge>
-                <Badge size="large">Large</Badge>
-              </div>
+            <ExampleWithCode title="Sizes" code={examples.badges.sizes.code}>
+              <examples.badges.sizes.Component />
             </ExampleWithCode>
           </div>
         );
@@ -768,23 +483,12 @@ function App() {
               <p className="text-gray-600">Avatar components for user profiles and images.</p>
             </div>
 
-            <Card title="Sizes" variant="elevated">
-              <div className="flex flex-wrap gap-4 items-center">
-                <Avatar name="John Doe" size="small" />
-                <Avatar name="Jane Smith" size="medium" />
-                <Avatar name="Bob Johnson" size="large" />
-                <Avatar name="Alice Brown" size="xlarge" />
-              </div>
-            </Card>
-
-            <Card title="With Status" variant="elevated">
-              <div className="flex flex-wrap gap-4 items-center">
-                <Avatar name="Online User" status="online" />
-                <Avatar name="Offline User" status="offline" />
-                <Avatar name="Away User" status="away" />
-                <Avatar name="Busy User" status="busy" />
-              </div>
-            </Card>
+            <ExampleWithCode title="Sizes" code={examples.avatars.sizes.code}>
+              <examples.avatars.sizes.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="With Status" code={examples.avatars.withStatus.code}>
+              <examples.avatars.withStatus.Component />
+            </ExampleWithCode>
           </div>
         );
 
@@ -796,30 +500,12 @@ function App() {
               <p className="text-gray-600">Alert components for notifications and messages.</p>
             </div>
 
-            <Card title="Variants" variant="elevated">
-              <div className="space-y-4">
-                <Alert variant="info" title="Information">
-                  This is an informational alert message.
-                </Alert>
-                <Alert variant="success" title="Success">
-                  Your action was completed successfully!
-                </Alert>
-                <Alert variant="warning" title="Warning">
-                  Please review this important information.
-                </Alert>
-                <Alert variant="danger" title="Error">
-                  Something went wrong. Please try again.
-                </Alert>
-              </div>
-            </Card>
-
-            <Card title="Dismissible" variant="elevated">
-              {alertVisible && (
-                <Alert variant="info" onClose={() => setAlertVisible(false)}>
-                  This alert can be dismissed by clicking the close button.
-                </Alert>
-              )}
-            </Card>
+            <ExampleWithCode title="Variants" code={examples.alerts.variants.code}>
+              <examples.alerts.variants.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Dismissible" code={examples.alerts.dismissible.code}>
+              <examples.alerts.dismissible.Component />
+            </ExampleWithCode>
           </div>
         );
 
@@ -831,26 +517,9 @@ function App() {
               <p className="text-gray-600">Modal dialog components for overlays and confirmations.</p>
             </div>
 
-            <Card title="Modal Examples" variant="elevated">
-              <div className="space-y-4">
-                <Button onClick={() => setModalOpen(true)}>Open Modal</Button>
-                <Modal
-                  isOpen={modalOpen}
-                  onClose={() => setModalOpen(false)}
-                  title="Example Modal"
-                  footer={
-                    <>
-                      <Button variant="outline" onClick={() => setModalOpen(false)}>Cancel</Button>
-                      <Button variant="primary" onClick={() => setModalOpen(false)}>Confirm</Button>
-                    </>
-                  }
-                >
-                  <p className="text-[#86868B] text-[13px]">
-                    This is an example modal dialog. You can add any content here.
-                  </p>
-                </Modal>
-              </div>
-            </Card>
+            <ExampleWithCode title="Modal Examples" code={examples.modals.basic.code}>
+              <examples.modals.basic.Component />
+            </ExampleWithCode>
           </div>
         );
 
@@ -862,48 +531,12 @@ function App() {
               <p className="text-gray-600">Tab components for organizing content into sections.</p>
             </div>
 
-            <Card title="Default Tabs" variant="elevated">
-              <Tabs
-                items={[
-                  { label: 'Overview', value: 'overview' },
-                  { label: 'Settings', value: 'settings' },
-                  { label: 'Profile', value: 'profile' },
-                ]}
-                defaultValue="overview"
-              >
-                <TabPanel value="overview">
-                  <p className="text-[#86868B] text-[13px]">This is the overview tab content.</p>
-                </TabPanel>
-                <TabPanel value="settings">
-                  <p className="text-[#86868B] text-[13px]">This is the settings tab content.</p>
-                </TabPanel>
-                <TabPanel value="profile">
-                  <p className="text-[#86868B] text-[13px]">This is the profile tab content.</p>
-                </TabPanel>
-              </Tabs>
-            </Card>
-
-            <Card title="Pills Variant" variant="elevated">
-              <Tabs
-                variant="pills"
-                items={[
-                  { label: 'Home', value: 'home' },
-                  { label: 'About', value: 'about' },
-                  { label: 'Contact', value: 'contact' },
-                ]}
-                defaultValue="home"
-              >
-                <TabPanel value="home">
-                  <p className="text-[#86868B] text-[13px]">Home content here.</p>
-                </TabPanel>
-                <TabPanel value="about">
-                  <p className="text-[#86868B] text-[13px]">About content here.</p>
-                </TabPanel>
-                <TabPanel value="contact">
-                  <p className="text-[#86868B] text-[13px]">Contact content here.</p>
-                </TabPanel>
-              </Tabs>
-            </Card>
+            <ExampleWithCode title="Default Tabs" code={examples.tabs.default.code}>
+              <examples.tabs.default.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Pills Variant" code={examples.tabs.pills.code}>
+              <examples.tabs.pills.Component />
+            </ExampleWithCode>
           </div>
         );
 
@@ -915,50 +548,12 @@ function App() {
               <p className="text-gray-600">Accordion components for collapsible content sections.</p>
             </div>
 
-            <Card title="Single Open" variant="elevated">
-              <Accordion
-                items={[
-                  {
-                    title: 'What is React UI?',
-                    value: '1',
-                    content: 'React UI is a comprehensive component library designed with macOS aesthetics in mind.',
-                  },
-                  {
-                    title: 'How do I install it?',
-                    value: '2',
-                    content: 'You can install React UI using npm or yarn package managers.',
-                  },
-                  {
-                    title: 'Is it free to use?',
-                    value: '3',
-                    content: 'Yes, React UI is completely free and open source.',
-                  },
-                ]}
-              />
-            </Card>
-
-            <Card title="Multiple Open" variant="elevated">
-              <Accordion
-                allowMultiple
-                items={[
-                  {
-                    title: 'Feature 1',
-                    value: '1',
-                    content: 'This is the first feature description.',
-                  },
-                  {
-                    title: 'Feature 2',
-                    value: '2',
-                    content: 'This is the second feature description.',
-                  },
-                  {
-                    title: 'Feature 3',
-                    value: '3',
-                    content: 'This is the third feature description.',
-                  },
-                ]}
-              />
-            </Card>
+            <ExampleWithCode title="Single Open" code={examples.accordions.singleOpen.code}>
+              <examples.accordions.singleOpen.Component />
+            </ExampleWithCode>
+            <ExampleWithCode title="Multiple Open" code={examples.accordions.multipleOpen.code}>
+              <examples.accordions.multipleOpen.Component />
+            </ExampleWithCode>
           </div>
         );
 
@@ -970,22 +565,9 @@ function App() {
               <p className="text-gray-600">Tooltip components for additional information on hover.</p>
             </div>
 
-            <Card title="Tooltip Examples" variant="elevated">
-              <div className="flex flex-wrap gap-4 items-center">
-                <Tooltip content="This is a tooltip on top" position="top">
-                  <Button>Hover me (Top)</Button>
-                </Tooltip>
-                <Tooltip content="This is a tooltip on bottom" position="bottom">
-                  <Button>Hover me (Bottom)</Button>
-                </Tooltip>
-                <Tooltip content="This is a tooltip on left" position="left">
-                  <Button>Hover me (Left)</Button>
-                </Tooltip>
-                <Tooltip content="This is a tooltip on right" position="right">
-                  <Button>Hover me (Right)</Button>
-                </Tooltip>
-              </div>
-            </Card>
+            <ExampleWithCode title="Tooltip Examples" code={examples.tooltips.positions.code}>
+              <examples.tooltips.positions.Component />
+            </ExampleWithCode>
           </div>
         );
 

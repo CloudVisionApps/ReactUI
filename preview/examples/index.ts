@@ -3,16 +3,46 @@
  * content (via Vite ?raw import). Add a new example by:
  * 1. Create examples/<section>/<Name>.tsx with default export component
  * 2. Import component and <Name>.tsx?raw in examples/<section>/index.ts
- * 3. Add to the section export object
- * 4. Use in App: <ExampleWithCode code={examples.buttons.variants.code}>
- *      <examples.buttons.variants.Component />
+ * 3. Add to the section export object and to this index
+ * 4. Use in App: <ExampleWithCode code={examples.section.key.code}>
+ *      <examples.section.key.Component />
  *    </ExampleWithCode>
  */
 
 import { buttonExamples } from './buttons';
 import { inputExamples } from './inputs';
+import { navigationExamples } from './navigation';
+import { heroExamples } from './hero';
+import { footerExamples } from './footer';
+import { selectExamples } from './selects';
+import { checkboxExamples } from './checkboxes';
+import { radioExamples } from './radios';
+import { textareaExamples } from './textareas';
+import { cardExamples } from './cards';
+import { badgeExamples } from './badges';
+import { avatarExamples } from './avatars';
+import { alertExamples } from './alerts';
+import { modalExamples } from './modals';
+import { tabExamples } from './tabs';
+import { accordionExamples } from './accordions';
+import { tooltipExamples } from './tooltips';
 
 export const examples = {
   buttons: buttonExamples,
   inputs: inputExamples,
+  navigation: navigationExamples,
+  hero: heroExamples,
+  footer: footerExamples,
+  selects: selectExamples,
+  checkboxes: checkboxExamples,
+  radios: radioExamples,
+  textareas: textareaExamples,
+  cards: cardExamples,
+  badges: badgeExamples,
+  avatars: avatarExamples,
+  alerts: alertExamples,
+  modals: modalExamples,
+  tabs: tabExamples,
+  accordions: accordionExamples,
+  tooltips: tooltipExamples,
 };
