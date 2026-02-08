@@ -2,20 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button, Input, Card, Select, Checkbox, Radio, Textarea, Navigation, Hero, Footer, Modal, Badge, Avatar, Tabs, TabPanel, Accordion, Alert, Tooltip } from '../src';
 import { Sidebar } from './components/Sidebar';
 import { ExampleWithCode } from './components/ExampleWithCode';
+import { examples } from './examples';
 import { codeExamples } from './codeExamples';
 
 function App() {
   const [activeSection, setActiveSection] = useState('navigation');
-  const [inputValue, setInputValue] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [alertVisible, setAlertVisible] = useState(true);
   const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
-
-  const handleButtonClick = () => {
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 2000);
-  };
 
   useEffect(() => {
     const observerOptions = {
@@ -260,41 +254,17 @@ function App() {
             </div>
 
             <div className="space-y-6">
-              <ExampleWithCode title="Variants" code={codeExamples.buttons.variants} defaultShowCode>
-                <div className="flex flex-wrap gap-4 items-center">
-                  <Button variant="primary">Primary</Button>
-                  <Button variant="secondary">Secondary</Button>
-                  <Button variant="danger">Danger</Button>
-                  <Button variant="outline">Outline</Button>
-                  <Button variant="ghost">Ghost</Button>
-                  <Button variant="gradient">Gradient</Button>
-                </div>
+              <ExampleWithCode title="Variants" code={examples.buttons.variants.code} defaultShowCode>
+                <examples.buttons.variants.Component />
               </ExampleWithCode>
-
-              <ExampleWithCode title="Sizes" code={codeExamples.buttons.sizes}>
-                <div className="flex flex-wrap gap-4 items-center">
-                  <Button size="small">Small</Button>
-                  <Button size="medium">Medium</Button>
-                  <Button size="large">Large</Button>
-                </div>
+              <ExampleWithCode title="Sizes" code={examples.buttons.sizes.code}>
+                <examples.buttons.sizes.Component />
               </ExampleWithCode>
-
-              <ExampleWithCode title="States" code={codeExamples.buttons.states}>
-                <div className="flex flex-wrap gap-4 items-center">
-                  <Button isLoading={isLoading} onClick={handleButtonClick}>
-                    {isLoading ? 'Loading...' : 'Click to Load'}
-                  </Button>
-                  <Button disabled>Disabled</Button>
-                </div>
+              <ExampleWithCode title="States" code={examples.buttons.states.code}>
+                <examples.buttons.states.Component />
               </ExampleWithCode>
-
-              <ExampleWithCode title="Interactive Examples" code={codeExamples.buttons.interactive}>
-                <div className="flex flex-wrap gap-4 items-center">
-                  <Button variant="primary" size="large">Large Primary</Button>
-                  <Button variant="gradient">Gradient Magic</Button>
-                  <Button variant="outline" size="large">Outlined</Button>
-                  <Button variant="ghost">Ghost Button</Button>
-                </div>
+              <ExampleWithCode title="Interactive Examples" code={examples.buttons.interactive.code}>
+                <examples.buttons.interactive.Component />
               </ExampleWithCode>
             </div>
           </div>
@@ -310,39 +280,17 @@ function App() {
 
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <ExampleWithCode title="Basic Input" code={codeExamples.inputs.basic}>
-                  <Input
-                    label="Email Address"
-                    placeholder="Enter your email"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                  />
+                <ExampleWithCode title="Basic Input" code={examples.inputs.basic.code}>
+                  <examples.inputs.basic.Component />
                 </ExampleWithCode>
-
-                <ExampleWithCode title="Input with Helper Text" code={codeExamples.inputs.withHelperText}>
-                  <Input
-                    label="Password"
-                    type="password"
-                    placeholder="Enter password"
-                    helperText="Must be at least 8 characters"
-                  />
+                <ExampleWithCode title="Input with Helper Text" code={examples.inputs.withHelperText.code}>
+                  <examples.inputs.withHelperText.Component />
                 </ExampleWithCode>
-
-                <ExampleWithCode title="Input with Error" code={codeExamples.inputs.withError}>
-                  <Input
-                    label="Username"
-                    placeholder="Enter username"
-                    error="Username is already taken"
-                  />
+                <ExampleWithCode title="Input with Error" code={examples.inputs.withError.code}>
+                  <examples.inputs.withError.Component />
                 </ExampleWithCode>
-
-                <ExampleWithCode title="Disabled Input" code={codeExamples.inputs.disabled}>
-                  <Input
-                    label="Disabled Field"
-                    placeholder="This field is disabled"
-                    disabled
-                    value="Cannot edit this"
-                  />
+                <ExampleWithCode title="Disabled Input" code={examples.inputs.disabled.code}>
+                  <examples.inputs.disabled.Component />
                 </ExampleWithCode>
               </div>
 
