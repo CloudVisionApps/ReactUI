@@ -1,6 +1,6 @@
 {
   "name": "@cloudvisionapps/react-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A comprehensive React UI component library",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
