@@ -6,6 +6,7 @@ export default function ButtonInteractive() {
     <div className="flex flex-wrap gap-4 items-center">
       <Button variant="primary" size="large">Large Primary</Button>
       <Button variant="gradient">Gradient Magic</Button>
+      <Button variant="gradientBorder" size="large">Gradient border</Button>
       <Button variant="outline" size="large">Outlined</Button>
       <Button variant="ghost">Ghost Button</Button>
     </div>

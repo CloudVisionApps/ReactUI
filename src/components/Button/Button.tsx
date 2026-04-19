@@ -2,7 +2,14 @@ import React from 'react';
 import { cn } from '../../utils/cn';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost' | 'gradient';
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'danger'
+    | 'outline'
+    | 'ghost'
+    | 'gradient'
+    | 'gradientBorder';
   size?: 'small' | 'medium' | 'large';
   isLoading?: boolean;
   children: React.ReactNode;
@@ -21,6 +28,23 @@ const variantClasses = {
     'bg-transparent text-fg hover:bg-surface-muted active:bg-border/50 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-fg-subtle/25 focus-visible:ring-offset-2',
   gradient:
     'bg-gradient-to-r from-primary to-indigo-600 text-white shadow-ui-glow hover:from-primary-hover hover:to-indigo-700 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-ring focus-visible:ring-offset-2',
+  gradientBorder:
+    'p-[2px] bg-gradient-to-br from-primary via-indigo-500 to-violet-600 text-white shadow-ui transition-shadow hover:shadow-ui-md active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-ring focus-visible:ring-offset-2',
+};
+
+const gradientBorderOuterRadiusClasses = {
+  small: 'rounded-ui',
+  medium: 'rounded-ui',
+  large: 'rounded-ui-lg',
+};
+
+const gradientBorderInnerClasses = {
+  small:
+    'relative flex items-center justify-center gap-2 rounded-[calc(var(--ui-radius)-2px)] bg-surface px-4 py-2 text-[13px] font-semibold text-fg min-h-[28px]',
+  medium:
+    'relative flex items-center justify-center gap-2 rounded-[calc(var(--ui-radius)-2px)] bg-surface px-5 py-2.5 text-[13px] font-semibold text-fg min-h-[32px]',
+  large:
+    'relative flex items-center justify-center gap-2 rounded-[calc(var(--ui-radius-lg)-2px)] bg-surface px-6 py-3 text-[14px] font-semibold text-fg min-h-[38px]',
 };
 
 const sizeClasses = {
@@ -43,10 +67,12 @@ export const Button: React.FC<ButtonProps> = ({
   const disabledClasses =
     'disabled:opacity-45 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:scale-100 disabled:active:scale-100';
 
+  const isGradientBorder = variant === 'gradientBorder';
+
   const classes = cn(
     baseClasses,
     variantClasses[variant],
-    sizeClasses[size],
+    isGradientBorder ? gradientBorderOuterRadiusClasses[size] : sizeClasses[size],
     disabledClasses,
     isLoading && 'cursor-wait',
     !disabled && !isLoading && 'transform-gpu',
@@ -60,9 +86,11 @@ export const Button: React.FC<ButtonProps> = ({
           <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
         </span>
       )}
-      <span className={cn('relative flex items-center gap-2', isLoading && 'opacity-0')}>
-        {children}
-      </span>
+      {isGradientBorder ? (
+        <span className={cn(gradientBorderInnerClasses[size], isLoading && 'opacity-0')}>{children}</span>
+      ) : (
+        <span className={cn('relative flex items-center gap-2', isLoading && 'opacity-0')}>{children}</span>
+      )}
     </button>
   );
 };

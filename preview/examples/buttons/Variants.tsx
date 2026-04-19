@@ -10,6 +10,7 @@ export default function ButtonVariants() {
       <Button variant="outline">Outline</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="gradient">Gradient</Button>
+      <Button variant="gradientBorder">Gradient border</Button>
     </div>
   );
 }
