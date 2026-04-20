@@ -115,7 +115,7 @@ export const Tabs: React.FC<TabsProps> = ({
       {children && (
         <div className="mt-5">
           {React.Children.map(children, (child) => {
-            if (React.isValidElement(child) && child.props.value === activeValue) {
+            if (React.isValidElement<TabPanelProps>(child) && child.props.value === activeValue) {
               return child;
             }
             return null;

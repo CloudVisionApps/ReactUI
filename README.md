@@ -1,17 +1,32 @@
 # @cloudvisionapps/react-ui
 
 [![npm version](https://img.shields.io/npm/v/@cloudvisionapps/react-ui.svg)](https://www.npmjs.com/package/@cloudvisionapps/react-ui)
+[![npm downloads](https://img.shields.io/npm/dm/@cloudvisionapps/react-ui.svg)](https://www.npmjs.com/package/@cloudvisionapps/react-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-A React component library built with TypeScript and Tailwind CSS. Use it to build consistent UIs across applications with minimal setup.
+Production-ready React UI components built with TypeScript and Tailwind CSS.
+Use this package to ship consistent, accessible interfaces faster across multiple apps.
+
+## Why @cloudvisionapps/react-ui
+
+- Ready-to-use components for common product UI patterns
+- TypeScript-first API with editor autocomplete and static safety
+- Tailwind CSS styling model for fast customization
+- Lightweight integration with simple install + import flow
+
+## Links
+
+- [npm package](https://www.npmjs.com/package/@cloudvisionapps/react-ui)
+- [Source code](https://github.com/CloudVisionApps/ReactUI)
+- [Issue tracker](https://github.com/CloudVisionApps/ReactUI/issues)
 
 ## Screenshots
 
 ![Screenshot 1](https://raw.githubusercontent.com/CloudVisionApps/ReactUI/main/screenshots/screenshot1.png)
 ## Requirements
 
-- React 18+
-- React DOM 18+
+- React 19+
+- React DOM 19+
 
 ## Installation
 
@@ -44,6 +59,8 @@ function App() {
   );
 }
 ```
+
+You can also import only what you need from the package entry point.
 
 ## Components
 
