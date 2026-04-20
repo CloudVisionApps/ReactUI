@@ -22,5 +22,9 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm run build
+      - name: Configure npm auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+          echo "@cloudvisionapps:registry=https://registry.npmjs.org/" >> ~/.npmrc
       - run: npm whoami
       - run: npm publish --access public
