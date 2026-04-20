@@ -22,8 +22,7 @@
   },
   "files": [
     "dist",
-    "README.md",
-    "screenshots"
+    "README.md"
   ],
   "scripts": {
     "build": "rollup -c && npm run build:css",
@@ -34,6 +33,11 @@
     "build:preview": "npm run build && vite build",
     "type-check": "tsc --noEmit",
     "lint": "eslint src --ext .ts,.tsx",
+    "pack:check": "npm pack --dry-run",
+    "release": "npm run release:patch",
+    "release:patch": "npm version patch && git push --follow-tags",
+    "release:minor": "npm version minor && git push --follow-tags",
+    "release:major": "npm version major && git push --follow-tags",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -49,7 +53,7 @@
   ],
   "license": "MIT",
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com"
   },
   "peerDependencies": {
     "react": "^19.0.0",

@@ -1,7 +1,7 @@
 # @cloudvisionapps/react-ui
 
-[![npm version](https://img.shields.io/npm/v/@cloudvisionapps/react-ui.svg)](https://www.npmjs.com/package/@cloudvisionapps/react-ui)
-[![npm downloads](https://img.shields.io/npm/dm/@cloudvisionapps/react-ui.svg)](https://www.npmjs.com/package/@cloudvisionapps/react-ui)
+[![GitHub release](https://img.shields.io/github/v/release/CloudVisionApps/ReactUI)](https://github.com/CloudVisionApps/ReactUI/releases)
+[![GitHub package workflow](https://img.shields.io/github/actions/workflow/status/CloudVisionApps/ReactUI/publish.yml?label=publish)](https://github.com/CloudVisionApps/ReactUI/actions/workflows/publish.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 Production-ready React UI components built with TypeScript and Tailwind CSS.
@@ -16,7 +16,7 @@ Use this package to ship consistent, accessible interfaces faster across multipl
 
 ## Links
 
-- [npm package](https://www.npmjs.com/package/@cloudvisionapps/react-ui)
+- [GitHub Releases](https://github.com/CloudVisionApps/ReactUI/releases)
 - [Source code](https://github.com/CloudVisionApps/ReactUI)
 - [Issue tracker](https://github.com/CloudVisionApps/ReactUI/issues)
 
@@ -30,7 +30,10 @@ Use this package to ship consistent, accessible interfaces faster across multipl
 
 ## Installation
 
+This package is published from GitHub Packages.
+
 ```bash
+npm config set @cloudvisionapps:registry https://npm.pkg.github.com
 npm install @cloudvisionapps/react-ui
 ```
 
@@ -186,11 +189,31 @@ npm link @cloudvisionapps/react-ui
 
 ## Publishing
 
-Bump the version in `package.json`, then build and publish. With the GitHub workflow, push to trigger publish using the `NPM_TOKEN` secret.
+Releases are now set up for GitHub Packages and GitHub Releases.
 
-Manual publish:
+### Automatic release
+
+Run one of these commands locally:
 
 ```bash
+npm run release:patch
+npm run release:minor
+npm run release:major
+```
+
+Each command will:
+
+1. bump the version in the package manifest,
+2. create a Git tag like v2.0.1,
+3. push the tag to GitHub,
+4. trigger the workflow that builds the library, publishes it to GitHub Packages, and creates a GitHub Release.
+
+### Manual publish
+
+If you want to publish manually, authenticate with a token that has package permissions and then run:
+
+```bash
+export NODE_AUTH_TOKEN=YOUR_GITHUB_TOKEN
 npm run build
 npm publish
 ```
